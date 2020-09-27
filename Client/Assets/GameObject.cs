@@ -17,7 +17,7 @@ namespace Client
             public float rotation;
         }
 
-        protected Transform transform;
+        public Transform transform;
 
         protected GameObject(float x = 0, float y = 0, float w = 1, float h = 1, float r = 0)
         {

@@ -11,7 +11,7 @@ namespace Client
 {
     class Tank : GameObject
     {
-        float speed = 2f;
+        float speed = 200f;
 
         public Tank(float x, float y, float w, float h) : base(x, y, w, h)
         {
@@ -27,6 +27,7 @@ namespace Client
             e.Graphics.TranslateTransform((float)-(transform.position.X + transform.size.X / 2), (float)-(transform.position.Y + transform.size.Y / 2));
             // Draw rectangle
             e.Graphics.FillRectangle(Brushes.Red, (float)transform.position.X, (float)transform.position.Y, (float)transform.size.X, (float)transform.size.Y);
+            e.Graphics.ResetTransform();
         }
 
         public override void Update(float deltaTime)
