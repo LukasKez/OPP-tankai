@@ -39,6 +39,7 @@ namespace Client
 
         void Update(float deltaTime)
         {
+            if (!Focused) return;
             playerTank.Update(deltaTime);
         }
 
