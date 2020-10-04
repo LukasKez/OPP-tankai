@@ -138,6 +138,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameObject.cs" />
+    <Compile Include="Assets\Levels\GameLevelCreator.cs" />
+    <Compile Include="Assets\Levels\GameLevels\Cave.cs" />
+    <Compile Include="Assets\Levels\GameLevels\Desert.cs" />
+    <Compile Include="Assets\Levels\GameLevels\Field.cs" />
+    <Compile Include="Assets\Levels\GameLevels\Forest.cs" />
+    <Compile Include="Assets\Levels\GameLevels\GameLevel.cs" />
+    <Compile Include="Assets\Levels\Obstacles\Boulder.cs" />
+    <Compile Include="Assets\Levels\Obstacles\Obstacle.cs" />
+    <Compile Include="Assets\Levels\Obstacles\Tree.cs" />
+    <Compile Include="Assets\Levels\Obstacles\Wall.cs" />
+    <Compile Include="Assets\Levels\Obstacles\Water.cs" />
+    <Compile Include="Assets\PowerUp\AbstractPowerUpFactory\AbstractPowerUpFactory.cs" />
+    <Compile Include="Assets\PowerUp\AbstractPowerUpFactory\AttackFactory.cs" />
+    <Compile Include="Assets\PowerUp\AbstractPowerUpFactory\DefenseFactory.cs" />
+    <Compile Include="Assets\PowerUp\AbstractPowerUpFactory\HealthFactory.cs" />
+    <Compile Include="Assets\PowerUp\AbstractPowerUpFactory\SpeedFactory.cs" />
+    <Compile Include="Assets\PowerUp\PermanentPowerUp\PermanentAttack.cs" />
+    <Compile Include="Assets\PowerUp\PermanentPowerUp\PermanentDefense.cs" />
+    <Compile Include="Assets\PowerUp\PermanentPowerUp\PermanentHealth.cs" />
+    <Compile Include="Assets\PowerUp\PermanentPowerUp\PermanentPowerUp.cs" />
+    <Compile Include="Assets\PowerUp\PermanentPowerUp\PermanentSpeed.cs" />
+    <Compile Include="Assets\PowerUp\PowerUp.cs" />
+    <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryAttack.cs" />
+    <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryDefense.cs" />
+    <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryHealth.cs" />
+    <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryPowerUp.cs" />
+    <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporarySpeed.cs" />
     <Compile Include="Assets\Tank\Tank.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
@@ -170,8 +197,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Levels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

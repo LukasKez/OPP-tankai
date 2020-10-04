@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Text;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using PowerUp;
+
 
 namespace Client
 {
-    class Tank : GameObject
+    public class Tank : GameObject
     {
-        float speed = 200f;
+        public float attack = 1;
+        public float defense = 100;
+        public float health = 100;
+        public float speed = 100;
+
+        List<TemporaryPowerUp> temporaryPowerUps;
 
         public Tank(float x, float y, float w, float h) : base(x, y, w, h)
         {
+            temporaryPowerUps = new List<TemporaryPowerUp>();
         }
 
         public override void Render(PaintEventArgs e)
@@ -33,6 +39,7 @@ namespace Client
         public override void Update(float deltaTime)
         {
             UpdatePosition(deltaTime);
+            UpdatePowerUps(deltaTime);
         }
 
         void UpdatePosition(float deltaTime)
@@ -61,6 +68,28 @@ namespace Client
             transform.position.Y += vertical.X * Math.Sin(radians) + vertical.Y * Math.Cos(radians);
         }
 
+        void UpdatePowerUps(float deltaTime)
+        {
+            foreach (var powerUp in temporaryPowerUps)
+            {
+                powerUp.duration -= deltaTime;
+                if (powerUp.duration <= 0)
+                {
+                    powerUp.Unuse(this);
+                    temporaryPowerUps.Remove(powerUp);
+                }
+            }
+        }
 
+        void PowerUp(PermanentPowerUp powerUp)
+        {
+            powerUp.Use(this);
+        }
+
+        void PowerUp(TemporaryPowerUp powerUp)
+        {
+            temporaryPowerUps.Add(powerUp);
+            powerUp.Use(this);
+        }
     }
 }
