@@ -17,7 +17,7 @@ namespace Client
         {
             base.Update(deltaTime);
 
-            if (GameState.focused)
+            if (GameState.Instance.focused)
                 UpdatePosition(deltaTime);
 
             elapsedTime += deltaTime;

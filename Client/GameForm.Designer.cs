@@ -39,13 +39,13 @@ namespace Client
 
         protected override void OnGotFocus(EventArgs e)
         {
-            GameState.focused = true;
+            GameState.Instance.focused = true;
             base.OnGotFocus(e);
         }
 
         protected override void OnLostFocus(EventArgs e)
         {
-            GameState.focused = false;
+            GameState.Instance.focused = false;
             base.OnLostFocus(e);
         }
 

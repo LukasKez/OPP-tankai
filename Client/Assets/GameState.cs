@@ -8,6 +8,12 @@ namespace Client
 {
     class GameState
     {
-        public static bool focused;
+        public bool focused;
+
+        private static readonly GameState instance = new GameState();
+        public static GameState Instance
+        {
+            get { return instance; }
+        }
     }
 }
