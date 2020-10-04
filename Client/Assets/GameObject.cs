@@ -19,6 +19,15 @@ namespace Client
 
         public Transform transform;
 
+        protected GameObject()
+        {
+        }
+
+        protected GameObject(Transform transform)
+        {
+            this.transform = transform;
+        }
+
         protected GameObject(float x = 0, float y = 0, float w = 1, float h = 1, float r = 0)
         {
             transform.position.X = x;

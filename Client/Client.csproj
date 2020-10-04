@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameObject.cs" />
+    <Compile Include="Assets\GameState.cs" />
     <Compile Include="Assets\Levels\GameLevelCreator.cs" />
     <Compile Include="Assets\Levels\GameLevels\Cave.cs" />
     <Compile Include="Assets\Levels\GameLevels\Desert.cs" />
@@ -149,6 +150,10 @@
     <Compile Include="Assets\Levels\Obstacles\Tree.cs" />
     <Compile Include="Assets\Levels\Obstacles\Wall.cs" />
     <Compile Include="Assets\Levels\Obstacles\Water.cs" />
+    <Compile Include="Assets\Networking.cs" />
+    <Compile Include="Assets\Player\LocalPlayer.cs" />
+    <Compile Include="Assets\Player\Player.cs" />
+    <Compile Include="Assets\Player\RemotePlayer.cs" />
     <Compile Include="Assets\PowerUp\AbstractPowerUpFactory\AbstractPowerUpFactory.cs" />
     <Compile Include="Assets\PowerUp\AbstractPowerUpFactory\AttackFactory.cs" />
     <Compile Include="Assets\PowerUp\AbstractPowerUpFactory\DefenseFactory.cs" />
