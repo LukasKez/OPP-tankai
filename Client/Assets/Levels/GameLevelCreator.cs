@@ -13,26 +13,26 @@ namespace Client.Assets.Levels
         {
 
         }
-        public GameLevel GetGameLevel(string levelType,float levelWidth,float levelHight, float blockWidth, float blockHeight)
+        public GameLevel GetGameLevel(string levelType,float levelWidth,float levelHight, float blockWidth, float blockHeight,int seed)
         {                
             GameLevel gameLevel = null;
             switch (levelType.ToLower())
             {
                 case "desert":
-                    gameLevel = new Desert(levelWidth, levelHight, blockWidth, blockHeight);
+                    gameLevel = new Desert(levelWidth, levelHight, blockWidth, blockHeight, seed);
 
                     break;
                 case "forest":
-                    gameLevel = new Forest(levelWidth, levelHight, blockWidth, blockHeight);
+                    gameLevel = new Forest(levelWidth, levelHight, blockWidth, blockHeight, seed);
                     break;
                 case "cave":
-                    gameLevel = new Cave(levelWidth, levelHight, blockWidth, blockHeight);
+                    gameLevel = new Cave(levelWidth, levelHight, blockWidth, blockHeight, seed);
                     break;
                 default:
-                    gameLevel = new Field(levelWidth, levelHight, blockWidth, blockHeight);
+                    gameLevel = new Field(levelWidth, levelHight, blockWidth, blockHeight, seed);
                     break;
             }
-            gameLevel.SetupBorder(levelType);
+            gameLevel.SetupObstacles(levelType);
             return gameLevel;
         }
     }

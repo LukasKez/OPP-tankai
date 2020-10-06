@@ -18,7 +18,13 @@ namespace Client.Assets.Levels.Obstacles
 
         public override void Render(PaintEventArgs e)
         {
-            e.Graphics.FillRectangle(Brushes.DarkSlateGray, x, y, width, height);
+            e.Graphics.FillRectangle(Brushes.DarkSlateGray, (int)transform.position.X, (int)transform.position.Y,
+                (int)transform.size.X, (int)transform.size.Y);
+        }
+
+        public override void Update(float deltaTime)
+        {
+            throw new NotImplementedException();
         }
     }
 }

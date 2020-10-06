@@ -18,13 +18,16 @@ namespace Client.Assets.Levels.Obstacles
 
         public override void Render(PaintEventArgs e)
         {
-
-            Rectangle rectangle = new Rectangle((int)x, (int)y, (int)width, (int)height);
+            Rectangle rectangle = new Rectangle((int)transform.position.X, (int)transform.position.Y,
+                (int)transform.size.X, (int)transform.size.Y);
 
             SolidBrush shadowBrush = new SolidBrush(Color.DarkGray);
             e.Graphics.FillEllipse(shadowBrush, rectangle);
+        }
 
-
+        public override void Update(float deltaTime)
+        {
+            throw new NotImplementedException();
         }
     }
 }
