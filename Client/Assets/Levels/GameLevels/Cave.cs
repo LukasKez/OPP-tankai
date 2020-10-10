@@ -25,14 +25,14 @@ namespace Client.Assets.Levels.GameLevels
             {
                 if (i < vertEnd)
                 {
-                    stuff.Add(new Water(i * blockWidth, 0, blockWidth, blockHeight));
-                    stuff.Add(new Water(i * blockWidth, levelHeight - blockHeight, blockWidth, blockHeight));
+                    stuff.Add(new Boulder(i * blockWidth, 0, blockWidth, blockHeight));
+                    stuff.Add(new Boulder(i * blockWidth, levelHeight - blockHeight, blockWidth, blockHeight));
                     i++;
                 }
                 if (j < hozEnd)
                 {
-                    stuff.Add(new Water(0, j * blockHeight, blockWidth, blockHeight));
-                    stuff.Add(new Water(levelWidth - blockWidth, j * blockHeight, blockWidth, blockHeight));
+                    stuff.Add(new Boulder(0, j * blockHeight, blockWidth, blockHeight));
+                    stuff.Add(new Boulder(levelWidth - blockWidth, j * blockHeight, blockWidth, blockHeight));
                     j++;
                 }
             }
