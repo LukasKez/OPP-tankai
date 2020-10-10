@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Windows;
 using System.Windows.Forms;
-using System.Windows.Input;
 using PowerUp;
-
 
 namespace Client
 {
@@ -17,35 +14,18 @@ namespace Client
         public float health = 100;
         public float speed = 100;
 
+        private Brush brush;
         List<TemporaryPowerUp> temporaryPowerUps;
 
-        public Tank(float x, float y) : base(x, y, 20, 20)
+        public Tank(float x, float y, Brush brush) : base(x, y, 20, 20)
         {
+            this.brush = brush;
             temporaryPowerUps = new List<TemporaryPowerUp>();
         }
 
         public override void Render(PaintEventArgs e)
         {
-            // Set the rotation point
-            e.Graphics.TranslateTransform((float)transform.position.X + (float)transform.size.X / 2, (float)transform.position.Y + (float)transform.size.Y / 2);
-            // Rotate
-            e.Graphics.RotateTransform(transform.rotation);
-            // Restore rotation point in the matrix
-            e.Graphics.TranslateTransform((float)-(transform.position.X + transform.size.X / 2), (float)-(transform.position.Y + transform.size.Y / 2));
-            // Draw rectangle
-
-            var mth = new StackTrace().GetFrame(1).GetMethod();
-            var cls = mth.ReflectedType.Name;
-            Console.WriteLine(cls);
-            if (cls == "AbstractBot")
-            {
-                e.Graphics.FillRectangle(Brushes.Blue, (float)transform.position.X, (float)transform.position.Y, (float)transform.size.X, (float)transform.size.Y);
-            } else
-            {
-                e.Graphics.FillRectangle(Brushes.Red, (float)transform.position.X, (float)transform.position.Y, (float)transform.size.X, (float)transform.size.Y);
-            }
-
-            e.Graphics.ResetTransform();
+            Renderer.Rectangle(e, brush, transform);
         }
 
         public override void Update(float deltaTime)

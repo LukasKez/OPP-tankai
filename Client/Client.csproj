@@ -142,6 +142,7 @@
     <Compile Include="Assets\Bot\Strategies\Shoot.cs" />
     <Compile Include="Assets\Bot\Strategies\Turn.cs" />
     <Compile Include="Assets\Bot\Strategies\Move.cs" />
+    <Compile Include="Assets\GameLoop.cs" />
     <Compile Include="Assets\GameObject.cs" />
     <Compile Include="Assets\GameState.cs" />
     <Compile Include="Assets\Levels\GameLevelCreator.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Assets\Levels\GameLevels\Field.cs" />
     <Compile Include="Assets\Levels\GameLevels\Forest.cs" />
     <Compile Include="Assets\Levels\GameLevels\GameLevel.cs" />
+    <Compile Include="Assets\Levels\Ground.cs" />
     <Compile Include="Assets\Levels\Obstacles\Boulder.cs" />
     <Compile Include="Assets\Levels\Obstacles\Obstacle.cs" />
     <Compile Include="Assets\Levels\Obstacles\Tree.cs" />
@@ -177,7 +179,9 @@
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryHealth.cs" />
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryPowerUp.cs" />
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporarySpeed.cs" />
+    <Compile Include="Assets\Renderer.cs" />
     <Compile Include="Assets\Tank\Tank.cs" />
+    <Compile Include="Assets\Transform.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +190,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GameForm.resx">
+      <DependentUpon>GameForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

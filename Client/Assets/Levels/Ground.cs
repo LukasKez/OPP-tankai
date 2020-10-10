@@ -2,18 +2,20 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Client.Obstacles
+namespace Client
 {
-    class Wall : Obstacle
+    class Ground : GameObject
     {
-        public Wall(float x, float y, float width, float height)
-            : base(x, y, width, height)
+        private Brush brush;
+
+        public Ground(Transform transform, Brush brush) : base(transform)
         {
+            this.brush = brush;
         }
 
         public override void Render(PaintEventArgs e)
         {
-            Renderer.Rectangle(e, Brushes.DarkSlateGray, transform);
+            Renderer.Rectangle(e, brush, transform);
         }
 
         public override void Update(float deltaTime)

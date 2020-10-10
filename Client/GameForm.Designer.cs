@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.Assets.Levels;
+using System;
 using System.Windows.Forms;
 
 namespace Client
@@ -10,32 +11,26 @@ namespace Client
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        DateTime time1 = DateTime.Now;
-        DateTime time2 = DateTime.Now;
-
-        private LocalPlayer player;
-        private Bot bot;
+        GameLoop gameLoop;
+        string originalText;
 
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-            DoubleBuffered = true;
+            originalText = Text;
+            gameLoop = new GameLoop();
 
-            Networking.ConnectAsync();
+            GameState state = GameState.Instance;
+            state.gameLevel = GameLevelCreator.GetGameLevel(
+                "forest", (float)state.mapSize.X, (float)state.mapSize.Y, 20, 20, 2);
 
-            bot = new Bot();
-            player = new LocalPlayer();
+            gameLoop.StartGame();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            time2 = DateTime.Now;
-            float deltaTime = (time2.Ticks - time1.Ticks) / (float)(TimeSpan.TicksPerSecond);
-            time1 = time2;
-
-            //base.OnPaint(e);
-            Update(deltaTime);
-            Render(e);
+            gameLoop.Manage(e);
+            Text = originalText + gameLoop.FPS + " FPS";
             Invalidate();
         }
 
@@ -49,20 +44,6 @@ namespace Client
         {
             GameState.Instance.focused = false;
             base.OnLostFocus(e);
-        }
-
-        void Update(float deltaTime)
-        {
-            bot.Update(deltaTime);
-            player.Update(deltaTime);
-            Networking.Update(deltaTime);
-        }
-
-        void Render(PaintEventArgs e)
-        {
-            bot.Render(e);
-            player.Render(e);
-            Networking.Render(e);
         }
 
         /// <summary>
@@ -86,10 +67,24 @@ namespace Client
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // GameForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(816, 639);
+            this.MinimumSize = new System.Drawing.Size(816, 639);
+            this.Name = "GameForm";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Tank Game ";
+            this.ResumeLayout(false);
+
         }
 
         #endregion

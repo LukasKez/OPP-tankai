@@ -1,30 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Client.Obstacles;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Client.Assets.Levels.GameLevels
 {
     class Forest : GameLevel
     {
-
-        public Forest(float levelWidth,float levelHeight, float blockWidth, float blockHeight, int seed)
+        public Forest(float levelWidth, float levelHeight, float blockWidth, float blockHeight, int seed)
             : base(levelWidth, levelHeight, blockWidth, blockHeight, seed)
         {
-            
-        }
-        public override void Render(PaintEventArgs e)
-        {
-            e.Graphics.FillRectangle(Brushes.LightGreen, 0, 0, levelWidth, levelHeight);
-            base.Render(e);
+            stuff.Add(new Ground(new Transform(0, 0, levelWidth, levelHeight), Brushes.LightGreen));
+
+            // Horizontal borders
+            stuff.Add(new Water(0, 0, levelWidth, blockHeight));
+            stuff.Add(new Water(0, levelHeight - blockHeight, levelWidth, blockHeight));
+
+            // Vertical borders
+            stuff.Add(new Water(0, 0, blockWidth, levelHeight));
+            stuff.Add(new Water(levelWidth - blockWidth, 0, blockWidth, levelHeight));
         }
 
-        public override void Update(float deltaTime)
-        {
-            base.Update(deltaTime);
-        }
     }
 }

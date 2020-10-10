@@ -13,14 +13,14 @@ namespace Client.Assets.Levels
         {
 
         }
-        public GameLevel GetGameLevel(string levelType,float levelWidth,float levelHight, float blockWidth, float blockHeight,int seed)
-        {                
+
+        static public GameLevel GetGameLevel(string levelType, float levelWidth, float levelHight, float blockWidth, float blockHeight, int seed)
+        {
             GameLevel gameLevel = null;
             switch (levelType.ToLower())
             {
                 case "desert":
                     gameLevel = new Desert(levelWidth, levelHight, blockWidth, blockHeight, seed);
-
                     break;
                 case "forest":
                     gameLevel = new Forest(levelWidth, levelHight, blockWidth, blockHeight, seed);

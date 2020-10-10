@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Client
 {
     class Player : GameObject
     {
-        protected Tank controllable = new Tank(0, 0);
+        protected Tank controllable = new Tank(0, 0, Brushes.Red);
 
         public override void Render(PaintEventArgs e)
         {

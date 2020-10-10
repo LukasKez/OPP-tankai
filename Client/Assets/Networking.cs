@@ -104,7 +104,7 @@ namespace Client
 
             try
             {
-                GameObject.Transform tr = player.transform;
+                Transform tr = player.transform;
                 await connection.SendAsync("SendPositionUpdate", tr.position.X, tr.position.Y, tr.rotation);
             }
             catch

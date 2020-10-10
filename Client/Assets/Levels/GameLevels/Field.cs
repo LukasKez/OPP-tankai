@@ -1,30 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Client.Obstacles;
+using System;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Client.Assets.Levels.GameLevels
 {
     class Field : GameLevel
     {
-        public Field(float levelWidth, float levelHeight, float blockWidth, float blockHeight, int seed) 
+        public Field(float levelWidth, float levelHeight, float blockWidth, float blockHeight, int seed)
             : base(levelWidth, levelHeight, blockWidth, blockHeight, seed)
         {
+            stuff.Add(new Ground(new Transform(0, 0, levelWidth, levelHeight), Brushes.LightGreen));
 
-        }
-        public override void Render(PaintEventArgs e)
-        {
+            // Horizontal borders
+            stuff.Add(new Water(0, 0, levelWidth, blockHeight));
+            stuff.Add(new Water(0, levelHeight - blockHeight, levelWidth, blockHeight));
 
-            e.Graphics.FillRectangle(Brushes.LightGreen, 0, 0, levelWidth, levelHeight);
-            base.Render(e);
+            // Vertical borders
+            stuff.Add(new Water(0, 0, blockWidth, levelHeight));
+            stuff.Add(new Water(levelWidth - blockWidth, 0, blockWidth, levelHeight));
         }
 
-        public override void Update(float deltaTime)
-        {
-            base.Update(deltaTime);
-        }
     }
 }
