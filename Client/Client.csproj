@@ -137,6 +137,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Bot\Strategies\AbstractStrategy.cs" />
+    <Compile Include="Assets\Bot\Strategies\Explode.cs" />
+    <Compile Include="Assets\Bot\Strategies\Shoot.cs" />
+    <Compile Include="Assets\Bot\Strategies\Turn.cs" />
+    <Compile Include="Assets\Bot\Strategies\Move.cs" />
     <Compile Include="Assets\GameObject.cs" />
     <Compile Include="Assets\GameState.cs" />
     <Compile Include="Assets\Levels\GameLevelCreator.cs" />
@@ -151,6 +156,8 @@
     <Compile Include="Assets\Levels\Obstacles\Wall.cs" />
     <Compile Include="Assets\Levels\Obstacles\Water.cs" />
     <Compile Include="Assets\Networking.cs" />
+    <Compile Include="Assets\Bot\AbstractBot.cs" />
+    <Compile Include="Assets\Bot\Bot.cs" />
     <Compile Include="Assets\Player\LocalPlayer.cs" />
     <Compile Include="Assets\Player\Player.cs" />
     <Compile Include="Assets\Player\RemotePlayer.cs" />

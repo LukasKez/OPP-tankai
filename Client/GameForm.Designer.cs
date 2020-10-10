@@ -14,6 +14,7 @@ namespace Client
         DateTime time2 = DateTime.Now;
 
         private LocalPlayer player;
+        private Bot bot;
 
         protected override void OnLoad(EventArgs e)
         {
@@ -22,6 +23,7 @@ namespace Client
 
             Networking.ConnectAsync();
 
+            bot = new Bot();
             player = new LocalPlayer();
         }
 
@@ -51,12 +53,14 @@ namespace Client
 
         void Update(float deltaTime)
         {
+            bot.Update(deltaTime);
             player.Update(deltaTime);
             Networking.Update(deltaTime);
         }
 
         void Render(PaintEventArgs e)
         {
+            bot.Render(e);
             player.Render(e);
             Networking.Render(e);
         }

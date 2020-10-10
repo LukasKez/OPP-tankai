@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
@@ -32,7 +33,18 @@ namespace Client
             // Restore rotation point in the matrix
             e.Graphics.TranslateTransform((float)-(transform.position.X + transform.size.X / 2), (float)-(transform.position.Y + transform.size.Y / 2));
             // Draw rectangle
-            e.Graphics.FillRectangle(Brushes.Red, (float)transform.position.X, (float)transform.position.Y, (float)transform.size.X, (float)transform.size.Y);
+
+            var mth = new StackTrace().GetFrame(1).GetMethod();
+            var cls = mth.ReflectedType.Name;
+            Console.WriteLine(cls);
+            if (cls == "AbstractBot")
+            {
+                e.Graphics.FillRectangle(Brushes.Blue, (float)transform.position.X, (float)transform.position.Y, (float)transform.size.X, (float)transform.size.Y);
+            } else
+            {
+                e.Graphics.FillRectangle(Brushes.Red, (float)transform.position.X, (float)transform.position.Y, (float)transform.size.X, (float)transform.size.Y);
+            }
+
             e.Graphics.ResetTransform();
         }
 
