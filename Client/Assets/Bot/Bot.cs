@@ -10,7 +10,7 @@ namespace Client
 {
     class Bot : AbstractBot
     {
-        protected AbstractStrategy action;
+        protected StrategyInterface action;
 
         private float elapsedTime = 0f;
         private float updateRate = 1f / 40f;
@@ -38,24 +38,25 @@ namespace Client
             float speed = controllable.speed;
             Transform tr = controllable.transform;
 
-            //// Example of strategy call
-            //action = new Move();
-            //action.DoAction();
+            /*// Example of strategy call
+            action = new Move();
+            action.DoAction();
 
-            //action = new Turn();
-            //action.DoAction();
+            action = new Turn();
+            action.DoAction();
+            */
 
-            // Test bot move
             timePassed += deltaTime;
 
-            vertical.Y = speed * deltaTime;
+            // Test bot move
+            action = new Move();
+            action.DoAction(ref vertical, speed, deltaTime);
 
             if (timePassed > 2)
             {
                 vertical.Y = -speed * deltaTime;
             }
             
-
             double radians = tr.rotation * Math.PI / 180;
             tr.position.X += vertical.X * Math.Cos(radians) - vertical.Y * Math.Sin(radians);
             tr.position.Y += vertical.X * Math.Sin(radians) + vertical.Y * Math.Cos(radians);
