@@ -30,7 +30,7 @@ namespace Client
         protected override void OnPaint(PaintEventArgs e)
         {
             gameLoop.Manage(e);
-            Text = originalText + gameLoop.FPS + " FPS";
+            Text = originalText + gameLoop.fps + " FPS";
             Invalidate();
         }
 

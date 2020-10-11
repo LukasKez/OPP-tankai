@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Client
@@ -6,13 +7,10 @@ namespace Client
     public class GameLoop
     {
         public float DeltaTime { get; private set; }
-        public int FPS
-        {
-            get
-            {
-                return (int)Math.Truncate(1 / DeltaTime);
-            }
-        }
+        public int fps;
+
+        int frames;
+        DateTime lastTime;
 
         DateTime startTime = DateTime.Now;
         DateTime endTime = DateTime.Now;
@@ -47,6 +45,7 @@ namespace Client
 
         void Update(float deltaTime)
         {
+            UpdateFPS();
             GameState.Instance.gameLevel.Update(deltaTime);
             Networking.Update(deltaTime);
         }
@@ -55,6 +54,18 @@ namespace Client
         {
             GameState.Instance.gameLevel.Render(e);
             Networking.Render(e);
+        }
+
+        void UpdateFPS()
+        {
+            frames++;
+
+            if ((startTime - lastTime).TotalSeconds >= 0.5)
+            {
+                fps = frames * 2;
+                frames = 0;
+                lastTime = DateTime.Now;
+            }
         }
     }
 }
