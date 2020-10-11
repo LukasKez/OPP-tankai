@@ -6,7 +6,7 @@ namespace Client
 {
     class Player : GameObject
     {
-        protected Tank controllable = new Tank(0, 0, Brushes.Red);
+        protected Tank controllable = new Tank(20, 20, Brushes.Red);
 
         public override void Render(PaintEventArgs e)
         {

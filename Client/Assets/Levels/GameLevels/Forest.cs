@@ -1,4 +1,5 @@
 ﻿using Client.Obstacles;
+using PowerUp;
 using System;
 using System.Drawing;
 
@@ -18,6 +19,9 @@ namespace Client.Assets.Levels.GameLevels
             // Vertical borders
             stuff.Add(new Water(0, 0, blockWidth, levelHeight));
             stuff.Add(new Water(levelWidth - blockWidth, 0, blockWidth, levelHeight));
+
+            // Add PowerUp spawners
+            stuff.Add(new PowerUpSpawner(blockWidth * 7, blockHeight * 4, blockWidth, blockWidth));
         }
 
     }

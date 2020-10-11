@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PowerUp;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -54,7 +51,25 @@ namespace Client
             double radians = tr.rotation * Math.PI / 180;
             tr.position.X += vertical.X * Math.Cos(radians) - vertical.Y * Math.Sin(radians);
             tr.position.Y += vertical.X * Math.Sin(radians) + vertical.Y * Math.Cos(radians);
+
+            Transform oldTransform = controllable.transform;
             controllable.transform = tr;
+            
+            GameObject collision = GameState.Instance.gameLevel.GetCollision(controllable);
+            if (collision != null)
+            {
+                if (collision.collider == ColliderType.Collider)
+                {
+                    controllable.transform = oldTransform;
+                }
+                else
+                {
+                    if (collision is PowerUpSpawner powerUpSpawner)
+                    {
+                        controllable.PowerUp(powerUpSpawner.GiveAway());
+                    }
+                }
+            }
         }
     }
 }

@@ -6,14 +6,14 @@ namespace PowerUp
 {
 	public class DefenseFactory : AbstractPowerUpFactory
 	{
-		public override PermanentPowerUp CreatePermanentPowerUp()
+		public override PermanentPowerUp CreatePermanentPowerUp(float x, float y, float w, float h)
 		{
-			return new PermanentDefense();
+			return new PermanentDefense(x, y, w, h);
 		}
 
-		public override TemporaryPowerUp CreateTemporaryPowerUp(  )
+		public override TemporaryPowerUp CreateTemporaryPowerUp(float x, float y, float w, float h)
 		{
-			return new TemporaryDefense();
+			return new TemporaryDefense(x, y, w, h);
 		}
 
 	}

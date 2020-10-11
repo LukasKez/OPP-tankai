@@ -74,20 +74,6 @@ namespace Client.Assets.Levels.GameLevels
 
         }
 
-        public GameObject Get(GameObject gameObject)
-        {
-            var cords = new float[] { (float)(gameObject.transform.position.X + gameObject.transform.size.X / 2), (float)(gameObject.transform.position.Y + gameObject.transform.size.Y / 2) };
-
-            foreach (GameObject thing in stuff)
-            {
-                if (CheckGameObject(thing, cords) == true)
-                {
-                    return thing;
-                }
-            }
-            return null;
-        }
-
         public bool Add(GameObject gameObject)
         {
             return stuff.Add(gameObject);
@@ -98,15 +84,35 @@ namespace Client.Assets.Levels.GameLevels
             return stuff.Remove(gameObject);
         }
 
-        private bool CheckGameObject(GameObject gameObject, float[] coordinate)
+        public GameObject GetCollision(GameObject gameObject)
         {
-            if (coordinate[0] > gameObject.transform.position.X && coordinate[0] < (gameObject.transform.position.X + gameObject.transform.size.X))
+            Transform transform = gameObject.transform - (float)gameObject.transform.size.X * 0.2f;
+
+            foreach (GameObject thing in stuff)
             {
-                if (coordinate[0] > gameObject.transform.position.Y && coordinate[0] < (gameObject.transform.position.Y + gameObject.transform.size.Y))
+                if (thing.collider == ColliderType.None)
                 {
-                    return true;
+                    continue;
+                }
+
+                if (CheckCollision(transform, thing.transform) == true)
+                {
+                    return thing;
                 }
             }
+            return null;
+        }
+
+        private bool CheckCollision(Transform rect1, Transform rect2)
+        {
+            if (rect1.position.X < rect2.position.X + rect2.size.X &&
+                rect1.position.X + rect1.size.X > rect2.position.X &&
+                rect1.position.Y < rect2.position.Y + rect2.size.Y &&
+                rect1.position.Y + rect1.size.Y > rect2.position.Y)
+            {
+                return true;
+            }
+
             return false;
         }
 

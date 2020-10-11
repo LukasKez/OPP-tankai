@@ -15,5 +15,15 @@ namespace Client
             size = new Vector(w, h);
             rotation = r;
         }
+
+        public static Transform operator -(Transform left, float right)
+        {
+            float half = right / 2;
+            left.position.X += half;
+            left.position.Y += half;
+            left.size.X -= right;
+            left.size.Y -= right;
+            return left;
+        }
     }
 }

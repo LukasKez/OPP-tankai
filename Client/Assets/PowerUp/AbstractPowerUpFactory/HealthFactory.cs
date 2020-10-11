@@ -6,14 +6,14 @@ namespace PowerUp
 {
 	public class HealthFactory : AbstractPowerUpFactory
 	{
-		public override PermanentPowerUp CreatePermanentPowerUp()
+		public override PermanentPowerUp CreatePermanentPowerUp(float x, float y, float w, float h)
 		{
-			return new PermanentHealth();
+			return new PermanentHealth(x, y, w, h);
 		}
 
-		public override TemporaryPowerUp CreateTemporaryPowerUp(  )
+		public override TemporaryPowerUp CreateTemporaryPowerUp(float x, float y, float w, float h)
 		{
-			return new TemporaryHealth();
+			return new TemporaryHealth(x, y, w, h);
 		}
 
 	}

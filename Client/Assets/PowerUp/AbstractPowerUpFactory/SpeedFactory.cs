@@ -6,14 +6,14 @@ namespace PowerUp
 {
 	public class SpeedFactory : AbstractPowerUpFactory
 	{
-		public override PermanentPowerUp CreatePermanentPowerUp()
+		public override PermanentPowerUp CreatePermanentPowerUp(float x, float y, float w, float h)
 		{
-			return new PermanentSpeed();
+			return new PermanentSpeed(x, y, w, h);
 		}
 
-		public override TemporaryPowerUp CreateTemporaryPowerUp(  )
+		public override TemporaryPowerUp CreateTemporaryPowerUp(float x, float y, float w, float h)
 		{
-			return new TemporarySpeed();
+			return new TemporarySpeed(x, y, w, h);
 		}
 
 	}

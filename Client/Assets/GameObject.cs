@@ -11,12 +11,22 @@ namespace Client
         Ellipse,
         Mesh,
     }
-    
+
+    public enum ColliderType
+    {
+        None,
+        Collider,
+        Trigger,
+    }
+
     public abstract class GameObject
     {
         public Transform transform;
         public Shape shape;
-        public Brush brush = Brushes.Magenta;
+        public ColliderType collider;
+
+        public Brush brush;
+        protected Pen pen;
 
         protected GameObject()
         {
@@ -42,19 +52,13 @@ namespace Client
 
         public virtual void Render(PaintEventArgs e)
         {
-            switch (shape)
+            if (brush != null)
             {
-                case Shape.None:
-                    break;
-                case Shape.Rectangle:
-                    Renderer.Rectangle(e, brush, transform);
-                    break;
-                case Shape.Ellipse:
-                    Renderer.Ellipse(e, brush, transform);
-                    break;
-                case Shape.Mesh:
-                default:
-                    throw new NotImplementedException("Shape not implemented");
+                Renderer.RenderShape(e, brush, transform, shape);
+            }
+            if (pen != null)
+            {
+                Renderer.RenderShape(e, pen, transform - pen.Width, shape);
             }
         }
 

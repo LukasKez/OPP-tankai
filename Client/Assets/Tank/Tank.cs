@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Windows.Forms;
+using System.Linq;
 using PowerUp;
 
 namespace Client
@@ -20,6 +19,7 @@ namespace Client
         {
             shape = Shape.Rectangle;
             this.brush = brush;
+            pen = new Pen(Color.FromArgb(64, Color.Black), 2);
             temporaryPowerUps = new List<TemporaryPowerUp>();
         }
 
@@ -30,7 +30,7 @@ namespace Client
 
         void UpdatePowerUps(float deltaTime)
         {
-            foreach (var powerUp in temporaryPowerUps)
+            foreach (var powerUp in temporaryPowerUps.ToArray())
             {
                 powerUp.duration -= deltaTime;
                 if (powerUp.duration <= 0)
@@ -41,13 +41,20 @@ namespace Client
             }
         }
 
-        void PowerUp(PermanentPowerUp powerUp)
+        public void PowerUp(PowerUpBase powerUp)
         {
-            powerUp.Use(this);
+            PowerUp(powerUp as PermanentPowerUp);
+            PowerUp(powerUp as TemporaryPowerUp);
         }
 
-        void PowerUp(TemporaryPowerUp powerUp)
+        public void PowerUp(PermanentPowerUp powerUp)
         {
+            powerUp?.Use(this);
+        }
+
+        public void PowerUp(TemporaryPowerUp powerUp)
+        {
+            if (powerUp == null) return;
             temporaryPowerUps.Add(powerUp);
             powerUp.Use(this);
         }
