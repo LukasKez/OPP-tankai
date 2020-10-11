@@ -14,18 +14,13 @@ namespace Client
         public float health = 100;
         public float speed = 100;
 
-        private Brush brush;
         List<TemporaryPowerUp> temporaryPowerUps;
 
         public Tank(float x, float y, Brush brush) : base(x, y, 20, 20)
         {
+            shape = Shape.Rectangle;
             this.brush = brush;
             temporaryPowerUps = new List<TemporaryPowerUp>();
-        }
-
-        public override void Render(PaintEventArgs e)
-        {
-            Renderer.Rectangle(e, brush, transform);
         }
 
         public override void Update(float deltaTime)

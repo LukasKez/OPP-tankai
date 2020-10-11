@@ -6,20 +6,10 @@ namespace Client
 {
     class Ground : GameObject
     {
-        private Brush brush;
-
         public Ground(Transform transform, Brush brush) : base(transform)
         {
+            shape = Shape.Rectangle;
             this.brush = brush;
-        }
-
-        public override void Render(PaintEventArgs e)
-        {
-            Renderer.Rectangle(e, brush, transform);
-        }
-
-        public override void Update(float deltaTime)
-        {
         }
     }
 }

@@ -9,15 +9,8 @@ namespace Client.Obstacles
         public Water(float x, float y, float width, float height)
             : base(x, y, width, height)
         {
-        }
-
-        public override void Render(PaintEventArgs e)
-        {
-            Renderer.Rectangle(e, Brushes.DarkBlue, transform);
-        }
-
-        public override void Update(float deltaTime)
-        {
+            shape = Shape.Rectangle;
+            brush = Brushes.DarkBlue;
         }
     }
 }
