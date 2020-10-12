@@ -9,6 +9,7 @@ namespace Client.Obstacles
             : base(x, y, width, height)
         {
             collider = ColliderType.Collider;
+            isShadowCaster = true;
         }
     }
 }

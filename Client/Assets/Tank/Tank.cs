@@ -18,6 +18,7 @@ namespace Client
         public Tank(float x, float y, Brush brush) : base(x, y, 20, 20)
         {
             shape = Shape.Rectangle;
+            isShadowCaster = true;
             this.brush = brush;
             pen = new Pen(Color.FromArgb(64, Color.Black), 2);
             temporaryPowerUps = new List<TemporaryPowerUp>();

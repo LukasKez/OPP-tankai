@@ -8,14 +8,9 @@ namespace Client
     {
         protected Tank controllable = new Tank(20, 20, Brushes.Red);
 
-        public override void Render(PaintEventArgs e)
+        public Player()
         {
-            controllable.Render(e);
-        }
-
-        public override void Update(float deltaTime)
-        {
-            controllable.Update(deltaTime);
+            Instantiate(controllable);
         }
     }
 }

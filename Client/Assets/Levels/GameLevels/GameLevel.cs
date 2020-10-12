@@ -1,6 +1,8 @@
 ﻿using Client.Obstacles;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace Client.Assets.Levels.GameLevels
@@ -16,6 +18,12 @@ namespace Client.Assets.Levels.GameLevels
         public int seed { get; protected set; }
 
         protected HashSet<GameObject> stuff = new HashSet<GameObject>();
+
+        private Queue<GameObject> toAdd = new Queue<GameObject>();
+        private Queue<GameObject> toRemove = new Queue<GameObject>();
+
+        readonly Brush shadowBrush = new SolidBrush(Color.FromArgb(64, Color.Black));
+        readonly Vector sunDirection = new Vector(2, 2);
 
         public GameLevel(float levelWidth, float levelHeight, float blockWidth, float blockHeight, int seed)
         {
@@ -64,14 +72,14 @@ namespace Client.Assets.Levels.GameLevels
             }
         }
 
-        public bool Add(GameObject gameObject)
+        public void Add(GameObject gameObject)
         {
-            return stuff.Add(gameObject);
+            toAdd.Enqueue(gameObject);
         }
 
-        public bool Remove(GameObject gameObject)
+        public void Remove(GameObject gameObject)
         {
-            return stuff.Remove(gameObject);
+            toRemove.Enqueue(gameObject);
         }
 
         public GameObject GetCollision(GameObject gameObject)
@@ -112,13 +120,57 @@ namespace Client.Assets.Levels.GameLevels
             {
                 thing.Update(deltaTime);
             }
+            UpdateStuff();
+        }
+
+        private void UpdateStuff()
+        {
+            for (int i = 0; i < toAdd.Count; i++)
+            {
+                stuff.Add(toAdd.Dequeue());
+            }
+
+            for (int i = 0; i < toRemove.Count; i++)
+            {
+                stuff.Remove(toRemove.Dequeue());
+            }
         }
 
         public void Render(PaintEventArgs e)
         {
             foreach (var thing in stuff)
             {
-                thing.Render(e);
+                if (!thing.isShadowCaster)
+                {
+                    thing.Render(e);
+                }
+            }
+
+            if (Options.shadows)
+            {
+                RenderShadows(e);
+            }
+
+            foreach (var thing in stuff)
+            {
+                if (thing.isShadowCaster)
+                {
+                    thing.Render(e);
+                }
+            }
+        }
+
+        private void RenderShadows(PaintEventArgs e)
+        {
+            foreach (var thing in stuff)
+            {
+                if (thing.isShadowCaster)
+                {
+                    Transform shadow = thing.transform;
+                    shadow.position += sunDirection;
+
+                    Renderer.RenderShape(e, shadowBrush, shadow, thing.shape);
+                }
             }
         }
     }

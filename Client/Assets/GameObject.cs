@@ -24,6 +24,7 @@ namespace Client
         public Transform transform;
         public Shape shape;
         public ColliderType collider;
+        public bool isShadowCaster;
 
         public Brush brush;
         protected Pen pen;
@@ -62,7 +63,12 @@ namespace Client
             }
         }
 
-        protected void Destroy()
+        protected void Instantiate(GameObject gameObject)
+        {
+            GameState.Instance.gameLevel.Add(gameObject);
+        }
+
+        public void Destroy()
         {
             GameState.Instance.gameLevel.Remove(this);
         }

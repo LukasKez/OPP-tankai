@@ -41,15 +41,6 @@ namespace PowerUp
             }
         }
 
-        public override void Render(PaintEventArgs e)
-        {
-            base.Render(e);
-            if (powerUp != null)
-            {
-                powerUp.Render(e);
-            }
-        }
-
         private void Spawn()
         {
             AbstractPowerUpFactory powerUpFactory;
@@ -86,11 +77,15 @@ namespace PowerUp
                 powerUp = powerUpFactory.CreatePermanentPowerUp(
                         (float)transform.position.X + 3, (float)transform.position.Y + 2, (float)transform.size.Y * 0.7f, (float)transform.size.Y * 0.8f);
             }
+            Instantiate(powerUp);
         }
 
         public PowerUpBase GiveAway()
         {
+            if (powerUp == null) return null;
+
             PowerUpBase powerUpToGive = powerUp;
+            powerUp.Destroy();
             powerUp = null;
 
             return powerUpToGive;

@@ -11,6 +11,7 @@ namespace PowerUp
 
         public PowerUpBase(float x, float y, float w, float h) : base(x, y, w, h)
         {
+            isShadowCaster = true;
             shape = Shape.Ellipse;
             pen = new Pen(Color.FromArgb(64, Color.Black), 2);
         }
