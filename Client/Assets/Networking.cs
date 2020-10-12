@@ -9,9 +9,11 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    class Networking
+    static class Networking
     {
-        public static string url = "http://localhost:52620/gamehub";
+        public static string scheme = "http://";
+        public static string host = "localhost:52620";
+        public static string path = "/gamehub";
 
         private static Dictionary<string, RemotePlayer> remotePlayers;
         private static HubConnection connection;
@@ -21,7 +23,7 @@ namespace Client
             remotePlayers = new Dictionary<string, RemotePlayer>();
 
             connection = new HubConnectionBuilder()
-                .WithUrl(url)
+                .WithUrl(scheme + host + path)
                 .WithAutomaticReconnect()
                 .Build();
 
