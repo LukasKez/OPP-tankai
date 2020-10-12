@@ -30,48 +30,38 @@ namespace Client.Assets.Levels.GameLevels
 
         public void SetupObstacles(string levelType)
         {
-            int i = 0;
-            int k = 2;
-
             int vertEnd = (int)(levelWidth / blockWidth);
             int hozEnd = (int)(levelHeight / blockHeight);
 
             seed %= 4;
 
-            while (i < vertEnd || i < hozEnd)
+            for (int k = 3; k <= hozEnd - 2; k += 2)
             {
-                i++;
-
-                if (k <= hozEnd - 2)
+                for (int z = 4; z < vertEnd; z += seed + 6)
                 {
-                    for (int z = 4; z < vertEnd; z += seed + 6)
+                    if (seed == 0)
                     {
-                        if (seed == 0)
-                        {
-                            stuff.Add(new Boulder((z + seed) * blockWidth, k * blockHeight, blockWidth, blockHeight));
-                            seed++;
-                        }
-                        else if (seed == 1)
-                        {
-                            stuff.Add(new Water(z * blockWidth, k * blockHeight, blockWidth, blockHeight));
-                            seed++;
-                        }
-                        else if (seed == 2)
-                        {
-                            stuff.Add(new Tree((z - seed) * blockWidth, k * blockHeight, blockWidth, blockHeight));
-                            seed++;
-                        }
-                        else if (seed == 3)
-                        {
-                            stuff.Add(new Wall(z * blockWidth, k * blockHeight, blockWidth, blockHeight));
-                            seed++;
-                        }
-                        seed %= 4;
+                        stuff.Add(new Boulder((z + seed) * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        seed++;
                     }
-                    k += 2;
+                    else if (seed == 1)
+                    {
+                        stuff.Add(new Water(z * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        seed++;
+                    }
+                    else if (seed == 2)
+                    {
+                        stuff.Add(new Tree((z - seed) * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        seed++;
+                    }
+                    else if (seed == 3)
+                    {
+                        stuff.Add(new Wall(z * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        seed++;
+                    }
+                    seed %= 4;
                 }
             }
-
         }
 
         public bool Add(GameObject gameObject)
