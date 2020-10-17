@@ -1,4 +1,6 @@
-﻿using Client.Obstacles;
+﻿using Client.Assets.Levels.ObstacleBuilders;
+using Client.Assets.Levels.Obstacles;
+using Client.Obstacles;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -25,6 +27,9 @@ namespace Client.Assets.Levels.GameLevels
         readonly Brush shadowBrush = new SolidBrush(Color.FromArgb(64, Color.Black));
         readonly Vector sunDirection = new Vector(2, 2);
 
+        private ObstacleBuilder obstacleBuilder;
+        private ObstacleDirector obstacleDirector;
+
         public GameLevel(float levelWidth, float levelHeight, float blockWidth, float blockHeight, int seed)
         {
             this.levelWidth = levelWidth;
@@ -34,7 +39,10 @@ namespace Client.Assets.Levels.GameLevels
             this.blockHeight = blockHeight;
 
             this.seed = seed;
-        }
+
+            this.obstacleBuilder = new ObstacleBuilder();
+            this.obstacleDirector = new ObstacleDirector(obstacleBuilder);
+    }
 
         public void SetupObstacles(string levelType)
         {
@@ -43,28 +51,36 @@ namespace Client.Assets.Levels.GameLevels
 
             seed %= 4;
 
-            for (int k = 3; k <= hozEnd - 2; k += 2)
+            for (int k = 4; k <= hozEnd - 2; k += 3)
             {
-                for (int z = 4; z < vertEnd; z += seed + 6)
+                for (int z = 6; z < vertEnd; z += seed + 6)
                 {
                     if (seed == 0)
                     {
-                        stuff.Add(new Boulder((z + seed) * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        obstacleDirector.ConstructBoulder((z + seed) * blockWidth, k * blockHeight, blockWidth, blockHeight);
+                        stuff.Add(obstacleBuilder.GetObstacle());
+                        //new Boulder((z + seed) * blockWidth, k * blockHeight, blockWidth, blockHeight));
                         seed++;
                     }
                     else if (seed == 1)
                     {
-                        stuff.Add(new Water(z * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        obstacleDirector.ConstructWater(z * blockWidth, k * blockHeight, blockWidth, blockHeight);
+                        stuff.Add(obstacleBuilder.GetObstacle());
+                        //new Water(z * blockWidth, k * blockHeight, blockWidth, blockHeight));
                         seed++;
                     }
                     else if (seed == 2)
                     {
-                        stuff.Add(new Tree((z - seed) * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        obstacleDirector.ConstructTree(z * blockWidth, k * blockHeight, blockWidth, blockHeight);
+                        stuff.Add(obstacleBuilder.GetObstacle());
+                        //new Tree((z - seed) * blockWidth, k * blockHeight, blockWidth, blockHeight));
                         seed++;
                     }
                     else if (seed == 3)
                     {
-                        stuff.Add(new Wall(z * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        obstacleDirector.ConstructWall(z * blockWidth, k * blockHeight, blockWidth, blockHeight);
+                        stuff.Add(obstacleBuilder.GetObstacle());
+                        //new Wall(z * blockWidth, k * blockHeight, blockWidth, blockHeight));
                         seed++;
                     }
                     seed %= 4;
