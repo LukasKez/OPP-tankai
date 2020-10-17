@@ -152,6 +152,7 @@
     <Compile Include="Assets\Levels\GameLevels\Forest.cs" />
     <Compile Include="Assets\Levels\GameLevels\GameLevel.cs" />
     <Compile Include="Assets\Levels\Ground.cs" />
+    <Compile Include="Assets\Levels\ObstacleDirector.cs" />
     <Compile Include="Assets\Levels\Obstacles\Boulder.cs" />
     <Compile Include="Assets\Levels\Obstacles\Obstacle.cs" />
     <Compile Include="Assets\Levels\Obstacles\Tree.cs" />

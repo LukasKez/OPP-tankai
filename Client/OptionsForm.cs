@@ -15,21 +15,24 @@ namespace Client
         public OptionsForm()
         {
             InitializeComponent();
-        }
 
-        private void OptionsForm_Load(object sender, EventArgs e)
-        {
             checkBox1.Checked = Options.shadows;
+            textBox1.Text = Options.name;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             Options.shadows = (sender as CheckBox).Checked;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            Options.name = (sender as TextBox).Text;
         }
     }
 }

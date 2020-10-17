@@ -63,14 +63,14 @@ namespace Client
             }
         }
 
-        protected void Instantiate(GameObject gameObject)
+        public static void Instantiate(GameObject gameObject)
         {
-            GameState.Instance.gameLevel.Add(gameObject);
+            GameState.Instance.gameLevel?.Add(gameObject);
         }
 
         public void Destroy()
         {
-            GameState.Instance.gameLevel.Remove(this);
+            GameState.Instance.gameLevel?.Remove(this);
         }
     }
 }

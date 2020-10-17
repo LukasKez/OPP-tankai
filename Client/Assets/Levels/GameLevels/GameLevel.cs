@@ -2,6 +2,7 @@
 using Client.Assets.Levels.Obstacles;
 using Client.Obstacles;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows;
@@ -21,8 +22,8 @@ namespace Client.Assets.Levels.GameLevels
 
         protected HashSet<GameObject> stuff = new HashSet<GameObject>();
 
-        private Queue<GameObject> toAdd = new Queue<GameObject>();
-        private Queue<GameObject> toRemove = new Queue<GameObject>();
+        private ConcurrentQueue<GameObject> toAdd = new ConcurrentQueue<GameObject>();
+        private ConcurrentQueue<GameObject> toRemove = new ConcurrentQueue<GameObject>();
 
         readonly Brush shadowBrush = new SolidBrush(Color.FromArgb(64, Color.Black));
         readonly Vector sunDirection = new Vector(2, 2);
@@ -141,14 +142,16 @@ namespace Client.Assets.Levels.GameLevels
 
         private void UpdateStuff()
         {
-            for (int i = 0; i < toAdd.Count; i++)
+            for (; 0 < toAdd.Count;)
             {
-                stuff.Add(toAdd.Dequeue());
+                toAdd.TryDequeue(out GameObject obj);
+                stuff.Add(obj);
             }
 
-            for (int i = 0; i < toRemove.Count; i++)
+            for (; 0 < toRemove.Count;)
             {
-                stuff.Remove(toRemove.Dequeue());
+                toRemove.TryDequeue(out GameObject obj);
+                stuff.Remove(obj);
             }
         }
 

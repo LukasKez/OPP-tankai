@@ -9,5 +9,6 @@ namespace Client
     static class Options
     {
         public static bool shadows = true;
+        public static string name = "Player";
     }
 }

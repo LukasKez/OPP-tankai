@@ -47,6 +47,7 @@ namespace Client
             this.StartButton.TabIndex = 0;
             this.StartButton.Text = "Join Game";
             this.StartButton.UseVisualStyleBackColor = true;
+            this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
             // 
             // MenuPanel
             // 

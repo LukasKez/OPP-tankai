@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Client
 {
@@ -15,25 +12,47 @@ namespace Client
         public static string host = "localhost:52620";
         public static string path = "/gamehub";
 
-        private static Dictionary<string, RemotePlayer> remotePlayers;
+        private static ConcurrentDictionary<string, RemotePlayer> remotePlayers;
         private static HubConnection connection;
+
+        static Networking()
+        {
+            remotePlayers = new ConcurrentDictionary<string, RemotePlayer>();
+        }
 
         public static async void ConnectAsync()
         {
-            remotePlayers = new Dictionary<string, RemotePlayer>();
+            if (IsConnected())
+                return;
+
+            remotePlayers.Clear();
 
             connection = new HubConnectionBuilder()
                 .WithUrl(scheme + host + path)
                 .WithAutomaticReconnect()
                 .Build();
 
+            connection.Closed += (error) =>
+            {
+                GameState.Instance.State = ClientState.Menu;
+                return Task.CompletedTask;
+            };
+
+            connection.On<DateTime>("StartGame", (startAt) =>
+            {
+                GameLoop.StartGame();
+                foreach (var remotePlayer in remotePlayers)
+                {
+                    remotePlayer.Value.Spawn();
+                }
+            });
+
             connection.On<string>("OnNewConnection", (connectionId) =>
             {
                 if (connectionId == connection.ConnectionId)
                     return;
 
-                RemotePlayer player = new RemotePlayer();
-                remotePlayers.Add(connectionId, player);
+                remotePlayers.TryAdd(connectionId, new RemotePlayer());
             });
 
             connection.On<string>("OnDisconnectedConnection", (connectionId) =>
@@ -41,12 +60,32 @@ namespace Client
                 if (connectionId == connection.ConnectionId)
                     return;
 
-                remotePlayers.Remove(connectionId);
+                if (!remotePlayers.ContainsKey(connectionId))
+                    return;
+
+                remotePlayers[connectionId].Despawn();
+                remotePlayers.TryRemove(connectionId, out _);
             });
 
             connection.On<string, string>("ReceiveMessage", (user, message) =>
             {
                 Debug.WriteLine($"{user}: {message}");
+            });
+
+            connection.On<string, string>("OnSetName", (connectionId, name) =>
+            {
+                if (!remotePlayers.ContainsKey(connectionId))
+                    return;
+
+                remotePlayers[connectionId].name = name;
+            });
+
+            connection.On<string, bool>("OnSetIsReady", (connectionId, isReady) =>
+            {
+                if (!remotePlayers.ContainsKey(connectionId))
+                    return;
+
+                remotePlayers[connectionId].isReady = isReady;
             });
 
             connection.On<string, float, float, float>("OnPositionUpdate", (connectionId, x, y, r) =>
@@ -57,13 +96,22 @@ namespace Client
                 remotePlayers[connectionId].UpdatePosition(x, y, r);
             });
 
+            connection.On("DisconnectClient", () =>
+            {
+                DisconnectAsync();
+            });
+
             try
             {
                 await connection.StartAsync();
+                SetNameAsync(Options.name);
+
+                GameState.Instance.State = ClientState.Connected;
                 Debug.WriteLine("Connection started");
             }
             catch
             {
+                GameState.Instance.State = ClientState.Menu;
                 Debug.WriteLine("Error connecting");
             }
         }
@@ -99,6 +147,38 @@ namespace Client
             }
         }
 
+        public static async void SetNameAsync(string name)
+        {
+            if (!IsConnected())
+                return;
+
+            try
+            {
+                await connection.InvokeAsync("SetName", name);
+            }
+            catch
+            {
+                Debug.WriteLine("Error setting player name");
+            }
+        }
+
+        public static async void SetIsReadyAsync(bool isReady)
+        {
+            if (!IsConnected())
+                return;
+
+            try
+            {
+                await connection.InvokeAsync("SetIsReady", isReady);
+            }
+            catch
+            {
+                if (GameState.Instance.State == ClientState.Ready)
+                    GameState.Instance.State = ClientState.Connected;
+                Debug.WriteLine("Error setting ready state");
+            }
+        }
+
         public static async void SendPositionUpdateAsync(GameObject player)
         {
             if (!IsConnected())
@@ -118,22 +198,6 @@ namespace Client
         public static bool IsConnected()
         {
             return connection?.State == HubConnectionState.Connected;
-        }
-
-        public static void Update(float deltaTime)
-        {
-            foreach (var player in remotePlayers)
-            {
-                player.Value.Update(deltaTime);
-            }
-        }
-
-        public static void Render(PaintEventArgs e)
-        {
-            foreach (var player in remotePlayers)
-            {
-                player.Value.Render(e);
-            }
         }
     }
 }

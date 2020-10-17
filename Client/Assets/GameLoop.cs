@@ -1,36 +1,35 @@
-﻿using System;
-using System.Threading;
+﻿using Client.Assets.Levels;
+using System;
 using System.Windows.Forms;
 
 namespace Client
 {
-    public class GameLoop
+    public static class GameLoop
     {
-        public float DeltaTime { get; private set; }
-        public int fps;
+        public static float DeltaTime { get; private set; }
+        public static int fps;
 
-        int frames;
-        DateTime lastTime;
+        static int frames;
+        static DateTime lastTime;
 
-        DateTime startTime = DateTime.Now;
-        DateTime endTime = DateTime.Now;
+        static DateTime startTime = DateTime.Now;
+        static DateTime endTime = DateTime.Now;
 
-        public GameLoop()
+        public static void StartGame(string levelType = "forest")
         {
-            Networking.ConnectAsync();
+            var state = GameState.Instance;
+            state.gameLevel = GameLevelCreator.GetGameLevel(
+                levelType, (float)state.mapSize.X, (float)state.mapSize.Y, 20, 20, 2);
+
+            GameObject.Instantiate(new LocalPlayer());
+            //GameObject.Instantiate(new Bot());
+
+            GameState.Instance.State = ClientState.Playing;
         }
 
-        public void StartGame()
+        public static void Manage(PaintEventArgs e)
         {
-            GameState.Instance.gameLevel.Add(new LocalPlayer());
-            GameState.Instance.gameLevel.Add(new Bot());
-
-            GameState.Instance.state = State.playing;
-        }
-
-        public void Manage(PaintEventArgs e)
-        {
-            if (GameState.Instance.state != State.playing)
+            if (GameState.Instance.State != ClientState.Playing)
             {
                 return;
             }
@@ -43,20 +42,18 @@ namespace Client
             Render(e);
         }
 
-        void Update(float deltaTime)
+        static void Update(float deltaTime)
         {
             UpdateFPS();
             GameState.Instance.gameLevel.Update(deltaTime);
-            Networking.Update(deltaTime);
         }
 
-        void Render(PaintEventArgs e)
+        static void Render(PaintEventArgs e)
         {
             GameState.Instance.gameLevel.Render(e);
-            Networking.Render(e);
         }
 
-        void UpdateFPS()
+        static void UpdateFPS()
         {
             frames++;
 
