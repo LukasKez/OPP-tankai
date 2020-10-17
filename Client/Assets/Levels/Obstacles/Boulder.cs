@@ -1,16 +1,26 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Drawing;
 
-namespace Client.Obstacles
+namespace Client
 {
-    class Boulder : Obstacle
+    class Boulder : ObstacleDecorator
     {
-        public Boulder(float x, float y, float width, float height)
-            : base(x, y, width, height)
+
+        public Boulder(GameObject decoredObject)
+            : base(decoredObject)
         {
-            shape = Shape.Ellipse;
-            brush = Brushes.DarkGray;
         }
+        public override void Decorate()
+        {
+            collider = obstacle.collider;
+            isShadowCaster = obstacle.isShadowCaster;
+
+            transform = obstacle.transform;
+
+            shape = Shape.Ellipse;
+            brush = Brushes.Gray;
+        }
+
+
+
     }
 }

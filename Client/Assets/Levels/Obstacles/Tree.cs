@@ -1,14 +1,20 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Drawing;
 
-namespace Client.Obstacles
+namespace Client
 {
-    class Tree : Obstacle
+    class Tree : ObstacleDecorator
     {
-        public Tree(float x,float y,float width,float height) 
-            : base(x,y,width, height)
+        public Tree(GameObject decoredObject)
+            : base(decoredObject)
         {
+        }
+        public override void Decorate()
+        {
+            collider = obstacle.collider;
+            isShadowCaster = obstacle.isShadowCaster;
+
+            transform = obstacle.transform;
+
             shape = Shape.Ellipse;
             brush = Brushes.DarkGreen;
         }

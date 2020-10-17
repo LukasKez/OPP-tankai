@@ -72,5 +72,7 @@ namespace Client
         {
             GameState.Instance.gameLevel?.Remove(this);
         }
+
+        public virtual void Decorate(){ }
     }
 }

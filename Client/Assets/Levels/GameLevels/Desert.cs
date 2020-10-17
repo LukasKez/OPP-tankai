@@ -1,6 +1,4 @@
-﻿using Client.Obstacles;
-using System;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace Client.Assets.Levels.GameLevels
 {
@@ -12,12 +10,24 @@ namespace Client.Assets.Levels.GameLevels
             stuff.Add(new Ground(new Transform(0, 0, levelWidth, levelHeight), Brushes.LightYellow));
 
             // Horizontal borders
-            stuff.Add(new Water(0, 0, levelWidth, blockHeight));
-            stuff.Add(new Water(0, levelHeight - blockHeight, levelWidth, blockHeight));
+
+            GameObject gameObject = new Water(new Obstacle(0, 0, levelWidth, blockHeight));
+            gameObject.Decorate();
+            stuff.Add(gameObject);
+
+            gameObject = new Water(new Obstacle(0, levelHeight - blockHeight, levelWidth, blockHeight));
+            gameObject.Decorate();
+            stuff.Add(gameObject);
 
             // Vertical borders
-            stuff.Add(new Water(0, 0, blockWidth, levelHeight));
-            stuff.Add(new Water(levelWidth - blockWidth, 0, blockWidth, levelHeight));
+
+            gameObject = new Water(new Obstacle(0, 0, blockWidth, levelHeight));
+            gameObject.Decorate();
+            stuff.Add(gameObject);
+
+            gameObject = new Water(new Obstacle(levelWidth - blockWidth, 0, blockWidth, levelHeight));
+            gameObject.Decorate();
+            stuff.Add(gameObject);
         }
 
     }

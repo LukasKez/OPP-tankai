@@ -1,16 +1,23 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Drawing;
 
-namespace Client.Obstacles
+namespace Client
 {
-    class Water : Obstacle
+    class Water : ObstacleDecorator
     {
-        public Water(float x, float y, float width, float height)
-            : base(x, y, width, height)
+        public Water(GameObject decoredObject)
+            :base(decoredObject)
         {
+        }
+        public override void Decorate()
+        {
+            collider = obstacle.collider;
+            isShadowCaster = obstacle.isShadowCaster;
+
+            transform = obstacle.transform;
+            
             shape = Shape.Rectangle;
-            brush = Brushes.DarkBlue;
+            brush = Brushes.DarkSlateBlue;          
+
         }
     }
 }

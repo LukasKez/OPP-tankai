@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
-
-namespace Client.Obstacles
+﻿namespace Client
 {
     class Obstacle : GameObject
     {
@@ -10,6 +7,10 @@ namespace Client.Obstacles
         {
             collider = ColliderType.Collider;
             isShadowCaster = true;
+        }
+
+        public override void Decorate()
+        {
         }
     }
 }

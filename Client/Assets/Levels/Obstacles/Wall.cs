@@ -1,16 +1,24 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Drawing;
 
-namespace Client.Obstacles
+namespace Client
 {
-    class Wall : Obstacle
+    class Wall : ObstacleDecorator
     {
-        public Wall(float x, float y, float width, float height)
-            : base(x, y, width, height)
+        public Wall(GameObject decoredObject)
+            : base(decoredObject)
         {
-            shape = Shape.Rectangle;
-            brush = Brushes.DarkSlateGray;
         }
+        public override void Decorate()
+        {
+            collider = obstacle.collider;
+            isShadowCaster = obstacle.isShadowCaster;
+
+            transform = obstacle.transform;
+            
+            shape = Shape.Rectangle;
+            brush = Brushes.DarkGray;
+        }
+
+
     }
 }

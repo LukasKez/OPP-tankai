@@ -1,8 +1,7 @@
-﻿using Client.Obstacles;
-using System;
+﻿using Client.Assets.Levels.GameLevels;
 using System.Drawing;
 
-namespace Client.Assets.Levels.GameLevels
+namespace Client
 {
     class Cave : GameLevel
     {
@@ -25,14 +24,27 @@ namespace Client.Assets.Levels.GameLevels
             {
                 if (i < vertEnd)
                 {
-                    stuff.Add(new Boulder(i * blockWidth, 0, blockWidth, blockHeight));
-                    stuff.Add(new Boulder(i * blockWidth, levelHeight - blockHeight, blockWidth, blockHeight));
+                    GameObject gameObject = new Boulder(new Obstacle(i * blockWidth, 0, blockWidth, blockHeight));
+                    gameObject.Decorate();
+                    stuff.Add(gameObject);
+
+                    gameObject = new Boulder(new Obstacle(i * blockWidth, levelHeight - blockHeight, blockWidth, blockHeight));
+                    gameObject.Decorate();
+                    stuff.Add(gameObject);
+
                     i++;
                 }
                 if (j < hozEnd)
                 {
-                    stuff.Add(new Boulder(0, j * blockHeight, blockWidth, blockHeight));
-                    stuff.Add(new Boulder(levelWidth - blockWidth, j * blockHeight, blockWidth, blockHeight));
+
+                    GameObject gameObject = new Boulder(new Obstacle(0, j * blockHeight, blockWidth, blockHeight));
+                    gameObject.Decorate();
+                    stuff.Add(gameObject);
+
+                    gameObject = new Boulder(new Obstacle(levelWidth - blockWidth, j * blockHeight, blockWidth, blockHeight));
+                    gameObject.Decorate();
+                    stuff.Add(gameObject);
+
                     j++;
                 }
             }
