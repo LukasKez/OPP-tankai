@@ -1,5 +1,4 @@
-﻿using Client.Assets.Levels.GameLevels;
-using System;
+﻿using System;
 using System.Windows;
 
 namespace Client

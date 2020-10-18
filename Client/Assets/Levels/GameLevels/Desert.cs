@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Client.Assets.Levels.GameLevels
+namespace Client
 {
     class Desert : GameLevel
     {

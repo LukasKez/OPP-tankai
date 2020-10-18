@@ -1,18 +1,11 @@
-<<<<<<< HEAD
-﻿using System.Collections.Generic;
-=======
-﻿using Client.Assets.Levels.ObstacleBuilders;
-using Client.Assets.Levels.Obstacles;
-using Client.Obstacles;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
->>>>>>> c67ba76f51ed888867c3d5b876b8d26c4a2f730d
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
 
-namespace Client.Assets.Levels.GameLevels
+namespace Client
 {
     abstract class GameLevel
     {
