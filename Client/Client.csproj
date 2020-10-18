@@ -158,7 +158,6 @@
     <Compile Include="Assets\Controller\Controller.cs" />
     <Compile Include="Assets\GameLoop.cs" />
     <Compile Include="Assets\GameObject.cs" />
-    <Compile Include="Assets\GameObserver.cs" />
     <Compile Include="Assets\GameState.cs" />
     <Compile Include="Assets\Levels\GameLevelCreator.cs" />
     <Compile Include="Assets\Levels\GameLevels\Cave.cs" />
@@ -178,6 +177,8 @@
     <Compile Include="Assets\Networking.cs" />
     <Compile Include="Assets\Bot\AbstractBot.cs" />
     <Compile Include="Assets\Bot\Bot.cs" />
+    <Compile Include="Assets\Observer\IObserver.cs" />
+    <Compile Include="Assets\Observer\Subject.cs" />
     <Compile Include="Assets\Player\LocalPlayer.cs" />
     <Compile Include="Assets\Player\Player.cs" />
     <Compile Include="Assets\Player\RemotePlayer.cs" />
