@@ -7,15 +7,22 @@ namespace Client
 {
     class LocalPlayer : Player
     {
+        private Controller tankController;
+
         private float elapsedTime = 0f;
         private float updateRate = 1f / 40f;
+
+        public LocalPlayer()
+        {
+            tankController = new Controller(controllable);
+        }
 
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
 
             if (GameState.Instance.focused)
-                UpdatePosition(deltaTime);
+                UpdatePosition();
 
             elapsedTime += deltaTime;
             if (elapsedTime > updateRate)
@@ -25,50 +32,23 @@ namespace Client
             }
         }
 
-        void UpdatePosition(float deltaTime)
+        void UpdatePosition()
         {
-            Vector vertical = new Vector();
-            float speed = controllable.speed;
-            Transform tr = controllable.transform;
-
-            if (Keyboard.IsKeyDown(Key.W))
-            {
-                vertical.Y = -speed * deltaTime;
-            }
             if (Keyboard.IsKeyDown(Key.A))
             {
-                tr.rotation -= speed * deltaTime;
-            }
-            if (Keyboard.IsKeyDown(Key.S))
-            {
-                vertical.Y = speed * deltaTime;
+                tankController.TurnLeft();
             }
             if (Keyboard.IsKeyDown(Key.D))
             {
-                tr.rotation += speed * deltaTime;
+                tankController.TurnRight();
             }
-
-            double radians = tr.rotation * Math.PI / 180;
-            tr.position.X += vertical.X * Math.Cos(radians) - vertical.Y * Math.Sin(radians);
-            tr.position.Y += vertical.X * Math.Sin(radians) + vertical.Y * Math.Cos(radians);
-
-            Transform oldTransform = controllable.transform;
-            controllable.transform = tr;
-            
-            GameObject collision = GameState.Instance.gameLevel.GetCollision(controllable);
-            if (collision != null)
+            if (Keyboard.IsKeyDown(Key.W))
             {
-                if (collision.collider == ColliderType.Collider)
-                {
-                    controllable.transform = oldTransform;
-                }
-                else
-                {
-                    if (collision is PowerUpSpawner powerUpSpawner)
-                    {
-                        controllable.PowerUp(powerUpSpawner.GiveAway());
-                    }
-                }
+                tankController.MoveForward();
+            }
+            if (Keyboard.IsKeyDown(Key.S))
+            {
+                tankController.MoveBackward();
             }
         }
     }

@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows;
 using PowerUp;
 
 namespace Client
 {
-    public class Tank : GameObject
+    public class Tank : GameObject, IControllable
     {
-        public float attack = 1;     // TODO: Delete
-        public float defense = 100;  // TODO: Delete
-        public float health = 100;   // TODO: Delete
-        public float speed = 100;    // TODO: Delete
+        [Obsolete()] public float attack = 1;     // TODO: Delete
+        [Obsolete()] public float defense = 100;  // TODO: Delete
+        [Obsolete()] public float health = 100;   // TODO: Delete
+        [Obsolete()] public float speed = 100;    // TODO: Delete
 
         public Engine engine { get; set; }
         public Suspension suspension { get; set; }
@@ -31,6 +32,52 @@ namespace Client
         public override void Update(float deltaTime)
         {
             UpdatePowerUps(deltaTime);
+        }
+
+        public void Move(float direction)
+        {
+            Vector vertical = new Vector();
+            Vector newPosition = transform.position;
+
+            vertical.Y = direction * speed * GameLoop.DeltaTime;
+
+            double radians = transform.rotation * Math.PI / 180;
+            newPosition.X += vertical.X * Math.Cos(radians) - vertical.Y * Math.Sin(radians);
+            newPosition.Y += vertical.X * Math.Sin(radians) + vertical.Y * Math.Cos(radians);
+
+            Transform oldTransform = transform;
+            transform.position = newPosition;
+
+            GameObject collision = GameState.Instance.gameLevel.GetCollision(this);
+            if (collision != null)
+            {
+                if (collision.collider == ColliderType.Collider)
+                {
+                    transform = oldTransform;
+                }
+                else
+                {
+                    if (collision is PowerUpSpawner powerUpSpawner)
+                    {
+                        PowerUp(powerUpSpawner.GiveAway());
+                    }
+                }
+            }
+        }
+
+        public void Rotate(float direction)
+        {
+            transform.rotation += direction * speed * GameLoop.DeltaTime;
+        }
+
+        public void LookAt(float direction)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Action()
+        {
+            throw new NotImplementedException();
         }
 
         void UpdatePowerUps(float deltaTime)

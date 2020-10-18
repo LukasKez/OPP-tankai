@@ -147,6 +147,15 @@
     <Compile Include="Assets\Builders\Tank\ITankBuilder.cs" />
     <Compile Include="Assets\Builders\ObstacleBuilder.cs" />
     <Compile Include="Assets\Builders\Tank\TankBuilder.cs" />
+    <Compile Include="Assets\Controller\Commands\ActionCommand.cs" />
+    <Compile Include="Assets\Controller\Commands\LookLeftCommand.cs" />
+    <Compile Include="Assets\Controller\Commands\LookRightCommand.cs" />
+    <Compile Include="Assets\Controller\Commands\MoveBackwardCommand.cs" />
+    <Compile Include="Assets\Controller\Commands\MoveForwardCommand.cs" />
+    <Compile Include="Assets\Controller\Commands\TurnLeftCommand.cs" />
+    <Compile Include="Assets\Controller\Commands\TurnRightCommand.cs" />
+    <Compile Include="Assets\Controller\ICommand.cs" />
+    <Compile Include="Assets\Controller\Controller.cs" />
     <Compile Include="Assets\GameLoop.cs" />
     <Compile Include="Assets\GameObject.cs" />
     <Compile Include="Assets\GameObserver.cs" />
@@ -189,6 +198,7 @@
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryPowerUp.cs" />
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporarySpeed.cs" />
     <Compile Include="Assets\Renderer.cs" />
+    <Compile Include="Assets\Controller\IControllable.cs" />
     <Compile Include="Assets\Tank\Modules\Engine.cs" />
     <Compile Include="Assets\Tank\Modules\Gun.cs" />
     <Compile Include="Assets\Tank\Modules\Track.cs" />
