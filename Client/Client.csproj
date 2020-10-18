@@ -142,8 +142,14 @@
     <Compile Include="Assets\Bot\Strategies\Shoot.cs" />
     <Compile Include="Assets\Bot\Strategies\Turn.cs" />
     <Compile Include="Assets\Bot\Strategies\Move.cs" />
+    <Compile Include="Assets\Builders\IObstacleBuilder.cs" />
+    <Compile Include="Assets\Builders\Tank\TankDirector.cs" />
+    <Compile Include="Assets\Builders\Tank\ITankBuilder.cs" />
+    <Compile Include="Assets\Builders\ObstacleBuilder.cs" />
+    <Compile Include="Assets\Builders\Tank\TankBuilder.cs" />
     <Compile Include="Assets\GameLoop.cs" />
     <Compile Include="Assets\GameObject.cs" />
+    <Compile Include="Assets\GameObserver.cs" />
     <Compile Include="Assets\GameState.cs" />
     <Compile Include="Assets\Levels\GameLevelCreator.cs" />
     <Compile Include="Assets\Levels\GameLevels\Cave.cs" />
@@ -155,6 +161,7 @@
     <Compile Include="Assets\Levels\ObstacleDirector.cs" />
     <Compile Include="Assets\Levels\Obstacles\Boulder.cs" />
     <Compile Include="Assets\Levels\Obstacles\Obstacle.cs" />
+    <Compile Include="Assets\Levels\Obstacles\ObstacleDecorator.cs" />
     <Compile Include="Assets\Levels\Obstacles\Tree.cs" />
     <Compile Include="Assets\Levels\Obstacles\Wall.cs" />
     <Compile Include="Assets\Levels\Obstacles\Water.cs" />
@@ -182,6 +189,11 @@
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryPowerUp.cs" />
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporarySpeed.cs" />
     <Compile Include="Assets\Renderer.cs" />
+    <Compile Include="Assets\Tank\Modules\Engine.cs" />
+    <Compile Include="Assets\Tank\Modules\Gun.cs" />
+    <Compile Include="Assets\Tank\Modules\Track.cs" />
+    <Compile Include="Assets\Tank\Modules\Turret.cs" />
+    <Compile Include="Assets\Tank\Modules\Suspension.cs" />
     <Compile Include="Assets\Tank\Tank.cs" />
     <Compile Include="Assets\Transform.cs" />
     <Compile Include="GameForm.cs">

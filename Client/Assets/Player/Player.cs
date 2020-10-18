@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Windows.Forms;
 
 namespace Client
 {
@@ -10,7 +9,12 @@ namespace Client
 
         public Player()
         {
-            controllable = new Tank(20, 20, Brushes.Red);
+            TankBuilder builder = new TankBuilder();
+            TankDirector director = new TankDirector(builder);
+
+            director.Construct(20, 20);
+            controllable = builder.GetResult();
+
             Spawn();
         }
 

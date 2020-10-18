@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using PowerUp;
 
 namespace Client
 {
     public class Tank : GameObject
     {
-        public float attack = 1;
-        public float defense = 100;
-        public float health = 100;
-        public float speed = 100;
+        public float attack = 1;     // TODO: Delete
+        public float defense = 100;  // TODO: Delete
+        public float health = 100;   // TODO: Delete
+        public float speed = 100;    // TODO: Delete
 
-        List<TemporaryPowerUp> temporaryPowerUps;
+        public Engine engine { get; set; }
+        public Suspension suspension { get; set; }
+        public Turret turret { get; set; }
+
+
+        private List<TemporaryPowerUp> temporaryPowerUps;
 
         public Tank(float x, float y, Brush brush) : base(x, y, 20, 20)
         {
