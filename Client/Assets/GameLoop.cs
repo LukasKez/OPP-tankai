@@ -21,7 +21,7 @@ namespace Client
                 levelType, (float)state.mapSize.X, (float)state.mapSize.Y, 20, 20, 2);
 
             GameObject.Instantiate(new LocalPlayer());
-            //GameObject.Instantiate(new Bot());
+            //GameObject.Instantiate(new BotPlayer());
 
             GameState.Instance.State = ClientState.Playing;
         }

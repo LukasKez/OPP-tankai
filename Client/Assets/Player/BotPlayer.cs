@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace Client
 {
-    class Bot : AbstractBot
+    class BotPlayer : Player
     {
         protected StrategyInterface action;
 
@@ -55,6 +55,8 @@ namespace Client
             if (timePassed > 2)
             {
                 vertical.Y = -speed * deltaTime;
+                if (timePassed > 4)
+                    timePassed = 0;
             }
             
             double radians = tr.rotation * Math.PI / 180;
