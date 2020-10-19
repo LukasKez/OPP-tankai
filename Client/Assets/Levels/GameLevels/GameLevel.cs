@@ -52,7 +52,7 @@ namespace Client
                 {
                     if (seed == 0)
                     {
-                        GameObject gameObject = new Boulder(new Obstacle((z + seed) * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        GameObject gameObject = new DamageObstacle(new Boulder(new Obstacle((z + seed) * blockWidth, k * blockHeight, blockWidth, blockHeight)));
                         gameObject.Decorate();
                         stuff.Add(gameObject);
                         seed++;

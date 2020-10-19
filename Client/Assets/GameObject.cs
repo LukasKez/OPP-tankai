@@ -29,6 +29,8 @@ namespace Client
         public Brush brush;
         protected Pen pen;
 
+        public float damage;
+
         protected GameObject()
         {
         }

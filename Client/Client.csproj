@@ -158,7 +158,6 @@
     <Compile Include="Assets\Controller\Controller.cs" />
     <Compile Include="Assets\GameLoop.cs" />
     <Compile Include="Assets\GameObject.cs" />
-    <Compile Include="Assets\GameObserver.cs" />
     <Compile Include="Assets\GameState.cs" />
     <Compile Include="Assets\Levels\GameLevelCreator.cs" />
     <Compile Include="Assets\Levels\GameLevels\Cave.cs" />
@@ -169,12 +168,17 @@
     <Compile Include="Assets\Levels\Ground.cs" />
     <Compile Include="Assets\Levels\ObstacleDirector.cs" />
     <Compile Include="Assets\Levels\Obstacles\Boulder.cs" />
+    <Compile Include="Assets\Levels\Obstacles\DamageObstacle.cs" />
     <Compile Include="Assets\Levels\Obstacles\Obstacle.cs" />
     <Compile Include="Assets\Levels\Obstacles\ObstacleDecorator.cs" />
     <Compile Include="Assets\Levels\Obstacles\Tree.cs" />
     <Compile Include="Assets\Levels\Obstacles\Wall.cs" />
     <Compile Include="Assets\Levels\Obstacles\Water.cs" />
     <Compile Include="Assets\Networking.cs" />
+    <Compile Include="Assets\Bot\AbstractBot.cs" />
+    <Compile Include="Assets\Bot\Bot.cs" />
+    <Compile Include="Assets\Observer\IObserver.cs" />
+    <Compile Include="Assets\Observer\Subject.cs" />
     <Compile Include="Assets\Player\BotPlayer.cs" />
     <Compile Include="Assets\Player\LocalPlayer.cs" />
     <Compile Include="Assets\Player\Player.cs" />

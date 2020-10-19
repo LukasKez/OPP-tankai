@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    public partial class GameForm : Form
+    public partial class GameForm : Form, IObserver
     {
         string originalText;
 
@@ -28,7 +28,7 @@ namespace Client
         {
             originalText = Text;
 
-            GameObserver.OnGameStateChange += UpdateUIState;
+            GameState.Instance.Attach(this);
         }
 
         private void GameForm_Paint(object sender, PaintEventArgs e)
@@ -123,6 +123,11 @@ namespace Client
                 StartButton.Enabled = enableStartBtn;
                 StartButton.Text = startBtnText;
             }
+        }
+
+        public void OnSubjectUpdate()
+        {
+            UpdateUIState(GameState.Instance.State);
         }
     }
 }

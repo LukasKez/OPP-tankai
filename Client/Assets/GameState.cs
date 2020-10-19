@@ -13,7 +13,7 @@ namespace Client
         Died,
     }
 
-    class GameState
+    class GameState : Subject
     {
         public bool focused;
         public Vector mapSize;
@@ -26,7 +26,7 @@ namespace Client
             set
             {
                 state = value;
-                GameObserver.GameStateChange(value);
+                Notify();
             }
         }
 
