@@ -10,14 +10,20 @@ namespace Client
         }
         public override void Decorate()
         {
+            obstacle.Decorate();
             collider = obstacle.collider;
             isShadowCaster = obstacle.isShadowCaster;
+            damage = obstacle.damage;
+            shape = obstacle.shape;
+            brush = obstacle.brush;
 
             transform = obstacle.transform;
-            
+            MakeWater();
+        }
+        private void MakeWater()
+        {
             shape = Shape.Rectangle;
-            brush = Brushes.DarkSlateBlue;          
-
+            brush = Brushes.DarkSlateBlue;
         }
     }
 }

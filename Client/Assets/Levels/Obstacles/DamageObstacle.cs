@@ -1,10 +1,12 @@
-﻿using System.Drawing;
+﻿
+
+using System;
 
 namespace Client
 {
-    class Wall : ObstacleDecorator
+    class DamageObstacle : ObstacleDecorator
     {
-        public Wall(GameObject decoredObject)
+        public DamageObstacle(GameObject decoredObject)
             : base(decoredObject)
         {
         }
@@ -18,14 +20,12 @@ namespace Client
             brush = obstacle.brush;
 
             transform = obstacle.transform;
-            MakeWall();
+            MakeDamageObstacle();
         }
-        private void MakeWall()
+
+        private void MakeDamageObstacle()
         {
-            shape = Shape.Rectangle;
-            brush = Brushes.DarkGray;
+            damage = 10;
         }
-
-
     }
 }
