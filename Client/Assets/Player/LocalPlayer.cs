@@ -1,11 +1,13 @@
 ﻿using PowerUp;
 using System;
+using System.Drawing;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 
 namespace Client
 {
-    class LocalPlayer : Player
+    public class LocalPlayer : Player
     {
         private Controller tankController;
 
@@ -30,6 +32,17 @@ namespace Client
                 elapsedTime -= updateRate;
                 Networking.SendPositionUpdateAsync(controllable);
             }
+        }
+
+        public override void Render(PaintEventArgs e)
+        {
+            base.Render(e);
+
+            int pos = 110;
+            e.Graphics.DrawString("Attack " + controllable.attack.ToString(), Control.DefaultFont, Brushes.Black, 20, pos);
+            e.Graphics.DrawString("Defense " + controllable.defense.ToString(), Control.DefaultFont, Brushes.Black, 20, pos + 15);
+            e.Graphics.DrawString("Health " + controllable.health.ToString(), Control.DefaultFont, Brushes.Black, 20, pos + 30);
+            e.Graphics.DrawString("Speed " + controllable.speed.ToString(), Control.DefaultFont, Brushes.Black, 20, pos + 45);
         }
 
         void UpdatePosition()

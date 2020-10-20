@@ -175,8 +175,6 @@
     <Compile Include="Assets\Levels\Obstacles\Wall.cs" />
     <Compile Include="Assets\Levels\Obstacles\Water.cs" />
     <Compile Include="Assets\Networking.cs" />
-    <Compile Include="Assets\Bot\AbstractBot.cs" />
-    <Compile Include="Assets\Bot\Bot.cs" />
     <Compile Include="Assets\Observer\IObserver.cs" />
     <Compile Include="Assets\Observer\Subject.cs" />
     <Compile Include="Assets\Player\BotPlayer.cs" />

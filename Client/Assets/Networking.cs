@@ -15,6 +15,8 @@ namespace Client
         private static ConcurrentDictionary<string, RemotePlayer> remotePlayers;
         private static HubConnection connection;
 
+        public static event Action<int, RemotePlayer> OnRemotePlayersChange;
+
         static Networking()
         {
             remotePlayers = new ConcurrentDictionary<string, RemotePlayer>();
@@ -52,7 +54,9 @@ namespace Client
                 if (connectionId == connection.ConnectionId)
                     return;
 
-                remotePlayers.TryAdd(connectionId, new RemotePlayer());
+                RemotePlayer player = new RemotePlayer();
+                remotePlayers.TryAdd(connectionId, player);
+                RemotePlayerChange(remotePlayers.Count - 1, player);
             });
 
             connection.On<string>("OnDisconnectedConnection", (connectionId) =>
@@ -63,8 +67,10 @@ namespace Client
                 if (!remotePlayers.ContainsKey(connectionId))
                     return;
 
+                int index = FindIndex(connectionId);
                 remotePlayers[connectionId].Despawn();
                 remotePlayers.TryRemove(connectionId, out _);
+                RemotePlayerChange(index, null);
             });
 
             connection.On<string, string>("ReceiveMessage", (user, message) =>
@@ -77,7 +83,9 @@ namespace Client
                 if (!remotePlayers.ContainsKey(connectionId))
                     return;
 
-                remotePlayers[connectionId].name = name;
+                RemotePlayer player = remotePlayers[connectionId];
+                player.name = name;
+                RemotePlayerChange(FindIndex(connectionId), player);
             });
 
             connection.On<string, bool>("OnSetIsReady", (connectionId, isReady) =>
@@ -85,7 +93,9 @@ namespace Client
                 if (!remotePlayers.ContainsKey(connectionId))
                     return;
 
-                remotePlayers[connectionId].isReady = isReady;
+                RemotePlayer player = remotePlayers[connectionId];
+                player.isReady = isReady;
+                RemotePlayerChange(FindIndex(connectionId), player);
             });
 
             connection.On<string, float, float, float>("OnPositionUpdate", (connectionId, x, y, r) =>
@@ -198,6 +208,24 @@ namespace Client
         public static bool IsConnected()
         {
             return connection?.State == HubConnectionState.Connected;
+        }
+
+        private static void RemotePlayerChange(int index, RemotePlayer player)
+        {
+            OnRemotePlayersChange?.Invoke(index, player);
+        }
+
+        private static int FindIndex(string id)
+        {
+            int i = 0;
+            foreach (var item in remotePlayers)
+            {
+                if (id == item.Key)
+                    return i;
+
+                i++;
+            }
+            return -1;
         }
     }
 }

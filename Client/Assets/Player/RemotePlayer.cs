@@ -2,7 +2,7 @@
 
 namespace Client
 {
-    class RemotePlayer : Player
+    public class RemotePlayer : Player
     {
         public string name;
         public bool isReady;

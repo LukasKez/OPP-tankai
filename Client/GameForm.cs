@@ -19,6 +19,7 @@ namespace Client
             InitializeComponent();
 
             IpBox.Text = Networking.host;
+            UpdatePlayerUI();
 
             Select();
             Focus();
@@ -29,6 +30,7 @@ namespace Client
             originalText = Text;
 
             GameState.Instance.Attach(this);
+            Networking.OnRemotePlayersChange += UpdatePlayerListUI;
         }
 
         private void GameForm_Paint(object sender, PaintEventArgs e)
@@ -90,6 +92,7 @@ namespace Client
             {
                 case ClientState.Menu:
                     SetMenuButtons(true, true, "Join Game");
+                    ClearPlayerListEntries();
                     break;
                 case ClientState.Connecting:
                     SetMenuButtons(false, false, "Connecting...");
@@ -107,27 +110,99 @@ namespace Client
                 default:
                     break;
             }
+
+            UpdatePlayerUI();
         }
 
-        private delegate void Delegate(bool bool1, bool bool2, string str);
         private void SetMenuButtons(bool enableIpBox, bool enableStartBtn, string startBtnText)
         {
+            IpBox.Enabled = enableIpBox;
+            StartButton.Enabled = enableStartBtn;
+            StartButton.Text = startBtnText;
+        }
+
+        private delegate void Delegate(ClientState state);
+        public void OnSubjectUpdate()
+        {
+            ClientState state = GameState.Instance.State;
             if (InvokeRequired)
             {
-                Delegate d = SetMenuButtons;
-                Invoke(d, new object[] { enableIpBox, enableStartBtn, startBtnText });
+                Delegate d = UpdateUIState;
+                Invoke(d, new object[] { state });
             }
             else
             {
-                IpBox.Enabled = enableIpBox;
-                StartButton.Enabled = enableStartBtn;
-                StartButton.Text = startBtnText;
+                UpdateUIState(state);
             }
         }
 
-        public void OnSubjectUpdate()
+        public void UpdatePlayerUI()
         {
-            UpdateUIState(GameState.Instance.State);
+            label2.Text = GameState.Instance.State >= ClientState.Ready ? "✔" : "";
+            label1.Text = Options.name;
+        }
+
+        private void UpdatePlayerListUI(int index, RemotePlayer player)
+        {
+            index -= -1;
+            var controls = PlayerListPanel.Controls;
+
+            if (player != null)
+            {
+                Control control;
+
+                if (controls.Count <= index)
+                {
+                    control = CreatePlayerEntry();
+                    control.Tag = index;
+                    controls.Add(control);
+                }
+                else
+                {
+                    control = controls[index];
+                }
+
+                control.Controls[0].Text = player.isReady ? "✔" : "";
+                control.Controls[1].Text = player.name;
+            }
+            else if (controls.Count > index)
+            {
+                controls.RemoveAt(index);
+            }
+        }
+
+        private void ClearPlayerListEntries()
+        {
+            var controls = PlayerListPanel.Controls;
+            for (int i = 1; i < controls.Count; i++)
+            {
+                controls.RemoveAt(i);
+            }
+        }
+
+        private Control CreatePlayerEntry()
+        {
+            Panel nPanel = new Panel();
+            Label nLabel1 = new Label();
+            Label nLabel2 = new Label();
+
+            nPanel.Controls.Add(nLabel1);
+            nPanel.Controls.Add(nLabel2);
+
+            nPanel.BorderStyle = BorderStyle.FixedSingle;
+            nPanel.Padding = new Padding(2);
+            nPanel.Size = new Size(190, 30);
+
+            nLabel2.AutoEllipsis = true;
+            nLabel2.Location = new Point(5, 2);
+            nLabel2.Size = new Size(148, 24);
+            nLabel2.TextAlign = ContentAlignment.MiddleLeft;
+
+            nLabel1.Location = new Point(159, 2);
+            nLabel1.Size = new Size(24, 24);
+            nLabel1.TextAlign = ContentAlignment.MiddleCenter;
+
+            return nPanel;
         }
     }
 }

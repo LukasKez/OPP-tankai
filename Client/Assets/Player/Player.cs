@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Client
 {
-    class Player : GameObject
+    public class Player : GameObject
     {
         protected Tank controllable;
 

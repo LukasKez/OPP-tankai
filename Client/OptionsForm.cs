@@ -12,12 +12,30 @@ namespace Client
 {
     public partial class OptionsForm : Form
     {
+        string oldName;
+
         public OptionsForm()
         {
             InitializeComponent();
 
             checkBox1.Checked = Options.shadows;
             textBox1.Text = Options.name;
+        }
+
+        private void OptionsForm_Load(object sender, EventArgs e)
+        {
+            CenterToParent();
+
+            oldName = Options.name;
+        }
+
+        private void OptionsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (oldName != Options.name)
+            {
+                (Owner as GameForm).UpdatePlayerUI();
+                Networking.SetNameAsync(Options.name);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
