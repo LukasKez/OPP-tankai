@@ -64,32 +64,32 @@ namespace Client
 
         private static void Rectangle(PaintEventArgs e, Brush brush, Transform transform)
         {
-            e.Graphics.FillRectangle(brush, (float)transform.position.X, (float)transform.position.Y, (float)transform.size.X, (float)transform.size.Y);
+            e.Graphics.FillRectangle(brush, transform.position.X, transform.position.Y, transform.size.X, transform.size.Y);
         }
 
         private static void Rectangle(PaintEventArgs e, Pen pen, Transform transform)
         {
-            e.Graphics.DrawRectangle(pen, (float)transform.position.X, (float)transform.position.Y, (float)transform.size.X, (float)transform.size.Y);
+            e.Graphics.DrawRectangle(pen, transform.position.X, transform.position.Y, transform.size.X, transform.size.Y);
         }
 
         private static void Ellipse(PaintEventArgs e, Brush brush, Transform transform)
         {
-            e.Graphics.FillEllipse(brush, (float)transform.position.X, (float)transform.position.Y, (float)transform.size.X, (float)transform.size.Y);
+            e.Graphics.FillEllipse(brush, transform.position.X, transform.position.Y, transform.size.X, transform.size.Y);
         }
 
         private static void Ellipse(PaintEventArgs e, Pen pen, Transform transform)
         {
-            e.Graphics.DrawEllipse(pen, (float)transform.position.X, (float)transform.position.Y, (float)transform.size.X, (float)transform.size.Y);
+            e.Graphics.DrawEllipse(pen, transform.position.X, transform.position.Y, transform.size.X, transform.size.Y);
         }
 
         private static void Rotate(PaintEventArgs e, Transform transform)
         {
             // Set the rotation point
-            e.Graphics.TranslateTransform((float)transform.position.X + (float)transform.size.X / 2, (float)transform.position.Y + (float)transform.size.Y / 2);
+            e.Graphics.TranslateTransform(transform.position.X + transform.size.X / 2, transform.position.Y + transform.size.Y / 2);
             // Rotate
             e.Graphics.RotateTransform(transform.rotation);
             // Restore rotation point in the matrix
-            e.Graphics.TranslateTransform((float)-(transform.position.X + transform.size.X / 2), (float)-(transform.position.Y + transform.size.Y / 2));
+            e.Graphics.TranslateTransform(-(transform.position.X + transform.size.X / 2), -(transform.position.Y + transform.size.Y / 2));
         }
     }
 }

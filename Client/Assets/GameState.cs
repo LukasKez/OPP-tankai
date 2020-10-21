@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Windows;
+using System.Numerics;
 
 namespace Client
 {
@@ -16,7 +16,7 @@ namespace Client
     class GameState : Subject
     {
         public bool focused;
-        public Vector mapSize;
+        public Vector2 mapSize;
         public GameLevel gameLevel;
 
         private ClientState state;
@@ -38,7 +38,7 @@ namespace Client
 
         public GameState()
         {
-            mapSize = new Vector(800, 600);
+            mapSize = new Vector2(800, 600);
         }
     }
 }

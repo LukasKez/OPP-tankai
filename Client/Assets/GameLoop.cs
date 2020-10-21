@@ -18,7 +18,7 @@ namespace Client
         {
             var state = GameState.Instance;
             state.gameLevel = GameLevelCreator.GetGameLevel(
-                levelType, (float)state.mapSize.X, (float)state.mapSize.Y, 20, 20, 2);
+                levelType, state.mapSize.X, state.mapSize.Y, 20, 20, 2);
 
             GameObject.Instantiate(new LocalPlayer());
             //GameObject.Instantiate(new BotPlayer());

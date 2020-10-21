@@ -70,12 +70,12 @@ namespace PowerUp
             if (percent < 80)
             {
                 powerUp = powerUpFactory.CreateTemporaryPowerUp(
-                        (float)transform.position.X + 3, (float)transform.position.Y + 2, (float)transform.size.Y * 0.7f, (float)transform.size.Y * 0.8f);
+                        transform.position.X + 3, transform.position.Y + 2, transform.size.Y * 0.7f, transform.size.Y * 0.8f);
             }
             else
             {
                 powerUp = powerUpFactory.CreatePermanentPowerUp(
-                        (float)transform.position.X + 3, (float)transform.position.Y + 2, (float)transform.size.Y * 0.7f, (float)transform.size.Y * 0.8f);
+                        transform.position.X + 3, transform.position.Y + 2, transform.size.Y * 0.7f, transform.size.Y * 0.8f);
             }
             Instantiate(powerUp);
         }

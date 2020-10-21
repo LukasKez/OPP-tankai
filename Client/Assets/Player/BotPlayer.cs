@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Client
@@ -34,7 +34,7 @@ namespace Client
 
         void UpdatePosition(float deltaTime)
         {
-            Vector vertical = new Vector();
+            Vector2 vertical = new Vector2();
             float speed = controllable.speed;
             Transform tr = controllable.transform;
 
@@ -60,8 +60,8 @@ namespace Client
             }
             
             double radians = tr.rotation * Math.PI / 180;
-            tr.position.X += vertical.X * Math.Cos(radians) - vertical.Y * Math.Sin(radians);
-            tr.position.Y += vertical.X * Math.Sin(radians) + vertical.Y * Math.Cos(radians);
+            tr.position.X += (float)(vertical.X * Math.Cos(radians) - vertical.Y * Math.Sin(radians));
+            tr.position.Y += (float)(vertical.X * Math.Sin(radians) + vertical.Y * Math.Cos(radians));
             controllable.transform = tr;
         }
     }

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Client
 {
     interface StrategyInterface
     {
-        void DoAction(ref Vector vertical, float speed, float deltaTime);
+        void DoAction(ref Vector2 vertical, float speed, float deltaTime);
     }
 }

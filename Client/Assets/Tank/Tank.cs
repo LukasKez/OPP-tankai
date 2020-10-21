@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows;
+using System.Numerics;
 using PowerUp;
 
 namespace Client
@@ -36,14 +36,14 @@ namespace Client
 
         public void Move(float direction)
         {
-            Vector vertical = new Vector();
-            Vector newPosition = transform.position;
+            Vector2 vertical = new Vector2();
+            Vector2 newPosition = transform.position;
 
             vertical.Y = direction * speed * GameLoop.DeltaTime;
 
             double radians = transform.rotation * Math.PI / 180;
-            newPosition.X += vertical.X * Math.Cos(radians) - vertical.Y * Math.Sin(radians);
-            newPosition.Y += vertical.X * Math.Sin(radians) + vertical.Y * Math.Cos(radians);
+            newPosition.X += (float)(vertical.X * Math.Cos(radians) - vertical.Y * Math.Sin(radians));
+            newPosition.Y += (float)(vertical.X * Math.Sin(radians) + vertical.Y * Math.Cos(radians));
 
             Transform oldTransform = transform;
             transform.position = newPosition;

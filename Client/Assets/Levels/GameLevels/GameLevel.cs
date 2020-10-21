@@ -2,7 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Windows;
+using System.Numerics;
 using System.Windows.Forms;
 
 namespace Client
@@ -23,7 +23,7 @@ namespace Client
         private ConcurrentQueue<GameObject> toRemove = new ConcurrentQueue<GameObject>();
 
         readonly Brush shadowBrush = new SolidBrush(Color.FromArgb(64, Color.Black));
-        readonly Vector sunDirection = new Vector(2, 2);
+        readonly Vector2 sunDirection = new Vector2(2, 2);
 
 
 
@@ -97,7 +97,7 @@ namespace Client
 
         public GameObject GetCollision(GameObject gameObject)
         {
-            Transform transform = gameObject.transform - (float)gameObject.transform.size.X * 0.2f;
+            Transform transform = gameObject.transform - gameObject.transform.size.X * 0.2f;
 
             foreach (GameObject thing in stuff)
             {
