@@ -207,6 +207,7 @@
     <Compile Include="Assets\Tank\Modules\Suspension.cs" />
     <Compile Include="Assets\Tank\Tank.cs" />
     <Compile Include="Assets\Transform.cs" />
+    <Compile Include="Assets\Utils.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>

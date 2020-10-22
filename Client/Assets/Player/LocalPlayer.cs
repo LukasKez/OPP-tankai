@@ -1,7 +1,5 @@
-﻿using PowerUp;
-using System;
+﻿using System;
 using System.Drawing;
-using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -11,8 +9,8 @@ namespace Client
     {
         private Controller tankController;
 
-        private float elapsedTime = 0f;
-        private float updateRate = 1f / 40f;
+        private float elapsedTime;
+        private float updateRate = 0.1f;
 
         public LocalPlayer()
         {
@@ -27,9 +25,9 @@ namespace Client
                 UpdatePosition();
 
             elapsedTime += deltaTime;
-            if (elapsedTime > updateRate)
+            if (elapsedTime >= updateRate)
             {
-                elapsedTime -= updateRate;
+                elapsedTime = 0f;
                 Networking.SendPositionUpdateAsync(controllable);
             }
         }

@@ -43,9 +43,10 @@ namespace Client
             connection.On<DateTime>("StartGame", (startAt) =>
             {
                 GameLoop.StartGame();
-                foreach (var remotePlayer in remotePlayers)
+                foreach (var player in remotePlayers)
                 {
-                    remotePlayer.Value.Spawn();
+                    player.Value.Spawn();
+                    GameObject.Instantiate(player.Value);
                 }
             });
 
@@ -55,8 +56,11 @@ namespace Client
                     return;
 
                 RemotePlayer player = new RemotePlayer();
-                remotePlayers.TryAdd(connectionId, player);
-                RemotePlayerChange(remotePlayers.Count - 1, player);
+                if (remotePlayers.TryAdd(connectionId, player))
+                {
+                    RemotePlayerChange(remotePlayers.Count - 1, player);
+                    GameObject.Instantiate(player);
+                }
             });
 
             connection.On<string>("OnDisconnectedConnection", (connectionId) =>
@@ -64,13 +68,13 @@ namespace Client
                 if (connectionId == connection.ConnectionId)
                     return;
 
-                if (!remotePlayers.ContainsKey(connectionId))
-                    return;
-
                 int index = FindIndex(connectionId);
-                remotePlayers[connectionId].Despawn();
-                remotePlayers.TryRemove(connectionId, out _);
-                RemotePlayerChange(index, null);
+                if (remotePlayers.TryRemove(connectionId, out RemotePlayer player))
+                {
+                    RemotePlayerChange(index, null);
+                    player.Despawn();
+                    player.Destroy();
+                }
             });
 
             connection.On<string, string>("ReceiveMessage", (user, message) =>
@@ -80,30 +84,28 @@ namespace Client
 
             connection.On<string, string>("OnSetName", (connectionId, name) =>
             {
-                if (!remotePlayers.ContainsKey(connectionId))
-                    return;
-
-                RemotePlayer player = remotePlayers[connectionId];
-                player.name = name;
-                RemotePlayerChange(FindIndex(connectionId), player);
+                if (remotePlayers.TryGetValue(connectionId, out RemotePlayer player))
+                {
+                    player.name = name;
+                    RemotePlayerChange(FindIndex(connectionId), player);
+                }
             });
 
             connection.On<string, bool>("OnSetIsReady", (connectionId, isReady) =>
             {
-                if (!remotePlayers.ContainsKey(connectionId))
-                    return;
-
-                RemotePlayer player = remotePlayers[connectionId];
-                player.isReady = isReady;
-                RemotePlayerChange(FindIndex(connectionId), player);
+                if (remotePlayers.TryGetValue(connectionId, out RemotePlayer player))
+                {
+                    player.isReady = isReady;
+                    RemotePlayerChange(FindIndex(connectionId), player);
+                }
             });
 
             connection.On<string, float, float, float>("OnPositionUpdate", (connectionId, x, y, r) =>
             {
-                if (!remotePlayers.ContainsKey(connectionId))
-                    return;
-
-                remotePlayers[connectionId].UpdatePosition(x, y, r);
+                if (remotePlayers.TryGetValue(connectionId, out RemotePlayer player))
+                {
+                    player.SetPosition(x, y, r);
+                }
             });
 
             connection.On("DisconnectClient", () =>
