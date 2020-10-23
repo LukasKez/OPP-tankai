@@ -16,6 +16,7 @@ namespace Client
         private static HubConnection connection;
 
         public static event Action<int, RemotePlayer> OnRemotePlayersChange;
+        public static event Action<LevelType> OnLevelTypeChange;
 
         static Networking()
         {
@@ -40,9 +41,9 @@ namespace Client
                 return Task.CompletedTask;
             };
 
-            connection.On<DateTime>("StartGame", (startAt) =>
+            connection.On<LevelType, DateTime>("StartGame", (levelType, startAt) =>
             {
-                GameLoop.StartGame();
+                GameLoop.StartGame(levelType);
                 foreach (var player in remotePlayers)
                 {
                     player.Value.Spawn();
@@ -100,6 +101,11 @@ namespace Client
                 }
             });
 
+            connection.On<LevelType>("OnSetLevelType", (levelType) =>
+            {
+                LevellTypeChange(levelType);
+            });
+
             connection.On<string, float, float, float>("OnPositionUpdate", (connectionId, x, y, r) =>
             {
                 if (remotePlayers.TryGetValue(connectionId, out RemotePlayer player))
@@ -121,10 +127,10 @@ namespace Client
                 GameState.Instance.State = ClientState.Connected;
                 Debug.WriteLine("Connection started");
             }
-            catch
+            catch (Exception e)
             {
                 GameState.Instance.State = ClientState.Menu;
-                Debug.WriteLine("Error connecting");
+                Debug.WriteLine("Error connecting: " + e.Message);
             }
         }
 
@@ -138,9 +144,9 @@ namespace Client
                 await connection.StopAsync();
                 Debug.WriteLine("Connection stopped");
             }
-            catch
+            catch (Exception e)
             {
-                Debug.WriteLine("Error disconnecting");
+                Debug.WriteLine("Error disconnecting: " + e.Message);
             }
         }
 
@@ -153,9 +159,9 @@ namespace Client
             {
                 await connection.InvokeAsync("SendMessage", name, message);
             }
-            catch
+            catch (Exception e)
             {
-                Debug.WriteLine("Error sending message");
+                Debug.WriteLine("Error sending message: " + e.Message);
             }
         }
 
@@ -168,9 +174,9 @@ namespace Client
             {
                 await connection.InvokeAsync("SetName", name);
             }
-            catch
+            catch (Exception e)
             {
-                Debug.WriteLine("Error setting player name");
+                Debug.WriteLine("Error setting player name: " + e.Message);
             }
         }
 
@@ -183,11 +189,26 @@ namespace Client
             {
                 await connection.InvokeAsync("SetIsReady", isReady);
             }
-            catch
+            catch (Exception e)
             {
                 if (GameState.Instance.State == ClientState.Ready)
                     GameState.Instance.State = ClientState.Connected;
-                Debug.WriteLine("Error setting ready state");
+                Debug.WriteLine("Error setting ready state: " + e.Message);
+            }
+        }
+
+        public static async void SetLevelType(LevelType levelType)
+        {
+            if (!IsConnected())
+                return;
+
+            try
+            {
+                await connection.InvokeAsync("SetLevelType", levelType);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error setting level type: " + e.Message);
             }
         }
 
@@ -201,9 +222,9 @@ namespace Client
                 Transform tr = player.transform;
                 await connection.SendAsync("SendPositionUpdate", tr.position.X, tr.position.Y, tr.rotation);
             }
-            catch
+            catch (Exception e)
             {
-                Debug.WriteLine("Error sending position update");
+                Debug.WriteLine("Error sending position update: " + e.Message);
             }
         }
 
@@ -215,6 +236,11 @@ namespace Client
         private static void RemotePlayerChange(int index, RemotePlayer player)
         {
             OnRemotePlayersChange?.Invoke(index, player);
+        }
+
+        private static void LevellTypeChange(LevelType levelType)
+        {
+            OnLevelTypeChange?.Invoke(levelType);
         }
 
         private static int FindIndex(string id)

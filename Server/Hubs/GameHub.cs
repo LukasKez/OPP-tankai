@@ -19,39 +19,41 @@ namespace Server.Hubs
             new ConcurrentDictionary<string, PlayerStats>();
         public static int maxPlayerCount = 4;
         public static bool isGameStarted;
+        public static int levelType;
     }
 
     public class GameHub : Hub
     {
-        public override Task OnConnectedAsync()
+        public override async Task OnConnectedAsync()
         {
             if (GameHandler.isGameStarted || GameHandler.players.Count > GameHandler.maxPlayerCount)
             {
-                Clients.Caller.SendAsync("DisconnectClient");
-                return base.OnConnectedAsync();
+                await Clients.Caller.SendAsync("DisconnectClient");
+                await base.OnConnectedAsync();
             }
 
             foreach (var player in GameHandler.players)
             {
-                Clients.Caller.SendAsync("OnNewConnection", player.Key);
-                Clients.Caller.SendAsync("OnSetName", player.Key, player.Value.name);
-                Clients.Caller.SendAsync("OnSetReady", player.Key, player.Value.isReady);
+                await Clients.Caller.SendAsync("OnNewConnection", player.Key);
+                await Clients.Caller.SendAsync("OnSetName", player.Key, player.Value.name);
+                await Clients.Caller.SendAsync("OnSetReady", player.Key, player.Value.isReady);
             }
+            await Clients.Caller.SendAsync("OnSetLevelType", GameHandler.levelType);
 
             GameHandler.players.TryAdd(Context.ConnectionId, new GameHandler.PlayerStats());
 
-            Clients.Others.SendAsync("OnNewConnection", Context.ConnectionId);
-            return base.OnConnectedAsync();
+            await Clients.Others.SendAsync("OnNewConnection", Context.ConnectionId);
+            await base.OnConnectedAsync();
         }
 
-        public override Task OnDisconnectedAsync(Exception exception)
+        public override async Task OnDisconnectedAsync(Exception exception)
         {
             GameHandler.players.TryRemove(Context.ConnectionId, out _);
             if (GameHandler.players.Count == 0)
                 GameHandler.isGameStarted = false;
 
-            Clients.Others.SendAsync("OnDisconnectedConnection", Context.ConnectionId);
-            return base.OnDisconnectedAsync(exception);
+            await Clients.Others.SendAsync("OnDisconnectedConnection", Context.ConnectionId);
+            await base.OnDisconnectedAsync(exception);
         }
 
         public async Task SendMessage(string user, string message)
@@ -77,7 +79,17 @@ namespace Server.Hubs
 
             GameHandler.isGameStarted = true;
             DateTime startAt = DateTime.UtcNow.AddSeconds(5);
-            await Clients.All.SendAsync("StartGame", startAt);
+            await Clients.All.SendAsync("StartGame", GameHandler.levelType, startAt);
+        }
+
+        public async Task SetLevelType(int levelType)
+        {
+            if (GameHandler.isGameStarted)
+                return;
+
+            GameHandler.levelType = levelType;
+
+            await Clients.Others.SendAsync("OnSetLevelType", levelType);
         }
 
         public async Task SendPositionUpdate(float x, float y, float r)

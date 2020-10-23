@@ -14,7 +14,7 @@ namespace Client
         static DateTime startTime = DateTime.Now;
         static DateTime endTime = DateTime.Now;
 
-        public static void StartGame(string levelType = "forest")
+        public static void StartGame(LevelType levelType = LevelType.Forest)
         {
             var state = GameState.Instance;
             state.gameLevel = GameLevelCreator.GetGameLevel(

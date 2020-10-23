@@ -33,13 +33,15 @@ namespace Client
         {
             this.StartButton = new System.Windows.Forms.Button();
             this.MenuPanel = new System.Windows.Forms.Panel();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.PlayerListPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.IpLabel = new System.Windows.Forms.Label();
             this.OptionsButton = new System.Windows.Forms.Button();
             this.IpBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.levelLabel = new System.Windows.Forms.Label();
             this.MenuPanel.SuspendLayout();
             this.PlayerListPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -60,6 +62,8 @@ namespace Client
             this.MenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MenuPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.MenuPanel.Controls.Add(this.levelLabel);
+            this.MenuPanel.Controls.Add(this.comboBox1);
             this.MenuPanel.Controls.Add(this.PlayerListPanel);
             this.MenuPanel.Controls.Add(this.IpLabel);
             this.MenuPanel.Controls.Add(this.OptionsButton);
@@ -70,6 +74,16 @@ namespace Client
             this.MenuPanel.Padding = new System.Windows.Forms.Padding(2);
             this.MenuPanel.Size = new System.Drawing.Size(200, 600);
             this.MenuPanel.TabIndex = 0;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(71, 89);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(124, 21);
+            this.comboBox1.TabIndex = 5;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // PlayerListPanel
             // 
@@ -94,6 +108,23 @@ namespace Client
             this.panel1.Padding = new System.Windows.Forms.Padding(2);
             this.panel1.Size = new System.Drawing.Size(190, 60);
             this.panel1.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.Location = new System.Drawing.Point(159, 2);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(24, 24);
+            this.label2.TabIndex = 1;
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.AutoEllipsis = true;
+            this.label1.Location = new System.Drawing.Point(5, 2);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(148, 24);
+            this.label1.TabIndex = 0;
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // IpLabel
             // 
@@ -123,22 +154,15 @@ namespace Client
             this.IpBox.TabIndex = 1;
             this.IpBox.TextChanged += new System.EventHandler(this.IpBox_TextChanged);
             // 
-            // label1
+            // levelLabel
             // 
-            this.label1.AutoEllipsis = true;
-            this.label1.Location = new System.Drawing.Point(5, 2);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 24);
-            this.label1.TabIndex = 0;
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(159, 2);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 24);
-            this.label2.TabIndex = 1;
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.levelLabel.AutoSize = true;
+            this.levelLabel.Location = new System.Drawing.Point(5, 92);
+            this.levelLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.levelLabel.Name = "levelLabel";
+            this.levelLabel.Size = new System.Drawing.Size(60, 13);
+            this.levelLabel.TabIndex = 6;
+            this.levelLabel.Text = "Level Type";
             // 
             // GameForm
             // 
@@ -178,6 +202,8 @@ namespace Client
         private Panel panel1;
         private Label label2;
         private Label label1;
+        private ComboBox comboBox1;
+        private Label levelLabel;
     }
 }
 

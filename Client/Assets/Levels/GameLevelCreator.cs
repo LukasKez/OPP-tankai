@@ -9,20 +9,21 @@ namespace Client
 
         }
 
-        static public GameLevel GetGameLevel(string levelType, float levelWidth, float levelHight, float blockWidth, float blockHeight, int seed)
+        static public GameLevel GetGameLevel(LevelType levelType, float levelWidth, float levelHight, float blockWidth, float blockHeight, int seed)
         {
-            GameLevel gameLevel = null;
-            switch (levelType.ToLower())
+            GameLevel gameLevel;
+            switch (levelType)
             {
-                case "desert":
+                case LevelType.Desert:
                     gameLevel = new Desert(levelWidth, levelHight, blockWidth, blockHeight, seed);
                     break;
-                case "forest":
+                case LevelType.Forest:
                     gameLevel = new Forest(levelWidth, levelHight, blockWidth, blockHeight, seed);
                     break;
-                case "cave":
+                case LevelType.Cave:
                     gameLevel = new Cave(levelWidth, levelHight, blockWidth, blockHeight, seed);
                     break;
+                case LevelType.Field:
                 default:
                     gameLevel = new Field(levelWidth, levelHight, blockWidth, blockHeight, seed);
                     break;

@@ -19,6 +19,8 @@ namespace Client
             InitializeComponent();
 
             IpBox.Text = Networking.host;
+            comboBox1.DataSource = Enum.GetValues(typeof(LevelType));
+            SetMenuButtons(true, true, "Join Game", false);
             UpdatePlayerUI();
 
             Select();
@@ -30,6 +32,7 @@ namespace Client
             originalText = Text;
 
             GameState.Instance.Attach(this);
+            Networking.OnLevelTypeChange += UpdateLevelTypeBox;
             Networking.OnRemotePlayersChange += UpdatePlayerListUI;
         }
 
@@ -86,26 +89,31 @@ namespace Client
             }
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Networking.SetLevelType((LevelType)comboBox1.SelectedItem);
+        }
+
         private void UpdateUIState(ClientState newState)
         {
             switch (newState)
             {
                 case ClientState.Menu:
-                    SetMenuButtons(true, true, "Join Game");
+                    SetMenuButtons(true, true, "Join Game", false);
                     ClearPlayerListEntries();
                     break;
                 case ClientState.Connecting:
-                    SetMenuButtons(false, false, "Connecting...");
+                    SetMenuButtons(false, false, "Connecting...", false);
                     break;
                 case ClientState.Connected:
-                    SetMenuButtons(false, true, "Ready");
+                    SetMenuButtons(false, true, "Ready", true);
                     break;
                 case ClientState.Ready:
-                    SetMenuButtons(false, false, "Ready");
+                    SetMenuButtons(false, false, "Ready", true);
                     break;
                 case ClientState.Playing:
                 case ClientState.Died:
-                    SetMenuButtons(false, true, "Leave Game");
+                    SetMenuButtons(false, true, "Leave Game", false);
                     break;
                 default:
                     break;
@@ -114,11 +122,13 @@ namespace Client
             UpdatePlayerUI();
         }
 
-        private void SetMenuButtons(bool enableIpBox, bool enableStartBtn, string startBtnText)
+        private void SetMenuButtons(bool enableIpBox, bool enableStartBtn, string startBtnText, bool enableLevelBox)
         {
             IpBox.Enabled = enableIpBox;
             StartButton.Enabled = enableStartBtn;
             StartButton.Text = startBtnText;
+            levelLabel.Visible = enableLevelBox;
+            comboBox1.Visible = enableLevelBox;
         }
 
         private delegate void Delegate(ClientState state);
@@ -134,6 +144,11 @@ namespace Client
             {
                 UpdateUIState(state);
             }
+        }
+
+        private void UpdateLevelTypeBox(LevelType levelType)
+        {
+            comboBox1.SelectedItem = levelType;
         }
 
         public void UpdatePlayerUI()

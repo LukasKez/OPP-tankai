@@ -7,6 +7,14 @@ using System.Windows.Forms;
 
 namespace Client
 {
+    public enum LevelType
+    {
+        Desert,
+        Forest,
+        Cave,
+        Field,
+    }
+
     abstract class GameLevel
     {
         public float levelWidth { get; private set; }
@@ -39,7 +47,7 @@ namespace Client
 
         }
 
-        public void SetupObstacles(string levelType)
+        public void SetupObstacles(LevelType levelType)
         {
             int vertEnd = (int)(levelWidth / blockWidth);
             int hozEnd = (int)(levelHeight / blockHeight);
