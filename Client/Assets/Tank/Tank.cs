@@ -20,7 +20,7 @@ namespace Client
 
         private List<TemporaryPowerUp> temporaryPowerUps;
 
-        public Tank(float x, float y, Brush brush) : base(x, y, 20, 20)
+        public Tank(Transform transform, Brush brush) : base(transform)
         {
             shape = Shape.Rectangle;
             isShadowCaster = true;
@@ -37,20 +37,18 @@ namespace Client
         public void Move(float direction)
         {
             Vector2 vertical = new Vector2();
-            Vector2 newPosition = transform.position;
+            Vector2 displacement = transform.position;
 
             vertical.Y = direction * speed * GameLoop.DeltaTime;
-            newPosition += Utils.Rotate(vertical, transform.rotation);
-
-            Transform oldTransform = transform;
-            transform.position = newPosition;
+            displacement = Utils.Rotate(vertical, transform.rotation);
+            transform.position += displacement;
 
             GameObject collision = GameState.Instance.gameLevel.GetCollision(this);
             if (collision != null)
             {
                 if (collision.collider == ColliderType.Collider)
                 {
-                    transform = oldTransform;
+                    transform.position -= displacement;
                 }
                 else
                 {

@@ -105,7 +105,10 @@ namespace Client
 
         public GameObject GetCollision(GameObject gameObject)
         {
-            Transform transform = gameObject.transform - gameObject.transform.size.X * 0.2f;
+            //Transform transform = gameObject.transform - gameObject.transform.size.X * 0.2f;
+
+            Transform transform = new Transform(gameObject.transform);
+            transform.size *= 0.8f;
 
             foreach (GameObject thing in stuff)
             {
@@ -124,10 +127,13 @@ namespace Client
 
         private bool CheckCollision(Transform rect1, Transform rect2)
         {
-            if (rect1.position.X < rect2.position.X + rect2.size.X &&
-                rect1.position.X + rect1.size.X > rect2.position.X &&
-                rect1.position.Y < rect2.position.Y + rect2.size.Y &&
-                rect1.position.Y + rect1.size.Y > rect2.position.Y)
+            Vector2 position1 = rect1.position - rect1.size * 0.5f;
+            Vector2 position2 = rect2.position - rect2.size * 0.5f;
+
+            if (position1.X < position2.X + rect2.size.X &&
+                position1.X + rect1.size.X > position2.X &&
+                position1.Y < position2.Y + rect2.size.Y &&
+                position1.Y + rect1.size.Y > position2.Y)
             {
                 return true;
             }
@@ -189,7 +195,7 @@ namespace Client
             {
                 if (thing.isShadowCaster)
                 {
-                    Transform shadow = thing.transform;
+                    Transform shadow = new Transform(thing.transform);
                     shadow.position += sunDirection;
 
                     Renderer.RenderShape(e, shadowBrush, shadow, thing.shape);
