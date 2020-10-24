@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 
 namespace Client
 {
@@ -29,6 +30,15 @@ namespace Client
             else if (value > max)
                 value = max;
             return value;
+        }
+
+        public static Vector2 Rotate(Vector2 vec, float angle)
+        {
+            Vector2 newVec;
+            double radians = angle * Math.PI / 180;
+            newVec.X = (float)(vec.X * Math.Cos(radians) - vec.Y * Math.Sin(radians));
+            newVec.Y = (float)(vec.X * Math.Sin(radians) + vec.Y * Math.Cos(radians));
+            return newVec;
         }
     }
 }

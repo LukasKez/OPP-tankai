@@ -40,10 +40,7 @@ namespace Client
             Vector2 newPosition = transform.position;
 
             vertical.Y = direction * speed * GameLoop.DeltaTime;
-
-            double radians = transform.rotation * Math.PI / 180;
-            newPosition.X += (float)(vertical.X * Math.Cos(radians) - vertical.Y * Math.Sin(radians));
-            newPosition.Y += (float)(vertical.X * Math.Sin(radians) + vertical.Y * Math.Cos(radians));
+            newPosition += Utils.Rotate(vertical, transform.rotation);
 
             Transform oldTransform = transform;
             transform.position = newPosition;
