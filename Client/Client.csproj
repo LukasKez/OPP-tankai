@@ -198,8 +198,11 @@
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryHealth.cs" />
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryPowerUp.cs" />
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporarySpeed.cs" />
-    <Compile Include="Assets\Renderer.cs" />
+    <Compile Include="Assets\Renderer\Ellipse.cs" />
+    <Compile Include="Assets\Renderer\Rectangle.cs" />
+    <Compile Include="Assets\Renderer\Renderer.cs" />
     <Compile Include="Assets\Controller\IControllable.cs" />
+    <Compile Include="Assets\Renderer\Rotator.cs" />
     <Compile Include="Assets\Tank\Modules\Engine.cs" />
     <Compile Include="Assets\Tank\Modules\Gun.cs" />
     <Compile Include="Assets\Tank\Modules\Track.cs" />

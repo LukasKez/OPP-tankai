@@ -25,6 +25,7 @@ namespace Client
         public Shape shape;
         public ColliderType collider;
         public bool isShadowCaster;
+        private Renderer renderer = new Renderer();
 
         public Brush brush;
         protected Pen pen;
@@ -57,11 +58,11 @@ namespace Client
         {
             if (brush != null)
             {
-                Renderer.RenderShape(e, brush, transform, shape);
+                renderer.RenderShape(e, brush, transform, shape);
             }
             if (pen != null)
             {
-                Renderer.RenderShape(e, pen, transform - pen.Width, shape);
+                renderer.RenderShape(e, pen, transform - pen.Width, shape);
             }
         }
 

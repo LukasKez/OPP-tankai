@@ -30,6 +30,8 @@ namespace Client
         private ConcurrentQueue<GameObject> toAdd = new ConcurrentQueue<GameObject>();
         private ConcurrentQueue<GameObject> toRemove = new ConcurrentQueue<GameObject>();
 
+        private Renderer renderer = new Renderer();
+
         readonly Brush shadowBrush = new SolidBrush(Color.FromArgb(64, Color.Black));
         readonly Vector2 sunDirection = new Vector2(2, 2);
 
@@ -192,7 +194,7 @@ namespace Client
                     Transform shadow = thing.transform;
                     shadow.position += sunDirection;
 
-                    Renderer.RenderShape(e, shadowBrush, shadow, thing.shape);
+                    renderer.RenderShape(e, shadowBrush, shadow, thing.shape);
                 }
             }
         }
