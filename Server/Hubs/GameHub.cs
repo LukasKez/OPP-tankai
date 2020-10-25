@@ -92,9 +92,9 @@ namespace Server.Hubs
             await Clients.Others.SendAsync("OnSetLevelType", levelType);
         }
 
-        public async Task SendPositionUpdate(float x, float y, float r)
+        public async Task SendPositionUpdate(float x, float y, float r1, float r2)
         {
-            await Clients.Others.SendAsync("OnPositionUpdate", Context.ConnectionId, x, y, r);
+            await Clients.Others.SendAsync("OnPositionUpdate", Context.ConnectionId, x, y, r1, r2);
         }
     }
 }

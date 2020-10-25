@@ -106,11 +106,11 @@ namespace Client
                 LevellTypeChange(levelType);
             });
 
-            connection.On<string, float, float, float>("OnPositionUpdate", (connectionId, x, y, r) =>
+            connection.On<string, float, float, float, float>("OnPositionUpdate", (connectionId, x, y, r1, r2) =>
             {
                 if (remotePlayers.TryGetValue(connectionId, out RemotePlayer player))
                 {
-                    player.SetPosition(x, y, r);
+                    player.SetPosition(x, y, r1, r2);
                 }
             });
 
@@ -212,15 +212,16 @@ namespace Client
             }
         }
 
-        public static async void SendPositionUpdateAsync(GameObject player)
+        public static async void SendPositionUpdateAsync(Tank tank)
         {
             if (!IsConnected())
                 return;
 
             try
             {
-                Transform tr = player.transform;
-                await connection.SendAsync("SendPositionUpdate", tr.position.X, tr.position.Y, tr.rotation);
+                Transform tr = tank.transform;
+                float turetRot = tank.turret.transform.rotation;
+                await connection.SendAsync("SendPositionUpdate", tr.position.X, tr.position.Y, tr.rotation, turetRot);
             }
             catch (Exception e)
             {
