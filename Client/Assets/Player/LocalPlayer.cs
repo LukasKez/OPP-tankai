@@ -19,6 +19,8 @@ namespace Client
         {
             crosshair = new Pen(Color.FromArgb(128, Color.Red), 2);
             tankController = new Controller(controllable);
+
+            GameState.Instance.OnMouseClicked += OnMouseClicked;
         }
 
         public override void Update(float deltaTime)
@@ -77,7 +79,14 @@ namespace Client
             {
                 tankController.StopLooking();
             }
-            Console.WriteLine(dotProduct);
+        }
+
+        public void OnMouseClicked(MouseButtons button)
+        {
+            if (button == MouseButtons.Left)
+            {
+                tankController.Action();
+            }
         }
 
         public override void Render(PaintEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Numerics;
+using System.Windows.Forms;
 
 namespace Client
 {
@@ -29,6 +30,13 @@ namespace Client
                 state = value;
                 Notify();
             }
+        }
+
+        public event Action<MouseButtons> OnMouseClicked;
+
+        public void MouseClicked(MouseButtons button)
+        {
+            OnMouseClicked?.Invoke(button);
         }
 
         private static readonly GameState instance = new GameState();

@@ -24,22 +24,6 @@ namespace Client
             return this;
         }
 
-        public ITankBuilder AddGun()
-        {
-            gun = new Gun(20)
-            {
-                reloadTime = 3,
-                aimingTime = 2,
-                rotationAngle = 0,
-                spreadAngle = 10,
-                minSpreadAngle = 10,
-                maxSpreadAngle = 30
-            };
-
-            tank.turret.gun = gun;
-            return this;
-        }
-
         public ITankBuilder AddSuspension()
         {
             Vector2 size = tank.transform.size;
@@ -58,12 +42,27 @@ namespace Client
         {
             turret = new Turret()
             {
-                rotationSpeed = 100,
+                rotationSpeed = 60,
                 hitPoints = 800,
                 reactionTime = 0.2f
             };
 
             tank.turret = turret;
+            return this;
+        }
+
+        public ITankBuilder AddGun()
+        {
+            gun = new Gun(20)
+            {
+                reloadTime = 3,
+                aimingRate = 10,
+                rotationAngle = 0,
+                minSpreadAngle = 7,
+                maxSpreadAngle = 27
+            };
+
+            tank.turret.gun = gun;
             return this;
         }
 

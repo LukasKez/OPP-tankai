@@ -6,9 +6,9 @@ namespace Client
     {
         ITankBuilder AddHull(float x, float y);
         ITankBuilder AddEngine();
-        ITankBuilder AddGun();
         ITankBuilder AddSuspension();
         ITankBuilder AddTurret();
+        ITankBuilder AddGun();
         Tank GetResult();
     }
 }

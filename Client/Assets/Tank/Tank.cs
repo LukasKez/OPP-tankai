@@ -11,7 +11,7 @@ namespace Client
         [Obsolete()] public float attack = 1;     // TODO: Delete
         [Obsolete()] public float defense = 100;  // TODO: Delete
         [Obsolete()] public float health = 100;   // TODO: Delete
-        [Obsolete()] public float speed = 80;    // TODO: Delete
+        [Obsolete()] public float speed = 50;    // TODO: Delete
 
         public Engine engine { get; set; }
         public Suspension suspension { get; set; }
@@ -72,7 +72,7 @@ namespace Client
 
         public void Action()
         {
-            throw new NotImplementedException();
+            turret.gun.Shoot();
         }
 
         void UpdatePowerUps(float deltaTime)
