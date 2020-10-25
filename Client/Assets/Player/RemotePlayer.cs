@@ -19,6 +19,9 @@ namespace Client
 
         public RemotePlayer()
         {
+            oldPos = new Transform();
+            newPos = new Transform();
+
             nameFormat = new StringFormat()
             {
                 Alignment = StringAlignment.Center
@@ -39,14 +42,15 @@ namespace Client
             base.Render(e);
 
             Transform tr = controllable.transform;
-            float x = tr.position.X + tr.size.X / 2f;
-            float y = tr.position.Y - Control.DefaultFont.Height - 8;
+            float x = tr.position.X;
+            float y = tr.position.Y - Control.DefaultFont.Height - 18;
             e.Graphics.DrawString(name, Control.DefaultFont, Brushes.Black, x, y, nameFormat);
         }
 
         public void SetPosition(float x, float y, float r)
         {
-            oldPos = newPos;
+            oldPos.position = newPos.position;
+            oldPos.rotation = newPos.rotation;
             lerpAmount = 0;
 
             newPos.position.X = x;

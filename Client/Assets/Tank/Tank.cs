@@ -11,7 +11,7 @@ namespace Client
         [Obsolete()] public float attack = 1;     // TODO: Delete
         [Obsolete()] public float defense = 100;  // TODO: Delete
         [Obsolete()] public float health = 100;   // TODO: Delete
-        [Obsolete()] public float speed = 100;    // TODO: Delete
+        [Obsolete()] public float speed = 80;    // TODO: Delete
 
         public Engine engine { get; set; }
         public Suspension suspension { get; set; }
@@ -67,7 +67,7 @@ namespace Client
 
         public void LookAt(float direction)
         {
-            throw new NotImplementedException();
+            turret.Rotate(direction);
         }
 
         public void Action()

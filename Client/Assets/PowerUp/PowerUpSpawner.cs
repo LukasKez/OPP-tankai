@@ -25,7 +25,7 @@ namespace PowerUp
         {
             if (powerUp == null)
             {
-                if (waitTime < 0)
+                if (waitTime <= 0)
                 {
                     Spawn();
                     waitTime = waitDuration;

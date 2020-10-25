@@ -7,10 +7,14 @@ namespace Client
     class TankBuilder : ITankBuilder
     {
         private Tank tank;
+        private Suspension suspension;
+        private Turret turret;
+        private Gun gun;
 
         public ITankBuilder AddHull(float x, float y)
         {
-            tank = new Tank(new Transform(x, y, 20, 22), Brushes.Red);
+            Transform tr = new Transform(x, y, 20, 22);
+            tank = new Tank(tr, Brushes.Red);
             return this;
         }
 
@@ -22,27 +26,54 @@ namespace Client
 
         public ITankBuilder AddGun()
         {
-            tank.turret.gun = new Gun(3, 1, 0);
+            gun = new Gun(20)
+            {
+                reloadTime = 3,
+                aimingTime = 2,
+                rotationAngle = 0,
+                spreadAngle = 10,
+                minSpreadAngle = 10,
+                maxSpreadAngle = 30
+            };
+
+            tank.turret.gun = gun;
             return this;
         }
 
         public ITankBuilder AddSuspension()
         {
             Vector2 size = tank.transform.size;
-            Suspension suspension = new Suspension(size, 1, 1, 30);
-            suspension.transform.parent = tank.transform;
+            suspension = new Suspension(size)
+            {
+                movementSpeedModifier = 1,
+                rotationSpeedModifier = 1,
+                loadLimit = 30
+            };
+
             tank.suspension = suspension;
             return this;
         }
 
         public ITankBuilder AddTurret()
         {
-            tank.turret = new Turret(100, 800);
+            turret = new Turret()
+            {
+                rotationSpeed = 100,
+                hitPoints = 800,
+                reactionTime = 0.2f
+            };
+
+            tank.turret = turret;
             return this;
         }
 
         public Tank GetResult()
         {
+            suspension.InstantiateTracks();
+            GameObject.Instantiate(suspension, tank);
+            GameObject.Instantiate(tank);
+            GameObject.Instantiate(gun, turret);
+            GameObject.Instantiate(turret, tank);
             return tank;
         }
     }

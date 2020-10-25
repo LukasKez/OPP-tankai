@@ -12,15 +12,14 @@ namespace Client
         private Track leftTrack;
         private Track rightTrack;
 
-        public Suspension(Vector2 size, float movementSpeedModifier, float rotationSpeedModifier, float loadLimit)
+        public Suspension(Vector2 size)
         {
-            this.movementSpeedModifier = movementSpeedModifier;
-            this.rotationSpeedModifier = rotationSpeedModifier;
-            this.loadLimit = loadLimit;
+            leftTrack = new Track(-size.X / 2 + 2f, 0, size);
+            rightTrack = new Track(size.X / 2 - 2f, 0, size);
+        }
 
-            leftTrack = new Track(-size.X / 2 + 2.5f, 0, size);
-            rightTrack = new Track(size.X / 2 - 2.5f, 0, size);
-
+        public void InstantiateTracks()
+        {
             Instantiate(leftTrack, this);
             Instantiate(rightTrack, this);
         }

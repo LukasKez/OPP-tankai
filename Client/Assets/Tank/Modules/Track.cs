@@ -10,16 +10,8 @@ namespace Client
         {
             shape = Shape.Rectangle;
             isShadowCaster = true;
-            this.brush = Brushes.DimGray;
-            pen = new Pen(Color.FromArgb(64, Color.Black), 2);
-        }
-
-        public override void Update(float deltaTime)
-        {
-            base.Update(deltaTime);
-
-            //transform.position = parent.transform.position;
-            //transform.rotation = parent.transform.rotation;
+            brush = Brushes.DimGray;
+            pen = new Pen(Color.FromArgb(64, Color.Black), 1);
         }
     }
 }

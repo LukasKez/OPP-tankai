@@ -17,6 +17,7 @@ namespace Client
     {
         public bool focused;
         public Vector2 mapSize;
+        public Vector2 mouseLocation;
         public GameLevel gameLevel;
 
         private ClientState state;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace Client
 {
@@ -6,13 +7,18 @@ namespace Client
     {
         public float reloadTime;
         public float aimingTime;
-        public float angle;
+        public float rotationAngle;
 
-        public Gun(float reloadTime, float aimingTime, float angle)
+        public float spreadAngle;
+        public float minSpreadAngle;
+        public float maxSpreadAngle;
+
+        public Gun(float length) : base(new Transform(0, -length / 2, 6, length))
         {
-            this.reloadTime = reloadTime;
-            this.aimingTime = aimingTime;
-            this.angle = angle;
+            shape = Shape.Rectangle;
+            isShadowCaster = true;
+            brush = Brushes.Gray;
+            pen = new Pen(Color.FromArgb(64, Color.Black), 1);
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Client
         private ICommand turnRightCommand;
         private ICommand lookLeftCommand;
         private ICommand lookRightCommand;
+        private ICommand stopLookingCommand;
         private ICommand actionCommand;
 
         private ICommand lastCommand;
@@ -22,6 +23,7 @@ namespace Client
             turnRightCommand = new TurnRightCommand(controllable);
             lookLeftCommand = new LookLeftCommand(controllable);
             lookRightCommand = new LookRightCommand(controllable);
+            stopLookingCommand = new StopLookingCommand(controllable);
             actionCommand = new ActionCommand(controllable);
         }
 
@@ -59,6 +61,12 @@ namespace Client
         {
             lookRightCommand.Execute();
             lastCommand = lookRightCommand;
+        }
+
+        public void StopLooking()
+        {
+            stopLookingCommand.Execute();
+            lastCommand = stopLookingCommand;
         }
 
         public void Action()

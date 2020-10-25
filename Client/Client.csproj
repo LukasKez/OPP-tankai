@@ -137,6 +137,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Controller\Commands\StopLookingCommand.cs" />
     <Compile Include="Assets\Player\BotStrategies\StrategyInterface.cs" />
     <Compile Include="Assets\Player\BotStrategies\Explode.cs" />
     <Compile Include="Assets\Player\BotStrategies\Shoot.cs" />

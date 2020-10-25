@@ -32,13 +32,37 @@ namespace Client
             return value;
         }
 
+        public static double Deg2rad(float degrees)
+        {
+            return degrees * Math.PI / 180;
+        }
+
         public static Vector2 Rotate(this Vector2 vec, float angle)
         {
             Vector2 newVec;
-            double radians = angle * Math.PI / 180;
+            double radians = Deg2rad(angle);
             newVec.X = (float)(vec.X * Math.Cos(radians) - vec.Y * Math.Sin(radians));
             newVec.Y = (float)(vec.X * Math.Sin(radians) + vec.Y * Math.Cos(radians));
             return newVec;
+        }
+
+        public static Vector2 Rotate(this Vector2 vec, float angle, Vector2 origin)
+        {
+            return (vec - origin).Rotate(angle) + origin;
+        }
+
+        public static Vector2 RotatedVector(float angle)
+        {
+            Vector2 vector;
+            double radians = Deg2rad(angle);
+            vector.X = (float)Math.Cos(radians);
+            vector.Y = (float)Math.Sin(radians);
+            return vector;
+        }
+
+        public static Vector2 RotatedVector(float angle, float length)
+        {
+            return RotatedVector(angle) * length;
         }
 
         public static Vector2 Substract(this Vector2 left, float right)

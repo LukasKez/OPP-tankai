@@ -33,6 +33,7 @@ namespace Client
         {
             this.StartButton = new System.Windows.Forms.Button();
             this.MenuPanel = new System.Windows.Forms.Panel();
+            this.levelLabel = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.PlayerListPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -41,7 +42,6 @@ namespace Client
             this.IpLabel = new System.Windows.Forms.Label();
             this.OptionsButton = new System.Windows.Forms.Button();
             this.IpBox = new System.Windows.Forms.TextBox();
-            this.levelLabel = new System.Windows.Forms.Label();
             this.MenuPanel.SuspendLayout();
             this.PlayerListPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -74,6 +74,16 @@ namespace Client
             this.MenuPanel.Padding = new System.Windows.Forms.Padding(2);
             this.MenuPanel.Size = new System.Drawing.Size(200, 600);
             this.MenuPanel.TabIndex = 0;
+            // 
+            // levelLabel
+            // 
+            this.levelLabel.AutoSize = true;
+            this.levelLabel.Location = new System.Drawing.Point(5, 92);
+            this.levelLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.levelLabel.Name = "levelLabel";
+            this.levelLabel.Size = new System.Drawing.Size(60, 13);
+            this.levelLabel.TabIndex = 6;
+            this.levelLabel.Text = "Level Type";
             // 
             // comboBox1
             // 
@@ -154,16 +164,6 @@ namespace Client
             this.IpBox.TabIndex = 1;
             this.IpBox.TextChanged += new System.EventHandler(this.IpBox_TextChanged);
             // 
-            // levelLabel
-            // 
-            this.levelLabel.AutoSize = true;
-            this.levelLabel.Location = new System.Drawing.Point(5, 92);
-            this.levelLabel.Margin = new System.Windows.Forms.Padding(3);
-            this.levelLabel.Name = "levelLabel";
-            this.levelLabel.Size = new System.Drawing.Size(60, 13);
-            this.levelLabel.TabIndex = 6;
-            this.levelLabel.Text = "Level Type";
-            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,6 +183,7 @@ namespace Client
             this.Deactivate += new System.EventHandler(this.GameForm_Deactivate);
             this.Load += new System.EventHandler(this.GameForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameForm_Paint);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseMove);
             this.MenuPanel.ResumeLayout(false);
             this.MenuPanel.PerformLayout();
             this.PlayerListPanel.ResumeLayout(false);

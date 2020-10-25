@@ -6,21 +6,21 @@ namespace Client
     public class Player : GameObject
     {
         protected Tank controllable;
+        private TankBuilder builder;
 
         public Player()
         {
-            TankBuilder builder = new TankBuilder();
+            isShadowCaster = true;
+            builder = new TankBuilder();
             TankDirector director = new TankDirector(builder);
 
             director.Construct(50, 50);
-            controllable = builder.GetResult();
-
             Spawn();
         }
 
         public void Spawn()
         {
-            Instantiate(controllable);
+            controllable = builder.GetResult();
         }
 
         public void Despawn()

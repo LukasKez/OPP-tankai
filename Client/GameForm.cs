@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
 
 namespace Client
@@ -46,6 +47,11 @@ namespace Client
         private void GameForm_Deactivate(object sender, EventArgs e)
         {
             GameState.Instance.focused = false;
+        }
+
+        private void GameForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            GameState.Instance.mouseLocation = new Vector2(e.Location.X, e.Location.Y);
         }
 
         private void OptionsButton_Click(object sender, EventArgs e)
