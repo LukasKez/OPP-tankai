@@ -34,6 +34,7 @@ namespace Client
 
         protected GameObject()
         {
+            transform = new Transform();
         }
 
         protected GameObject(Transform transform)
@@ -41,13 +42,10 @@ namespace Client
             this.transform = transform;
         }
 
+        [Obsolete()]
         protected GameObject(float x, float y, float w = 1, float h = 1, float r = 0)
         {
-            transform.position.X = x;
-            transform.position.Y = y;
-            transform.size.X = w;
-            transform.size.Y = h;
-            transform.rotation = r;
+            transform = new Transform(x, y, w, h, r);
         }
 
         public virtual void Update(float deltaTime)
@@ -62,13 +60,19 @@ namespace Client
             }
             if (pen != null)
             {
-                renderer.RenderShape(e, pen, transform - pen.Width, shape);
+                renderer.RenderShape(e, pen, transform, shape);
             }
         }
 
         public static void Instantiate(GameObject gameObject)
         {
             GameState.Instance.gameLevel?.Add(gameObject);
+        }
+
+        public static void Instantiate(GameObject gameObject, GameObject parent)
+        {
+            gameObject.transform.parent = parent.transform;
+            Instantiate(gameObject);
         }
 
         public void Destroy()

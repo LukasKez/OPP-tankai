@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -12,24 +13,19 @@ namespace Client
     {
         protected StrategyInterface action;
 
-        private float elapsedTime = 0f;
-        private float updateRate = 1f / 40f;
+        private float elapsedTime;
 
-        float timePassed = 0;
+        public BotPlayer()
+        {
+            controllable.transform.position = new Vector2(180, 200);
+            controllable.brush = Brushes.Blue;
+        }
 
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
 
-            if (GameState.Instance.focused)
-                UpdatePosition(deltaTime);
-
-            elapsedTime += deltaTime;
-            if (elapsedTime > updateRate)
-            {
-                elapsedTime -= updateRate;
-                Networking.SendPositionUpdateAsync(controllable);
-            }
+            UpdatePosition(deltaTime);
         }
 
         void UpdatePosition(float deltaTime)
@@ -46,22 +42,20 @@ namespace Client
             action.DoAction();
             */
 
-            timePassed += deltaTime;
+            elapsedTime += deltaTime;
 
             // Test bot move
             action = new Move();
             action.DoAction(ref vertical, speed, deltaTime);
 
-            if (timePassed > 2)
+            if (elapsedTime >= 2f)
             {
-                vertical.Y = -speed * deltaTime;
-                if (timePassed > 4)
-                    timePassed = 0;
+                action.DoAction(ref vertical, -speed, deltaTime);
+                if (elapsedTime >= 4f)
+                    elapsedTime = 0f;
             }
-            
-            double radians = tr.rotation * Math.PI / 180;
-            tr.position.X += (float)(vertical.X * Math.Cos(radians) - vertical.Y * Math.Sin(radians));
-            tr.position.Y += (float)(vertical.X * Math.Sin(radians) + vertical.Y * Math.Cos(radians));
+
+            tr.position += Utils.Rotate(vertical, tr.rotation);
             controllable.transform = tr;
         }
     }

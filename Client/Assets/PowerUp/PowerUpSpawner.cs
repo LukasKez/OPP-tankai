@@ -1,7 +1,7 @@
 ﻿using Client;
 using System;
 using System.Drawing;
-using System.Windows.Forms;
+using System.Numerics;
 
 namespace PowerUp
 {
@@ -66,18 +66,17 @@ namespace PowerUp
             }
 
             int percent = rnd.Next(100);
+            Vector2 size = transform.size * new Vector2(0.7f, 0.8f);
 
             if (percent < 80)
             {
-                powerUp = powerUpFactory.CreateTemporaryPowerUp(
-                        transform.position.X + 3, transform.position.Y + 2, transform.size.Y * 0.7f, transform.size.Y * 0.8f);
+                powerUp = powerUpFactory.CreateTemporaryPowerUp(0, 0, size.X, size.Y);
             }
             else
             {
-                powerUp = powerUpFactory.CreatePermanentPowerUp(
-                        transform.position.X + 3, transform.position.Y + 2, transform.size.Y * 0.7f, transform.size.Y * 0.8f);
+                powerUp = powerUpFactory.CreatePermanentPowerUp(0, 0, size.X, size.Y);
             }
-            Instantiate(powerUp);
+            Instantiate(powerUp, this);
         }
 
         public PowerUpBase GiveAway()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Numerics;
 
 namespace Client
 {
@@ -9,7 +10,7 @@ namespace Client
 
         public ITankBuilder AddHull(float x, float y)
         {
-            tank = new Tank(x, y, Brushes.Red);
+            tank = new Tank(new Transform(x, y, 20, 22), Brushes.Red);
             return this;
         }
 
@@ -27,7 +28,10 @@ namespace Client
 
         public ITankBuilder AddSuspension()
         {
-            tank.suspension = new Suspension(1, 1, 30);
+            Vector2 size = tank.transform.size;
+            Suspension suspension = new Suspension(size, 1, 1, 30);
+            suspension.transform.parent = tank.transform;
+            tank.suspension = suspension;
             return this;
         }
 
