@@ -9,11 +9,8 @@ namespace Client
         {
         }
 
-        public void Rotate(PaintEventArgs e, Transform transform)
+        public void Rotate(PaintEventArgs e, Vector2 position, float rotation)
         {
-            Vector2 position = transform.WorldPosition;
-            float rotation = transform.WorldRotation;
-
             // Set the rotation point
             e.Graphics.TranslateTransform(position.X, position.Y);
             // Rotate

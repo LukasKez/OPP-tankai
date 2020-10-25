@@ -197,10 +197,7 @@ namespace Client
             {
                 if (thing.isShadowCaster)
                 {
-                    Transform shadow = new Transform(thing.transform);
-                    shadow.position += sunDirection;
-
-                    renderer.RenderShape(e, shadowBrush, shadow, thing.shape);
+                    renderer.RenderShape(e, shadowBrush, thing.transform, thing.shape, sunDirection);
                 }
             }
         }
