@@ -22,7 +22,7 @@ namespace Client
         {
             if (shape == Shape.None) return;
 
-            if (transform.rotation != 0)
+            if (transform.WorldRotation != 0)
             {
                 rotator.Rotate(e, transform);
             }
@@ -30,17 +30,17 @@ namespace Client
             switch (shape)
             {
                 case Shape.Rectangle:
-                    rectangle.Draw(e, brush, transform);
+                    rectangle.Draw(e, brush, transform.WorldPosition, transform.size);
                     break;
                 case Shape.Ellipse:
-                    ellipse.Draw(e, brush, transform);
+                    ellipse.Draw(e, brush, transform.WorldPosition, transform.size);
                     break;
                 case Shape.Mesh:
                 default:
                     throw new NotImplementedException("Shape not implemented");
             }
 
-            if (transform.rotation != 0)
+            if (transform.WorldRotation != 0)
             {
                 e.Graphics.ResetTransform();
             }
@@ -50,7 +50,7 @@ namespace Client
         {
             if (shape == Shape.None) return;
 
-            if (transform.rotation != 0)
+            if (transform.WorldRotation != 0)
             {
                 rotator.Rotate(e, transform);
             }
@@ -58,17 +58,17 @@ namespace Client
             switch (shape)
             {
                 case Shape.Rectangle:
-                    rectangle.Draw(e, pen, transform);
+                    rectangle.Draw(e, pen, transform.WorldPosition, transform.size.Substract(pen.Width));
                     break;
                 case Shape.Ellipse:
-                    ellipse.Draw(e, pen, transform);
+                    ellipse.Draw(e, pen, transform.WorldPosition, transform.size.Substract(pen.Width));
                     break;
                 case Shape.Mesh:
                 default:
                     throw new NotImplementedException("Shape not implemented");
             }
 
-            if (transform.rotation != 0)
+            if (transform.WorldRotation != 0)
             {
                 e.Graphics.ResetTransform();
             }

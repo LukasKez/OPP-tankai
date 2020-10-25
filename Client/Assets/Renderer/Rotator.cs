@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+using System.Numerics;
 
 namespace Client
 {
@@ -10,12 +11,15 @@ namespace Client
 
         public void Rotate(PaintEventArgs e, Transform transform)
         {
+            Vector2 position = transform.WorldPosition;
+            float rotation = transform.WorldRotation;
+
             // Set the rotation point
-            e.Graphics.TranslateTransform(transform.position.X + transform.size.X / 2, transform.position.Y + transform.size.Y / 2);
+            e.Graphics.TranslateTransform(position.X, position.Y);
             // Rotate
-            e.Graphics.RotateTransform(transform.rotation);
+            e.Graphics.RotateTransform(rotation);
             // Restore rotation point in the matrix
-            e.Graphics.TranslateTransform(-(transform.position.X + transform.size.X / 2), -(transform.position.Y + transform.size.Y / 2));
+            e.Graphics.TranslateTransform(-position.X, -position.Y);
         }
     }
 }
