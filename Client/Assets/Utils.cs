@@ -65,6 +65,22 @@ namespace Client
             return RotatedVector(angle) * length;
         }
 
+        public static Vector2 MoveTowards(this Vector2 current, Vector2 target, float maxDistanceDelta)
+        {
+            float toVector_x = target.X - current.X;
+            float toVector_y = target.Y - current.Y;
+
+            float sqDist = toVector_x * toVector_x + toVector_y * toVector_y;
+
+            if (sqDist == 0 || (maxDistanceDelta >= 0 && sqDist <= maxDistanceDelta * maxDistanceDelta))
+                return target;
+
+            float dist = (float)Math.Sqrt(sqDist);
+
+            return new Vector2(current.X + toVector_x / dist * maxDistanceDelta,
+                current.Y + toVector_y / dist * maxDistanceDelta);
+        }
+
         public static Vector2 Substract(this Vector2 left, float right)
         {
             return new Vector2(left.X - right, left.Y - right);

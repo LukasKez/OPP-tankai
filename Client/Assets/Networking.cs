@@ -41,9 +41,9 @@ namespace Client
                 return Task.CompletedTask;
             };
 
-            connection.On<LevelType, DateTime>("StartGame", (levelType, startAt) =>
+            connection.On<DateTime, LevelType>("StartGame", (startAt, levelType) =>
             {
-                GameLoop.StartGame(levelType);
+                GameLoop.StartGame(startAt, levelType);
                 foreach (var player in remotePlayers)
                 {
                     player.Value.Spawn();

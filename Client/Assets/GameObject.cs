@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Numerics;
 using System.Windows.Forms;
 
 namespace Client
@@ -21,31 +22,53 @@ namespace Client
 
     public abstract class GameObject
     {
+        private Renderer renderer = new Renderer();
+
         public Transform transform;
         public Shape shape;
         public ColliderType collider;
+        public bool isStatic;
         public bool isShadowCaster;
-        private Renderer renderer = new Renderer();
+
+        private BoxAABB _AABB;
+        public BoxAABB AABB
+        {
+            get => _AABB + transform.position;
+            private set => _AABB = value;
+        }
 
         public Brush brush;
         protected Pen pen;
 
         public float damage;
 
-        protected GameObject()
+        protected GameObject() : this(new Transform())
         {
-            transform = new Transform();
         }
 
         protected GameObject(Transform transform)
         {
             this.transform = transform;
+            GenerateAABB();
         }
 
         [Obsolete()]
-        protected GameObject(float x, float y, float w = 1, float h = 1, float r = 0)
+        protected GameObject(float x, float y, float w = 1, float h = 1, float r = 0) : this(new Transform(x, y, w, h, r))
         {
-            transform = new Transform(x, y, w, h, r);
+        }
+
+        public void GenerateAABB()
+        {
+            GenerateAABB(transform.size);
+        }
+
+        public void GenerateAABB(Vector2 size)
+        {
+            AABB = new BoxAABB()
+            {
+                min = -size * 0.5f,
+                max = size * 0.5f,
+            };
         }
 
         public virtual void Update(float deltaTime)
@@ -64,6 +87,14 @@ namespace Client
             }
         }
 
+        public virtual void OnCollision(Collision collision)
+        {
+        }
+
+        public virtual void OnTrigger(Collision collision)
+        {
+        }
+
         public static void Instantiate(GameObject gameObject)
         {
             GameState.Instance.gameLevel?.Add(gameObject);
@@ -80,6 +111,6 @@ namespace Client
             GameState.Instance.gameLevel?.Remove(this);
         }
 
-        public virtual void Decorate(){ }
+        public virtual void Decorate() { }
     }
 }

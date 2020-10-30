@@ -38,7 +38,9 @@ namespace Server.Hubs
                 await Clients.Caller.SendAsync("OnSetName", player.Key, player.Value.name);
                 await Clients.Caller.SendAsync("OnSetReady", player.Key, player.Value.isReady);
             }
-            await Clients.Caller.SendAsync("OnSetLevelType", GameHandler.levelType);
+
+            if (!GameHandler.isGameStarted)
+                await Clients.Caller.SendAsync("OnSetLevelType", GameHandler.levelType);
 
             GameHandler.players.TryAdd(Context.ConnectionId, new GameHandler.PlayerStats());
 
@@ -79,7 +81,7 @@ namespace Server.Hubs
 
             GameHandler.isGameStarted = true;
             DateTime startAt = DateTime.UtcNow.AddSeconds(5);
-            await Clients.All.SendAsync("StartGame", GameHandler.levelType, startAt);
+            await Clients.All.SendAsync("StartGame", startAt, GameHandler.levelType);
         }
 
         public async Task SetLevelType(int levelType)

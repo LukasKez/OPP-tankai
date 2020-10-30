@@ -105,42 +105,9 @@ namespace Client
             toRemove.Enqueue(gameObject);
         }
 
-        public GameObject GetCollision(GameObject gameObject)
+        public void HandleCollisions()
         {
-            //Transform transform = gameObject.transform - gameObject.transform.size.X * 0.2f;
-
-            Transform transform = new Transform(gameObject.transform);
-            transform.size *= 0.8f;
-
-            foreach (GameObject thing in stuff)
-            {
-                if (thing.collider == ColliderType.None)
-                {
-                    continue;
-                }
-
-                if (CheckCollision(transform, thing.transform) == true)
-                {
-                    return thing;
-                }
-            }
-            return null;
-        }
-
-        private bool CheckCollision(Transform rect1, Transform rect2)
-        {
-            Vector2 position1 = rect1.position - rect1.size * 0.5f;
-            Vector2 position2 = rect2.position - rect2.size * 0.5f;
-
-            if (position1.X < position2.X + rect2.size.X &&
-                position1.X + rect1.size.X > position2.X &&
-                position1.Y < position2.Y + rect2.size.Y &&
-                position1.Y + rect1.size.Y > position2.Y)
-            {
-                return true;
-            }
-
-            return false;
+            Physics.HandleCollisions(stuff);
         }
 
         public void Update(float deltaTime)

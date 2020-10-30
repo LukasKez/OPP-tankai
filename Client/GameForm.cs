@@ -136,13 +136,13 @@ namespace Client
             comboBox1.Visible = enableLevelBox;
         }
 
-        private delegate void Delegate(ClientState state);
+        private delegate void StateDelegate(ClientState state);
         public void OnSubjectUpdate()
         {
             ClientState state = GameState.Instance.State;
             if (InvokeRequired)
             {
-                Delegate d = UpdateUIState;
+                StateDelegate d = UpdateUIState;
                 Invoke(d, new object[] { state });
             }
             else
@@ -151,9 +151,18 @@ namespace Client
             }
         }
 
+        private delegate void LevelDelegate(LevelType levelType);
         private void UpdateLevelTypeBox(LevelType levelType)
         {
-            comboBox1.SelectedItem = levelType;
+            if (InvokeRequired)
+            {
+                LevelDelegate d = UpdateLevelTypeBox;
+                Invoke(d, new object[] { levelType });
+            }
+            else
+            {
+                comboBox1.SelectedItem = levelType;
+            }
         }
 
         public void UpdatePlayerUI()

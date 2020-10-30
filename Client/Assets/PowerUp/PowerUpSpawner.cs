@@ -18,7 +18,7 @@ namespace PowerUp
             collider = ColliderType.Trigger;
             pen = new Pen(Brushes.Orange, 2);
             waitTime = waitDuration;
-            rnd = new Random();
+            rnd = new Random(GameState.Instance.RandomSeed);
         }
 
         public override void Update(float deltaTime)

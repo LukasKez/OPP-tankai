@@ -1,5 +1,6 @@
 ﻿using System.Windows.Forms;
 using System.Numerics;
+using System;
 
 namespace Client
 {
@@ -14,7 +15,7 @@ namespace Client
             // Set the rotation point
             e.Graphics.TranslateTransform(position.X, position.Y);
             // Rotate
-            e.Graphics.RotateTransform(rotation);
+            e.Graphics.RotateTransform((float)Math.Round(rotation));
             // Restore rotation point in the matrix
             e.Graphics.TranslateTransform(-position.X, -position.Y);
         }

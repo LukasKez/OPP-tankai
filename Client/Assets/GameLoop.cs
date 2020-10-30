@@ -14,9 +14,10 @@ namespace Client
         static DateTime startTime = DateTime.Now;
         static DateTime endTime = DateTime.Now;
 
-        public static void StartGame(LevelType levelType = LevelType.Forest)
+        public static void StartGame(DateTime startAt, LevelType levelType = LevelType.Forest)
         {
             var state = GameState.Instance;
+            state.RandomSeed = (int)startAt.Ticks;
             state.gameLevel = GameLevelCreator.GetGameLevel(
                 levelType, state.mapSize.X, state.mapSize.Y, 20, 20, 2);
 
@@ -45,6 +46,7 @@ namespace Client
         {
             UpdateFPS();
             GameState.Instance.gameLevel.Update(deltaTime);
+            GameState.Instance.gameLevel.HandleCollisions();
         }
 
         static void Render(PaintEventArgs e)

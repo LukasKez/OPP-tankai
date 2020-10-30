@@ -12,12 +12,14 @@ namespace Client
         {
             obstacle.Decorate();
             collider = obstacle.collider;
+            isStatic = obstacle.isStatic;
             isShadowCaster = obstacle.isShadowCaster;
             damage = obstacle.damage;
             shape = obstacle.shape;
             brush = obstacle.brush;
 
             transform = obstacle.transform;
+            GenerateAABB();
             MakeTree();
         }
         private void MakeTree()

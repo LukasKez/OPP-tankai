@@ -22,7 +22,9 @@ namespace Client
 
         public Tank(Transform transform, Brush brush) : base(transform)
         {
+            GenerateAABB(transform.size + new Vector2(6, 4));
             shape = Shape.Rectangle;
+            collider = ColliderType.Collider;
             isShadowCaster = true;
             this.brush = brush;
             pen = new Pen(Color.FromArgb(64, Color.Black), 2);
@@ -34,30 +36,22 @@ namespace Client
             UpdatePowerUps(deltaTime);
         }
 
+        public override void OnTrigger(Collision collision)
+        {
+            base.OnTrigger(collision);
+
+            if (collision.other is PowerUpSpawner powerUpSpawner &&
+               (collision.penetration * collision.normal).LengthSquared() > 32f)
+            {
+                PowerUp(powerUpSpawner.GiveAway());
+            }
+        }
+
         public void Move(float direction)
         {
             Vector2 vertical = new Vector2();
-            Vector2 displacement = transform.position;
-
             vertical.Y = direction * speed * GameLoop.DeltaTime;
-            displacement = Utils.Rotate(vertical, transform.rotation);
-            transform.position += displacement;
-
-            GameObject collision = GameState.Instance.gameLevel.GetCollision(this);
-            if (collision != null)
-            {
-                if (collision.collider == ColliderType.Collider)
-                {
-                    transform.position -= displacement;
-                }
-                else
-                {
-                    if (collision is PowerUpSpawner powerUpSpawner)
-                    {
-                        PowerUp(powerUpSpawner.GiveAway());
-                    }
-                }
-            }
+            transform.position += Utils.Rotate(vertical, transform.rotation);
         }
 
         public void Rotate(float direction)
