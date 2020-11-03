@@ -2,6 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Numerics;
 using System.Windows.Forms;
 
@@ -49,7 +50,7 @@ namespace Client
 
         }
 
-        public void SetupObstacles(LevelType levelType)
+        public virtual void SetupObstacles(LevelType levelType)
         {
             int vertEnd = (int)(levelWidth / blockWidth);
             int hozEnd = (int)(levelHeight / blockHeight);
@@ -167,6 +168,21 @@ namespace Client
                     renderer.RenderShape(e, shadowBrush, thing.transform, thing.shape, sunDirection);
                 }
             }
+        }
+
+        public List<T> Find<T>()
+        {
+            List<T> list = new List<T>();
+
+            foreach (var thing in stuff)
+            {
+                if (thing is T item)
+                {
+                    list.Add(item);
+                }
+            }
+
+            return list;
         }
     }
 }

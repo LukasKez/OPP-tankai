@@ -81,7 +81,12 @@ namespace Server.Hubs
 
             GameHandler.isGameStarted = true;
             DateTime startAt = DateTime.UtcNow.AddSeconds(5);
-            await Clients.All.SendAsync("StartGame", startAt, GameHandler.levelType);
+
+            int i = 0;
+            foreach (var player in GameHandler.players)
+            {
+                await Clients.Client(player.Key).SendAsync("StartGame", startAt, GameHandler.levelType, i++);
+            }
         }
 
         public async Task SetLevelType(int levelType)

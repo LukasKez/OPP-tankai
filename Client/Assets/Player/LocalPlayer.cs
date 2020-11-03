@@ -15,7 +15,7 @@ namespace Client
         private float crosshairLength = 20;
         private Pen crosshair;
 
-        public LocalPlayer()
+        public LocalPlayer(PlayerSpawner spawnPoint) : base(spawnPoint)
         {
             crosshair = new Pen(Color.FromArgb(128, Color.Red), 2);
             tankController = new Controller(controllable);

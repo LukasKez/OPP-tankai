@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Client
@@ -11,19 +12,21 @@ namespace Client
         static int frames;
         static DateTime lastTime;
 
-        static DateTime startTime = DateTime.Now;
-        static DateTime endTime = DateTime.Now;
+        static DateTime startTime;
+        static DateTime endTime;
 
-        public static void StartGame(DateTime startAt, LevelType levelType = LevelType.Forest)
+        public static void StartGame(DateTime startAt, LevelType levelType = LevelType.Forest, int spawnPos = 0)
         {
             var state = GameState.Instance;
             state.RandomSeed = (int)startAt.Ticks;
             state.gameLevel = GameLevelCreator.GetGameLevel(
                 levelType, state.mapSize.X, state.mapSize.Y, 20, 20, 2);
 
-            GameObject.Instantiate(new LocalPlayer());
+            var spawner = state.gameLevel.Find<PlayerSpawner>().ElementAtOrDefault(spawnPos);
+            GameObject.Instantiate(new LocalPlayer(spawner));
             GameObject.Instantiate(new BotPlayer());
 
+            startTime = DateTime.Now;
             GameState.Instance.State = ClientState.Playing;
         }
 
