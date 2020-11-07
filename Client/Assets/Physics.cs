@@ -44,10 +44,22 @@ namespace Client
                         continue;
 
                     Collision collision = default;
-                    if (item2.shape == Shape.Ellipse)
+                    if (item1.shape == Shape.Ellipse && item2.shape == Shape.Ellipse)
+                    {
+                        if (!CirclevsCircleOverlap(item1, item2, ref collision))
+                            continue;
+                    }
+                    else if (item2.shape == Shape.Ellipse)
                     {
                         if (!AABBvsCircleOverlap(item1, item2, ref collision))
                             continue;
+                    }
+                    else if (item1.shape == Shape.Ellipse)
+                    {
+
+                        if (!AABBvsCircleOverlap(item2, item1, ref collision))
+                            continue;
+                        collision.normal = -collision.normal;
                     }
                     else
                     {
@@ -56,6 +68,7 @@ namespace Client
                     }
 
                     InvokeCallback(item1, item2, collision);
+                    InvokeCallback(item2, item1, collision);
 
                     if (item1.collider == ColliderType.Trigger)
                         continue;
@@ -121,6 +134,26 @@ namespace Client
             }
 
             collision.normal = new Vector2(biasX ? 1 : -1, biasY ? 1 : -1);
+            return true;
+        }
+
+        private static bool CirclevsCircleOverlap(GameObject item1, GameObject item2, ref Collision collision)
+        {
+            Transform circle1 = item1.transform;
+            Transform circle2 = item2.transform;
+
+            float radius = (Math.Max(circle1.size.X, circle1.size.Y) + Math.Max(circle2.size.X, circle2.size.Y)) / 2;
+            Vector2 normal = circle2.position - circle1.position;
+
+            if (radius * radius <= normal.LengthSquared())
+                return false;
+
+            float normalLen = normal.Length();
+            float pen = radius - normalLen;
+
+            collision.penetration = new Vector2(pen);
+            collision.normal = normal / normalLen;
+
             return true;
         }
 

@@ -18,6 +18,8 @@ namespace Client
         public Turret turret { get; set; }
 
 
+        public event Action<Projectile> OnProjectileHit;
+
         private List<TemporaryPowerUp> temporaryPowerUps;
 
         public Tank(Transform transform, Brush brush) : base(transform)
@@ -34,6 +36,16 @@ namespace Client
         public override void Update(float deltaTime)
         {
             UpdatePowerUps(deltaTime);
+        }
+
+        public override void OnCollision(Collision collision)
+        {
+            base.OnCollision(collision);
+
+            if (collision.other is Projectile projectile)
+            {
+                ProjectileHit(projectile);
+            }
         }
 
         public override void OnTrigger(Collision collision)
@@ -98,6 +110,19 @@ namespace Client
             if (powerUp == null) return;
             temporaryPowerUps.Add(powerUp);
             powerUp.Use(this);
+        }
+
+        public void TakeDamage(float damage)
+        {
+            health -= Utils.Clamp(damage - defense, 0, health);
+
+            if (health <= 0)
+                GameState.Instance.State = ClientState.Died;
+        }
+
+        public void ProjectileHit(Projectile projectile)
+        {
+            OnProjectileHit?.Invoke(projectile);
         }
     }
 }

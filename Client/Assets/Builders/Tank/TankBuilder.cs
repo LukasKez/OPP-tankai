@@ -53,8 +53,17 @@ namespace Client
 
         public ITankBuilder AddGun()
         {
+            Projectile projectile = new Projectile()
+            {
+                damage = 120,
+                speed = 600,
+                bounceAngle = 45,
+                bounceCount = 1,
+            };
+
             gun = new Gun(20)
             {
+                shell = projectile,
                 reloadTime = 3,
                 aimingRate = 10,
                 rotationAngle = 0,

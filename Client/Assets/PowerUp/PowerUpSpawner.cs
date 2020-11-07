@@ -19,7 +19,6 @@ namespace PowerUp
             outlinePen = new Pen(Brushes.Orange, 2);
             waitTime = waitDuration;
             rnd = new Random(GameState.Instance.RandomSeed ^ (int)x ^ (int)y << 8);
-            Console.WriteLine(GameState.Instance.RandomSeed ^ (int)x ^ (int)y << 8);
         }
 
         public override void Update(float deltaTime)
