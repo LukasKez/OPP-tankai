@@ -1,13 +1,11 @@
 ﻿using Client;
 using System;
 using System.Drawing;
-using System.Numerics;
 
 namespace PowerUp
 {
     class PowerUpSpawner : Spawner
     {
-        private PowerUpBase powerUp;
         private float waitDuration = 5f;
         private float waitTime;
 
@@ -21,11 +19,11 @@ namespace PowerUp
 
         public override void Update(float deltaTime)
         {
-            if (powerUp == null)
+            if (spawnedObj == null)
             {
                 if (waitTime <= 0)
                 {
-                    Spawn(powerUp);
+                    Spawn(spawnedObj);
                     waitTime = waitDuration;
                 }
                 else
@@ -35,7 +33,7 @@ namespace PowerUp
             }
             else
             {
-                powerUp.Update(deltaTime);
+                spawnedObj.Update(deltaTime);
             }
         }
 
@@ -47,11 +45,11 @@ namespace PowerUp
 
         public PowerUpBase GiveAway()
         {
-            if (powerUp == null) return null;
+            if (spawnedObj == null) return null;
 
-            PowerUpBase powerUpToGive = powerUp;
-            powerUp.Destroy();
-            powerUp = null;
+            PowerUpBase powerUpToGive = spawnedObj as PowerUpBase;
+            spawnedObj.Destroy();
+            spawnedObj = null;
 
             return powerUpToGive;
         }

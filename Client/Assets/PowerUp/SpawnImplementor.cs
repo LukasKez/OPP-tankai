@@ -4,6 +4,6 @@ namespace Client
 {
     public interface SpawnImplementor
     {
-        void Spawn(GameObject spawner);
+        GameObject Spawn(GameObject spawner);
     }
 }

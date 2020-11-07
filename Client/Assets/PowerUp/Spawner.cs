@@ -1,13 +1,11 @@
-﻿using System;
-using System.Drawing;
-using System.Numerics;
-using PowerUp;
+﻿using System.Drawing;
 
 namespace Client
 {
     abstract class Spawner : GameObject
     {
         protected SpawnImplementor imp;
+        protected GameObject spawnedObj;
 
         public Spawner(float x, float y, float w, float h, SpawnImplementor imp) : base(new Transform(x, y, w, h))
         {
@@ -21,7 +19,7 @@ namespace Client
 
         public virtual void Spawn(GameObject gameObject)
         {
-            imp.Spawn(this);
+            spawnedObj = imp.Spawn(this);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Client
         private readonly Random rnd = new Random();
         
 
-        public void Spawn(GameObject spawner)
+        public GameObject Spawn(GameObject spawner)
         {
             //rnd = new Random(GameState.Instance.RandomSeed ^ (int)x ^ (int)y << 8);
             //Console.WriteLine(GameState.Instance.RandomSeed ^ (int)x ^ (int)y << 8);
@@ -51,6 +51,7 @@ namespace Client
                 powerUp = powerUpFactory.CreatePermanentPowerUp(0, 0, size.X, size.Y);
             }
             GameObject.Instantiate(powerUp, spawner);
+            return powerUp;
         }
     }
 }

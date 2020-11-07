@@ -9,7 +9,7 @@ namespace Client
     class FixedSpawn : SpawnImplementor
     {
         //TO DO: Implement fixed power up spawning
-        public void Spawn(GameObject spawner)
+        public GameObject Spawn(GameObject spawner)
         {
             throw new NotImplementedException();
         }
