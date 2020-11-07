@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using System.Windows.Forms;
+
 namespace Client
 {
     class OutlineObstacle: ObstacleDecorator
@@ -13,12 +13,13 @@ namespace Client
         {
             base.Decorate();
             adapter.SetFields(this);
+            GenerateAABB();
 
             MakeOutline();
         }
         private void MakeOutline()
         {
-            outlineBrush = Brushes.Black;
+            outlinePen = new Pen(Color.FromArgb(64, Color.Black), 2);
         }
 
 

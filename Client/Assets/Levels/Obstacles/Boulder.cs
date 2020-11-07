@@ -13,6 +13,7 @@ namespace Client
         {
             base.Decorate();
             adapter.SetFields(this);
+            GenerateAABB();
 
             MakeBoulder();
         }

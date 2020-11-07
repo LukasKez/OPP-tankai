@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
 
 namespace Client
 {
@@ -23,7 +21,6 @@ namespace Client
 
             foreach (var field in gameObject.GetType().GetFields())
             {
-                Debug.WriteLine(field.Name);
                 fields.Add(field.Name, field.GetValue(gameObject));
             }
 

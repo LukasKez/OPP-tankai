@@ -19,7 +19,7 @@ namespace Client
             shape = Shape.Ellipse;
             isShadowCaster = true;
             brush = Brushes.Gray;
-            pen = new Pen(Color.FromArgb(64, Color.Black), 2.5f);
+            outlinePen = new Pen(Color.FromArgb(64, Color.Black), 2.5f);
         }
 
         public override void Update(float deltaTime)

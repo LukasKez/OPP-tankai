@@ -11,7 +11,7 @@ namespace Client
             shape = Shape.Rectangle;
             isShadowCaster = true;
             brush = Brushes.DimGray;
-            pen = new Pen(Color.FromArgb(64, Color.Black), 1);
+            outlinePen = new Pen(Color.FromArgb(64, Color.Black), 1);
         }
     }
 }

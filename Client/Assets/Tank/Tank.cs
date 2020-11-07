@@ -27,7 +27,7 @@ namespace Client
             collider = ColliderType.Collider;
             isShadowCaster = true;
             this.brush = brush;
-            pen = new Pen(Color.FromArgb(64, Color.Black), 2);
+            outlinePen = new Pen(Color.FromArgb(64, Color.Black), 2);
             temporaryPowerUps = new List<TemporaryPowerUp>();
         }
 

@@ -13,7 +13,7 @@ namespace PowerUp
         {
             isShadowCaster = true;
             shape = Shape.Ellipse;
-            pen = new Pen(Color.FromArgb(64, Color.Black), 2);
+            outlinePen = new Pen(Color.FromArgb(64, Color.Black), 2);
         }
 
         public override void Update(float deltaTime)

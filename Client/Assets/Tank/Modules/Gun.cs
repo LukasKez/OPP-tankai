@@ -20,7 +20,7 @@ namespace Client
             shape = Shape.Rectangle;
             isShadowCaster = true;
             brush = Brushes.Gray;
-            pen = new Pen(Color.FromArgb(64, Color.Black), 1);
+            outlinePen = new Pen(Color.FromArgb(64, Color.Black), 1);
         }
 
         public override void Update(float deltaTime)

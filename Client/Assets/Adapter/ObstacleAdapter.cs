@@ -1,7 +1,5 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 
 namespace Client
@@ -19,11 +17,12 @@ namespace Client
             Dictionary<string, object> fields = adapterContainer.GetObjectFields(typeof(GameObject));
 
             gameObject.collider = fields.ContainsKey("collider") ? (ColliderType)fields["collider"] : throw new ArgumentNullException();
+            gameObject.isStatic = (bool)fields["isStatic"];
             gameObject.isShadowCaster = (bool)fields["isShadowCaster"];
             gameObject.damage = (float)fields["damage"];
             gameObject.shape = (Shape)fields["shape"];
             gameObject.brush = (Brush)fields["brush"];
-            gameObject.outlineBrush =(Brush)fields["outlineBrush"];
+            gameObject.outlinePen = (Pen)fields["outlinePen"];
             gameObject.transform = (Transform)fields["transform"];
         }
     }
