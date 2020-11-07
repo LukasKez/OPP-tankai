@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    class Shoot : StrategyInterface
+    class TurnLeft : StrategyInterface
     {
-        public void DoAction(ref Vector2 vertical, float speed, float deltaTime)
+        public void DoAction(Transform tr, ref Vector2 vertical, float speed, float deltaTime)
         {
-            // Shoot
+            tr.rotation -= speed * deltaTime;
         }
     }
 }

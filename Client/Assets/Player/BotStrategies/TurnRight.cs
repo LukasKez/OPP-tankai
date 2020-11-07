@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    class Turn : StrategyInterface
+    class TurnRight : StrategyInterface
     {
-        public void DoAction(ref Vector2 vertical, float speed, float deltaTime)
+        public void DoAction(Transform tr, ref Vector2 vertical, float speed, float deltaTime)
         {
-            // Turn around/rotate
+            tr.rotation += speed * deltaTime;
         }
     }
 }

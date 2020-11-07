@@ -32,7 +32,7 @@ namespace Client
 
 
             // Add PowerUp spawners
-            stuff.Add(new PowerUpSpawner(blockWidth * 7, blockHeight * 4, blockWidth, blockWidth));
+            stuff.Add(new PowerUpSpawner(blockWidth * 7, blockHeight * 4, blockWidth, blockWidth, new RandomSpawn()));
         }
 
     }
