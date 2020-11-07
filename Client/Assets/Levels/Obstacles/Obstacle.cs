@@ -10,7 +10,6 @@
         public override void Decorate()
         {
             collider = ColliderType.Collider;
-            isStatic = true;
             isShadowCaster = true;
         }
     }

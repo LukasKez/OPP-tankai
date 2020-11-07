@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Connections;
+using System;
 using System.Drawing;
+using System.Net.Sockets;
 using System.Numerics;
 using System.Windows.Forms;
 
@@ -38,9 +40,13 @@ namespace Client
         }
 
         public Brush brush;
+        public Brush outlineBrush;
         protected Pen pen;
 
+
+
         public float damage;
+        
 
         protected GameObject() : this(new Transform())
         {
@@ -77,6 +83,25 @@ namespace Client
 
         public virtual void Render(PaintEventArgs e)
         {
+            if(outlineBrush != null)
+            {
+                float padding;
+                if(transform.size.X >= transform.size.Y )
+                {
+                    padding = transform.size.Y * 0.16f;
+                }
+                else
+                {
+                    padding= transform.size.X * 0.16f;
+                }
+
+                Transform outline = new Transform(transform.position.X, transform.position.Y,
+                    transform.size.X+ padding, transform.size.Y+ padding);
+
+                renderer.RenderShape(e, outlineBrush, outline, shape);
+
+            }
+
             if (brush != null)
             {
                 renderer.RenderShape(e, brush, transform, shape);

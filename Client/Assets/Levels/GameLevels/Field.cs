@@ -45,101 +45,101 @@ namespace Client
             GameObject obj;
 
             // Center obstacles
-            obj = new Tree(new Obstacle(levelWidth / 2 - blockWidth * 3, levelHeight / 2 - blockHeight * 3, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 - blockWidth * 3, levelHeight / 2 - blockHeight * 3, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Tree(new Obstacle(levelWidth / 2 - blockWidth * 2, levelHeight / 2 - blockHeight * 3, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 - blockWidth * 2, levelHeight / 2 - blockHeight * 3, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Tree(new Obstacle(levelWidth / 2 - blockWidth * 3, levelHeight / 2 - blockHeight * 2, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 - blockWidth * 3, levelHeight / 2 - blockHeight * 2, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Tree(new Obstacle(levelWidth / 2 + blockWidth * 3, levelHeight / 2 - blockHeight * 3, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 + blockWidth * 3, levelHeight / 2 - blockHeight * 3, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Tree(new Obstacle(levelWidth / 2 + blockWidth * 2, levelHeight / 2 - blockHeight * 3, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 + blockWidth * 2, levelHeight / 2 - blockHeight * 3, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Tree(new Obstacle(levelWidth / 2 + blockWidth * 3, levelHeight / 2 - blockHeight * 2, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 + blockWidth * 3, levelHeight / 2 - blockHeight * 2, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Tree(new Obstacle(levelWidth / 2 - blockWidth * 3, levelHeight / 2 + blockHeight * 3, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 - blockWidth * 3, levelHeight / 2 + blockHeight * 3, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Tree(new Obstacle(levelWidth / 2 - blockWidth * 2, levelHeight / 2 + blockHeight * 3, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 - blockWidth * 2, levelHeight / 2 + blockHeight * 3, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Tree(new Obstacle(levelWidth / 2 - blockWidth * 3, levelHeight / 2 + blockHeight * 2, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 - blockWidth * 3, levelHeight / 2 + blockHeight * 2, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Tree(new Obstacle(levelWidth / 2 + blockWidth * 3, levelHeight / 2 + blockHeight * 3, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 + blockWidth * 3, levelHeight / 2 + blockHeight * 3, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Tree(new Obstacle(levelWidth / 2 + blockWidth * 2, levelHeight / 2 + blockHeight * 3, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 + blockWidth * 2, levelHeight / 2 + blockHeight * 3, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Tree(new Obstacle(levelWidth / 2 + blockWidth * 3, levelHeight / 2 + blockHeight * 2, blockWidth, blockHeight));
+            obj = new OutlineObstacle(new Tree(new Obstacle(levelWidth / 2 + blockWidth * 3, levelHeight / 2 + blockHeight * 2, blockWidth, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
             // Side obstacles
-            obj = new Water(new Obstacle(levelWidth / 2, blockHeight / 2 + blockHeight * 3, blockWidth, blockHeight * 3));
+            obj = new OutlineObstacle(new Water(new Obstacle(levelWidth / 2, blockHeight / 2 + blockHeight * 3, blockWidth, blockHeight * 3)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Water(new Obstacle(levelWidth / 2, levelHeight - blockHeight / 2 - blockHeight * 3, blockWidth, blockHeight * 3));
+            obj = new OutlineObstacle(new Water(new Obstacle(levelWidth / 2, levelHeight - blockHeight / 2 - blockHeight * 3, blockWidth, blockHeight * 3)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Water(new Obstacle(blockWidth / 2 + blockWidth * 3, levelHeight / 2, blockWidth * 3, blockHeight));
+            obj = new OutlineObstacle(new Water(new Obstacle(blockWidth / 2 + blockWidth * 3, levelHeight / 2, blockWidth * 3, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Water(new Obstacle(levelWidth - blockWidth / 2 - blockWidth * 3, levelHeight / 2, blockWidth * 3, blockHeight));
+            obj = new OutlineObstacle(new Water(new Obstacle(levelWidth - blockWidth / 2 - blockWidth * 3, levelHeight / 2, blockWidth * 3, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
             // Corner obstacles
-            obj = new Wall(new Obstacle(levelWidth / 2 - blockWidth * 8, levelHeight / 2 - blockHeight * 9.5f, blockWidth, blockHeight * 2));
+            obj = new OutlineObstacle(new Wall(new Obstacle(levelWidth / 2 - blockWidth * 8, levelHeight / 2 - blockHeight * 9.5f, blockWidth, blockHeight * 2)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Wall(new Obstacle(levelWidth / 2 - blockWidth * 9, levelHeight / 2 - blockHeight * 8, blockWidth * 3, blockHeight));
+            obj = new OutlineObstacle(new Wall(new Obstacle(levelWidth / 2 - blockWidth * 9, levelHeight / 2 - blockHeight * 8, blockWidth * 3, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Wall(new Obstacle(levelWidth / 2 + blockWidth * 8, levelHeight / 2 - blockHeight * 9.5f, blockWidth, blockHeight * 2));
+            obj = new OutlineObstacle(new Wall(new Obstacle(levelWidth / 2 + blockWidth * 8, levelHeight / 2 - blockHeight * 9.5f, blockWidth, blockHeight * 2)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Wall(new Obstacle(levelWidth / 2 + blockWidth * 9, levelHeight / 2 - blockHeight * 8, blockWidth * 3, blockHeight));
+            obj = new OutlineObstacle(new Wall(new Obstacle(levelWidth / 2 + blockWidth * 9, levelHeight / 2 - blockHeight * 8, blockWidth * 3, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Wall(new Obstacle(levelWidth / 2 - blockWidth * 8, levelHeight / 2 + blockHeight * 9.5f, blockWidth, blockHeight * 2));
+            obj = new OutlineObstacle(new Wall(new Obstacle(levelWidth / 2 - blockWidth * 8, levelHeight / 2 + blockHeight * 9.5f, blockWidth, blockHeight * 2)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Wall(new Obstacle(levelWidth / 2 - blockWidth * 9, levelHeight / 2 + blockHeight * 8, blockWidth * 3, blockHeight));
+            obj = new OutlineObstacle(new Wall(new Obstacle(levelWidth / 2 - blockWidth * 9, levelHeight / 2 + blockHeight * 8, blockWidth * 3, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Wall(new Obstacle(levelWidth / 2 + blockWidth * 8, levelHeight / 2 + blockHeight * 9.5f, blockWidth, blockHeight * 2));
+            obj = new OutlineObstacle(new Wall(new Obstacle(levelWidth / 2 + blockWidth * 8, levelHeight / 2 + blockHeight * 9.5f, blockWidth, blockHeight * 2)));
             obj.Decorate();
             stuff.Add(obj);
 
-            obj = new Wall(new Obstacle(levelWidth / 2 + blockWidth * 9, levelHeight / 2 + blockHeight * 8, blockWidth * 3, blockHeight));
+            obj = new OutlineObstacle(new Wall(new Obstacle(levelWidth / 2 + blockWidth * 9, levelHeight / 2 + blockHeight * 8, blockWidth * 3, blockHeight)));
             obj.Decorate();
             stuff.Add(obj);
         }

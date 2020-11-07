@@ -137,6 +137,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Adapter\AdapterContainer.cs" />
+    <Compile Include="Assets\Adapter\IAdapter.cs" />
+    <Compile Include="Assets\Adapter\ObstacleAdapter.cs" />
     <Compile Include="Assets\Player\PlayerSpawner.cs" />
     <Compile Include="Assets\Physics.cs" />
     <Compile Include="Assets\Controller\Commands\StopLookingCommand.cs" />
@@ -227,6 +230,7 @@
     <Compile Include="OptionsForm.Designer.cs">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Assets\Levels\Obstacles\OutlineObstacle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GameForm.resx">

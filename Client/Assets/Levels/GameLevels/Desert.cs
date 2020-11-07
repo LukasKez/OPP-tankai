@@ -11,21 +11,21 @@ namespace Client
 
             // Horizontal borders
 
-            GameObject gameObject = new Water(new Obstacle(levelWidth / 2, blockHeight / 2, levelWidth, blockHeight));
+            GameObject gameObject = new OutlineObstacle(new Water(new Obstacle(levelWidth / 2, blockHeight / 2, levelWidth, blockHeight)));
             gameObject.Decorate();
             stuff.Add(gameObject);
 
-            gameObject = new Water(new Obstacle(levelWidth / 2, levelHeight - blockHeight + blockHeight / 2, levelWidth, blockHeight));
+            gameObject = new OutlineObstacle(new Water(new Obstacle(levelWidth / 2, levelHeight - blockHeight + blockHeight / 2, levelWidth, blockHeight)));
             gameObject.Decorate();
             stuff.Add(gameObject);
 
             // Vertical borders
 
-            gameObject = new Water(new Obstacle(blockWidth / 2, levelHeight / 2, blockWidth, levelHeight));
+            gameObject = new OutlineObstacle(new Water(new Obstacle(blockWidth / 2, levelHeight / 2, blockWidth, levelHeight)));
             gameObject.Decorate();
             stuff.Add(gameObject);
 
-            gameObject = new Water(new Obstacle(levelWidth - blockWidth + blockWidth / 2, levelHeight / 2, blockWidth, levelHeight));
+            gameObject = new OutlineObstacle(new Water(new Obstacle(levelWidth - blockWidth + blockWidth / 2, levelHeight / 2, blockWidth, levelHeight)));
             gameObject.Decorate();
             stuff.Add(gameObject);
         }

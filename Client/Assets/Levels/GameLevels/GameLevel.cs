@@ -63,7 +63,8 @@ namespace Client
                 {
                     if (seed == 0)
                     {
-                        GameObject gameObject = new DamageObstacle(new Boulder(new Obstacle((z + seed) * blockWidth, k * blockHeight, blockWidth, blockHeight)));
+                        GameObject gameObject = new OutlineObstacle(new DamageObstacle(new Boulder
+                            (new Obstacle((z + seed) * blockWidth, k * blockHeight, blockWidth, blockHeight))));
                         gameObject.Decorate();
                         stuff.Add(gameObject);
                         seed++;
@@ -71,7 +72,8 @@ namespace Client
                     else if (seed == 1)
                     {
 
-                        GameObject gameObject = new Water(new Obstacle(z * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        GameObject gameObject = new OutlineObstacle(new DamageObstacle(new Water(
+                            new Obstacle(z * blockWidth, k * blockHeight, blockWidth, blockHeight))));
                         gameObject.Decorate();
                         stuff.Add(gameObject);
                         seed++;
@@ -79,14 +81,16 @@ namespace Client
                     else if (seed == 2)
                     {
 
-                        GameObject gameObject = new Tree(new Obstacle((z - seed) * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        GameObject gameObject = new OutlineObstacle(new DamageObstacle(new Tree(
+                            new Obstacle((z - seed) * blockWidth, k * blockHeight, blockWidth, blockHeight))));
                         gameObject.Decorate();
                         stuff.Add(gameObject);
                         seed++;
                     }
                     else if (seed == 3)
                     {
-                        GameObject gameObject = new Wall(new Obstacle(z * blockWidth, k * blockHeight, blockWidth, blockHeight));
+                        GameObject gameObject = new OutlineObstacle(new DamageObstacle(new Wall(
+                            new Obstacle(z * blockWidth, k * blockHeight, blockWidth, blockHeight))));
                         gameObject.Decorate();
                         stuff.Add(gameObject);
                         seed++;

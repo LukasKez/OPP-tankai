@@ -1,10 +1,11 @@
 ﻿using System.Drawing;
-
+using System.Windows.Forms;
 namespace Client
 {
-    class Wall : ObstacleDecorator
+    class OutlineObstacle: ObstacleDecorator
     {
-        public Wall(GameObject decoredObject)
+
+        public OutlineObstacle(GameObject decoredObject)
             : base(decoredObject)
         {
         }
@@ -13,13 +14,13 @@ namespace Client
             base.Decorate();
             adapter.SetFields(this);
 
-            MakeWall();
+            MakeOutline();
         }
-        private void MakeWall()
+        private void MakeOutline()
         {
-            shape = Shape.Rectangle;
-            brush = Brushes.DarkGray;
+            outlineBrush = Brushes.Black;
         }
+
 
 
     }

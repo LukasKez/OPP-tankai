@@ -15,22 +15,22 @@ namespace Client
         {
             for (float x = blockWidth / 2; x < levelWidth; x += blockWidth)
             {
-                GameObject gameObject = new Boulder(new Obstacle(x, blockHeight / 2, blockWidth, blockHeight));
+                GameObject gameObject = new OutlineObstacle(new Boulder(new Obstacle(x, blockHeight / 2, blockWidth, blockHeight)));
                 gameObject.Decorate();
                 stuff.Add(gameObject);
 
-                gameObject = new Boulder(new Obstacle(x, levelHeight - blockHeight / 2, blockWidth, blockHeight));
+                gameObject = new OutlineObstacle(new Boulder(new Obstacle(x, levelHeight - blockHeight / 2, blockWidth, blockHeight)));
                 gameObject.Decorate();
                 stuff.Add(gameObject);
             }
 
             for (float y = blockHeight + blockHeight / 2; y < levelHeight - blockHeight; y += blockHeight)
             {
-                GameObject gameObject = new Boulder(new Obstacle(blockWidth / 2, y, blockWidth, blockHeight));
+                GameObject gameObject = new OutlineObstacle(new Boulder(new Obstacle(blockWidth / 2, y, blockWidth, blockHeight)));
                 gameObject.Decorate();
                 stuff.Add(gameObject);
 
-                gameObject = new Boulder(new Obstacle(levelWidth - blockWidth / 2, y, blockWidth, blockHeight));
+                gameObject = new OutlineObstacle(new Boulder(new Obstacle(levelWidth - blockWidth / 2, y, blockWidth, blockHeight)));
                 gameObject.Decorate();
                 stuff.Add(gameObject);
             }

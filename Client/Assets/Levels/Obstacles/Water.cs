@@ -10,16 +10,9 @@ namespace Client
         }
         public override void Decorate()
         {
-            obstacle.Decorate();
-            collider = obstacle.collider;
-            isStatic = obstacle.isStatic;
-            isShadowCaster = obstacle.isShadowCaster;
-            damage = obstacle.damage;
-            shape = obstacle.shape;
-            brush = obstacle.brush;
+            base.Decorate();
+            adapter.SetFields(this);
 
-            transform = obstacle.transform;
-            GenerateAABB();
             MakeWater();
         }
         private void MakeWater()
