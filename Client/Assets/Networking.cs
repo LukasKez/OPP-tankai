@@ -7,6 +7,20 @@ using System.Threading.Tasks;
 
 namespace Client
 {
+    public struct PlayerStats
+    {
+        public string name { get; set; }
+        public bool isReady { get; set; }
+    }
+
+    public struct ProjectileStats
+    {
+        public float damage { get; set; }
+        public float speed { get; set; }
+        public int bounceCount { get; set; }
+        public float bounceAngle { get; set; }
+    }
+
     static class Networking
     {
         public static string scheme = "http://";
@@ -52,12 +66,17 @@ namespace Client
                 }
             });
 
-            connection.On<string>("OnNewConnection", (connectionId) =>
+            connection.On<string, PlayerStats>("OnNewConnection", (connectionId, stats) =>
             {
                 if (connectionId == connection.ConnectionId)
                     return;
 
-                RemotePlayer player = new RemotePlayer();
+                RemotePlayer player = new RemotePlayer()
+                {
+                    name = stats.name,
+                    isReady = stats.isReady,
+                };
+
                 if (remotePlayers.TryAdd(connectionId, player))
                 {
                     RemotePlayerChange(remotePlayers.Count - 1, player);
@@ -107,7 +126,7 @@ namespace Client
                 LevellTypeChange(levelType);
             });
 
-            connection.On<float, float, float>("OnCreateProjectile", (x, y, r) =>
+            connection.On<float, float, float, ProjectileStats>("OnCreateProjectile", (x, y, r, stats) =>
             {
                 Transform tr = new Transform()
                 {
@@ -115,13 +134,12 @@ namespace Client
                     rotation = r,
                 };
 
-                // TODO: Get stats from server
                 Projectile projectile = new Projectile(tr)
                 {
-                    damage = 120,
-                    speed = 600,
-                    bounceAngle = 45,
-                    bounceCount = 1,
+                    damage = stats.damage,
+                    speed = stats.speed,
+                    bounceAngle = stats.bounceAngle,
+                    bounceCount = stats.bounceCount,
                 };
 
                 projectile.SetPosition(tr);
@@ -242,7 +260,15 @@ namespace Client
             try
             {
                 Transform tr = projectile.transform;
-                await connection.InvokeAsync("CreateProjectile", tr.position.X, tr.position.Y, tr.rotation);
+                var stats = new ProjectileStats()
+                {
+                    damage = projectile.damage,
+                    speed = projectile.speed,
+                    bounceAngle = projectile.bounceAngle,
+                    bounceCount = projectile.bounceCount,
+                };
+
+                await connection.InvokeAsync("CreateProjectile", tr.position.X, tr.position.Y, tr.rotation, stats);
             }
             catch (Exception e)
             {

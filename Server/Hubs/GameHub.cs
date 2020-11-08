@@ -9,10 +9,18 @@ namespace Server.Hubs
 {
     public static class GameHandler
     {
-        public class PlayerStats
+        public struct PlayerStats
         {
-            public string name;
-            public bool isReady;
+            public string name { get; set; }
+            public bool isReady { get; set; }
+        }
+
+        public struct ProjectileStats
+        {
+            public float damage { get; set; }
+            public float speed { get; set; }
+            public int bounceCount { get; set; }
+            public float bounceAngle { get; set; }
         }
 
         public static ConcurrentDictionary<string, PlayerStats> players =
@@ -34,17 +42,16 @@ namespace Server.Hubs
 
             foreach (var player in GameHandler.players)
             {
-                await Clients.Caller.SendAsync("OnNewConnection", player.Key);
-                await Clients.Caller.SendAsync("OnSetName", player.Key, player.Value.name);
-                await Clients.Caller.SendAsync("OnSetReady", player.Key, player.Value.isReady);
+                await Clients.Caller.SendAsync("OnNewConnection", player.Key, player.Value);
             }
 
             if (!GameHandler.isGameStarted)
                 await Clients.Caller.SendAsync("OnSetLevelType", GameHandler.levelType);
 
-            GameHandler.players.TryAdd(Context.ConnectionId, new GameHandler.PlayerStats());
+            GameHandler.PlayerStats stats = new GameHandler.PlayerStats();
+            GameHandler.players.TryAdd(Context.ConnectionId, stats);
 
-            await Clients.Others.SendAsync("OnNewConnection", Context.ConnectionId);
+            await Clients.Others.SendAsync("OnNewConnection", Context.ConnectionId, stats);
             await base.OnConnectedAsync();
         }
 
@@ -65,14 +72,18 @@ namespace Server.Hubs
 
         public async Task SetName(string name)
         {
-            GameHandler.players[Context.ConnectionId].name = name;
+            var stats = GameHandler.players[Context.ConnectionId];
+            stats.name = name;
+            GameHandler.players[Context.ConnectionId] = stats;
 
             await Clients.Others.SendAsync("OnSetName", Context.ConnectionId, name);
         }
 
         public async Task SetIsReady(bool isReady)
         {
-            GameHandler.players[Context.ConnectionId].isReady = isReady;
+            var stats = GameHandler.players[Context.ConnectionId];
+            stats.isReady = isReady;
+            GameHandler.players[Context.ConnectionId] = stats;
 
             await Clients.Others.SendAsync("OnSetIsReady", Context.ConnectionId, isReady);
 
@@ -99,9 +110,9 @@ namespace Server.Hubs
             await Clients.Others.SendAsync("OnSetLevelType", levelType);
         }
 
-        public async Task CreateProjectile(float x, float y, float r)
+        public async Task CreateProjectile(float x, float y, float r, GameHandler.ProjectileStats stats)
         {
-            await Clients.Others.SendAsync("OnCreateProjectile", x, y, r);
+            await Clients.Others.SendAsync("OnCreateProjectile", x, y, r, stats);
         }
 
         public async Task SendPositionUpdate(float x, float y, float r1, float r2)
