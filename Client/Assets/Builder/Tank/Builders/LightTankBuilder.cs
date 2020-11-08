@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Client
 {
-    class TankBuilder : ITankBuilder
+    class LightTankBuilder : ITankBuilder
     {
         private Tank tank;
         private Suspension suspension;
@@ -13,8 +13,8 @@ namespace Client
 
         public ITankBuilder AddHull(float x, float y)
         {
-            Transform tr = new Transform(x, y, 20, 22);
-            tank = new Tank(tr, Brushes.Red);
+            Transform tr = new Transform(x, y, 18, 20);
+            tank = new Tank(tr, Brushes.Orange);
             return this;
         }
 
@@ -29,9 +29,9 @@ namespace Client
             Vector2 size = tank.transform.size;
             suspension = new Suspension(size)
             {
-                movementSpeedModifier = 1,
-                rotationSpeedModifier = 1,
-                loadLimit = 30
+                movementSpeedModifier = 1.5f,
+                rotationSpeedModifier = 1.5f,
+                loadLimit = 20
             };
 
             tank.suspension = suspension;
@@ -40,10 +40,10 @@ namespace Client
 
         public ITankBuilder AddTurret()
         {
-            turret = new Turret()
+            turret = new Turret(new Vector2(17, 17))
             {
-                rotationSpeed = 60,
-                hitPoints = 800,
+                rotationSpeed = 80,
+                hitPoints = 500,
                 reactionTime = 0.2f
             };
 
@@ -55,16 +55,16 @@ namespace Client
         {
             Projectile projectile = new Projectile()
             {
-                damage = 120,
+                damage = 110,
                 speed = 600,
-                bounceAngle = 45,
+                bounceAngle = 50,
                 bounceCount = 1,
             };
 
-            gun = new Gun(20)
+            gun = new Gun(18)
             {
                 shell = projectile,
-                reloadTime = 3,
+                reloadTime = 1.5f,
                 aimingRate = 10,
                 rotationAngle = 0,
                 minSpreadAngle = 7,

@@ -7,7 +7,7 @@ namespace Client
     {
         protected PlayerSpawner spawnPoint;
         protected Tank controllable;
-        private TankBuilder builder;
+        private ITankBuilder builder;
 
         public Player() : this(null)
         {
@@ -18,7 +18,7 @@ namespace Client
             this.spawnPoint = spawnPoint ?? new PlayerSpawner(50, 50);
 
             isShadowCaster = true;
-            builder = new TankBuilder();
+            builder = new HeavyTankBuilder();
             TankDirector director = new TankDirector(builder);
 
             Transform tr = this.spawnPoint.transform;

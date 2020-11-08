@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Numerics;
 using System.Threading.Tasks;
 
 namespace Client
@@ -14,7 +15,7 @@ namespace Client
 
         public Gun gun { get; set; }
 
-        public Turret() : base(new Transform(0, 0, 19, 19))
+        public Turret(Vector2 size) : base(new Transform(0, 0, size.X, size.Y))
         {
             shape = Shape.Ellipse;
             isShadowCaster = true;
