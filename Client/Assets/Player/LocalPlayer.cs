@@ -21,13 +21,20 @@ namespace Client
             tankController = new Controller(controllable);
 
             GameState.Instance.OnMouseClicked += OnMouseClicked;
+            controllable.OnProjectileHit += OnProjectileHit;
+        }
+
+        ~LocalPlayer()
+        {
+            GameState.Instance.OnMouseClicked -= OnMouseClicked;
+            controllable.OnProjectileHit -= OnProjectileHit;
         }
 
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
 
-            if (GameState.Instance.focused)
+            if (GameState.Instance.focused && GameState.Instance.State != ClientState.Died)
             {
                 UpdatePosition();
                 UpdateLooking();
@@ -83,10 +90,20 @@ namespace Client
 
         public void OnMouseClicked(MouseButtons button)
         {
+            if (GameState.Instance.State == ClientState.Died)
+                return;
+
             if (button == MouseButtons.Left)
             {
                 tankController.Action();
             }
+        }
+
+        private void OnProjectileHit(Projectile projectile)
+        {
+            controllable.TakeDamage(projectile.damage);
+
+            // TODO: Send update to the server
         }
 
         public override void Render(PaintEventArgs e)

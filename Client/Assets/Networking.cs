@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
+using System.Numerics;
 using System.Threading.Tasks;
 
 namespace Client
@@ -104,6 +105,27 @@ namespace Client
             connection.On<LevelType>("OnSetLevelType", (levelType) =>
             {
                 LevellTypeChange(levelType);
+            });
+
+            connection.On<float, float, float>("OnCreateProjectile", (x, y, r) =>
+            {
+                Transform tr = new Transform()
+                {
+                    position = new Vector2(x, y),
+                    rotation = r,
+                };
+
+                // TODO: Get stats from server
+                Projectile projectile = new Projectile(tr)
+                {
+                    damage = 120,
+                    speed = 600,
+                    bounceAngle = 45,
+                    bounceCount = 1,
+                };
+
+                projectile.SetPosition(tr);
+                GameObject.Instantiate(projectile);
             });
 
             connection.On<string, float, float, float, float>("OnPositionUpdate", (connectionId, x, y, r1, r2) =>
@@ -209,6 +231,22 @@ namespace Client
             catch (Exception e)
             {
                 Debug.WriteLine("Error setting level type: " + e.Message);
+            }
+        }
+
+        public static async void CreateProjectile(Projectile projectile)
+        {
+            if (!IsConnected())
+                return;
+
+            try
+            {
+                Transform tr = projectile.transform;
+                await connection.InvokeAsync("CreateProjectile", tr.position.X, tr.position.Y, tr.rotation);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error sending projectile update: " + e.Message);
             }
         }
 

@@ -218,6 +218,7 @@
     <Compile Include="Assets\Tank\Modules\Track.cs" />
     <Compile Include="Assets\Tank\Modules\Turret.cs" />
     <Compile Include="Assets\Tank\Modules\Suspension.cs" />
+    <Compile Include="Assets\Tank\Projectile\Projectile.cs" />
     <Compile Include="Assets\Tank\Tank.cs" />
     <Compile Include="Assets\Transform.cs" />
     <Compile Include="Assets\Utils.cs" />

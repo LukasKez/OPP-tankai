@@ -183,8 +183,8 @@ namespace Client
             this.Deactivate += new System.EventHandler(this.GameForm_Deactivate);
             this.Load += new System.EventHandler(this.GameForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.GameForm_Paint);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseClick);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.GameForm_MouseUp);
             this.MenuPanel.ResumeLayout(false);
             this.MenuPanel.PerformLayout();
             this.PlayerListPanel.ResumeLayout(false);

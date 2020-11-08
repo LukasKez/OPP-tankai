@@ -32,7 +32,7 @@ namespace Client
 
         public static void Manage(PaintEventArgs e)
         {
-            if (GameState.Instance.State != ClientState.Playing)
+            if (GameState.Instance.State < ClientState.Playing)
             {
                 return;
             }

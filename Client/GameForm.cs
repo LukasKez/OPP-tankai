@@ -54,7 +54,7 @@ namespace Client
             GameState.Instance.mouseLocation = new Vector2(e.Location.X, e.Location.Y);
         }
 
-        private void GameForm_MouseClick(object sender, MouseEventArgs e)
+        private void GameForm_MouseUp(object sender, MouseEventArgs e)
         {
             GameState.Instance.MouseClicked(e.Button);
         }

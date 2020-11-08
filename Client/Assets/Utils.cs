@@ -37,6 +37,11 @@ namespace Client
             return degrees * Math.PI / 180;
         }
 
+        public static double Rad2deg(float radians)
+        {
+            return radians * 180 / Math.PI;
+        }
+
         public static Vector2 Rotate(this Vector2 vec, float angle)
         {
             Vector2 newVec;
@@ -81,9 +86,42 @@ namespace Client
                 current.Y + toVector_y / dist * maxDistanceDelta);
         }
 
+        public static Vector2 Reflect(this Vector2 inDirection, Vector2 inNormal)
+        {
+            float factor = -2F * Vector2.Dot(inNormal, inDirection);
+            return new Vector2(factor * inNormal.X + inDirection.X, factor * inNormal.Y + inDirection.Y);
+        }
+
+        private const float kEpsilonNormalSqrt = 1e-15f;
+        public static float Angle(this Vector2 from, Vector2 to)
+        {
+            // sqrt(a) * sqrt(b) = sqrt(a * b) -- valid for real numbers
+            float denominator = (float)Math.Sqrt(from.LengthSquared() * to.LengthSquared());
+            if (denominator < kEpsilonNormalSqrt)
+                return 0F;
+
+            float dot = Clamp(Vector2.Dot(from, to) / denominator, -1F, 1F);
+            return (float)Rad2deg((float)Math.Acos(dot));
+        }
+
+        public static float SignedAngle(this Vector2 from, Vector2 to)
+        {
+            float unsigned_angle = Angle(from, to);
+            float sign = Math.Sign(from.X * to.Y - from.Y * to.X);
+            return unsigned_angle * sign;
+        }
+
         public static Vector2 Substract(this Vector2 left, float right)
         {
             return new Vector2(left.X - right, left.Y - right);
+        }
+
+        public static double NextGaussian(this Random r, double mean = 0, double stdDev = 1)
+        {
+            double u1 = 1.0 - r.NextDouble();
+            double u2 = 1.0 - r.NextDouble();
+            double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+            return mean + stdDev * randStdNormal;
         }
     }
 }
