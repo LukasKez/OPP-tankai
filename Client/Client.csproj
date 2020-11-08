@@ -140,14 +140,14 @@
     <Compile Include="Assets\Adapter\AdapterContainer.cs" />
     <Compile Include="Assets\Adapter\IAdapter.cs" />
     <Compile Include="Assets\Adapter\ObstacleAdapter.cs" />
+    <Compile Include="Assets\Player\BotStrategies\MoveBackwards.cs" />
+    <Compile Include="Assets\Player\BotStrategies\TurnLeft.cs" />
     <Compile Include="Assets\Player\PlayerSpawner.cs" />
     <Compile Include="Assets\Physics.cs" />
     <Compile Include="Assets\Controller\Commands\StopLookingCommand.cs" />
     <Compile Include="Assets\Player\BotStrategies\StrategyInterface.cs" />
-    <Compile Include="Assets\Player\BotStrategies\Explode.cs" />
-    <Compile Include="Assets\Player\BotStrategies\Shoot.cs" />
-    <Compile Include="Assets\Player\BotStrategies\Turn.cs" />
-    <Compile Include="Assets\Player\BotStrategies\Move.cs" />
+    <Compile Include="Assets\Player\BotStrategies\TurnRight.cs" />
+    <Compile Include="Assets\Player\BotStrategies\MoveForward.cs" />
     <Compile Include="Assets\Builders\IObstacleBuilder.cs" />
     <Compile Include="Assets\Builders\Tank\TankDirector.cs" />
     <Compile Include="Assets\Builders\Tank\ITankBuilder.cs" />
@@ -192,6 +192,7 @@
     <Compile Include="Assets\PowerUp\AbstractPowerUpFactory\DefenseFactory.cs" />
     <Compile Include="Assets\PowerUp\AbstractPowerUpFactory\HealthFactory.cs" />
     <Compile Include="Assets\PowerUp\AbstractPowerUpFactory\SpeedFactory.cs" />
+    <Compile Include="Assets\PowerUp\FixedSpawn.cs" />
     <Compile Include="Assets\PowerUp\PermanentPowerUp\PermanentAttack.cs" />
     <Compile Include="Assets\PowerUp\PermanentPowerUp\PermanentDefense.cs" />
     <Compile Include="Assets\PowerUp\PermanentPowerUp\PermanentHealth.cs" />
@@ -199,6 +200,9 @@
     <Compile Include="Assets\PowerUp\PermanentPowerUp\PermanentSpeed.cs" />
     <Compile Include="Assets\PowerUp\PowerUp.cs" />
     <Compile Include="Assets\PowerUp\PowerUpSpawner.cs" />
+    <Compile Include="Assets\PowerUp\RandomSpawn.cs" />
+    <Compile Include="Assets\PowerUp\Spawner.cs" />
+    <Compile Include="Assets\PowerUp\SpawnImplementor.cs" />
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryAttack.cs" />
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryDefense.cs" />
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryHealth.cs" />

@@ -1,33 +1,30 @@
 ﻿using Client;
 using System;
 using System.Drawing;
-using System.Numerics;
 
 namespace PowerUp
 {
-    class PowerUpSpawner : GameObject
+    class PowerUpSpawner : Spawner
     {
-        private PowerUpBase powerUp;
         private float waitDuration = 5f;
         private float waitTime;
-        Random rnd;
 
-        public PowerUpSpawner(float x, float y, float w, float h) : base(new Transform(x, y, w, h))
+        public PowerUpSpawner(float x, float y, float w, float h, SpawnImplementor imp) : base(x, y, w, h, imp)
         {
             shape = Shape.Ellipse;
             collider = ColliderType.Trigger;
             outlinePen = new Pen(Brushes.Orange, 2);
             waitTime = waitDuration;
-            rnd = new Random(GameState.Instance.RandomSeed ^ (int)x ^ (int)y << 8);
         }
 
         public override void Update(float deltaTime)
         {
-            if (powerUp == null)
+            if (spawnedObj == null)
             {
                 if (waitTime <= 0)
                 {
-                    Spawn();
+                    // Use SpawnImplementor Spawn() method
+                    spawnedObj = imp.Spawn(this);
                     waitTime = waitDuration;
                 }
                 else
@@ -37,55 +34,17 @@ namespace PowerUp
             }
             else
             {
-                powerUp.Update(deltaTime);
+                spawnedObj.Update(deltaTime);
             }
-        }
-
-        private void Spawn()
-        {
-            AbstractPowerUpFactory powerUpFactory;
-
-            int type = rnd.Next(4);
-
-            switch (type)
-            {
-                case 0:
-                    powerUpFactory = new AttackFactory();
-                    break;
-                case 1:
-                    powerUpFactory = new DefenseFactory();
-                    break;
-                case 2:
-                    powerUpFactory = new HealthFactory();
-                    break;
-                case 3:
-                    powerUpFactory = new SpeedFactory();
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
-            int percent = rnd.Next(100);
-            Vector2 size = transform.size * new Vector2(0.7f, 0.8f);
-
-            if (percent < 80)
-            {
-                powerUp = powerUpFactory.CreateTemporaryPowerUp(0, 0, size.X, size.Y);
-            }
-            else
-            {
-                powerUp = powerUpFactory.CreatePermanentPowerUp(0, 0, size.X, size.Y);
-            }
-            Instantiate(powerUp, this);
         }
 
         public PowerUpBase GiveAway()
         {
-            if (powerUp == null) return null;
+            if (spawnedObj == null) return null;
 
-            PowerUpBase powerUpToGive = powerUp;
-            powerUp.Destroy();
-            powerUp = null;
+            PowerUpBase powerUpToGive = spawnedObj as PowerUpBase;
+            spawnedObj.Destroy();
+            spawnedObj = null;
 
             return powerUpToGive;
         }

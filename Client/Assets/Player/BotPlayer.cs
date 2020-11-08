@@ -34,25 +34,27 @@ namespace Client
             float speed = controllable.speed;
             Transform tr = controllable.transform;
 
-            /*// Example of strategy call
-            action = new Move();
-            action.DoAction();
-
-            action = new Turn();
-            action.DoAction();
-            */
-
             elapsedTime += deltaTime;
 
-            // Test bot move
-            action = new Move();
-            action.DoAction(ref vertical, speed, deltaTime);
-
-            if (elapsedTime >= 2f)
+            // Test strategy pattern
+            if (elapsedTime < 3f) {
+                action = new MoveForward();
+                action.DoAction(tr, ref vertical, speed, deltaTime);
+            } else if (elapsedTime >= 3f && elapsedTime < 4.8f) 
             {
-                action.DoAction(ref vertical, -speed, deltaTime);
-                if (elapsedTime >= 4f)
-                    elapsedTime = 0f;
+                action = new TurnRight();
+                action.DoAction(tr, ref vertical, speed, deltaTime);
+            } else if (elapsedTime >= 4.8f && elapsedTime < 6.6f)
+            {
+                action = new TurnLeft();
+                action.DoAction(tr, ref vertical, speed, deltaTime);
+            } else if (elapsedTime >= 6.6f && elapsedTime < 9.6f)
+            {
+                action = new MoveBackwards();
+                action.DoAction(tr, ref vertical, speed, deltaTime);
+            } else if (elapsedTime >= 9.6f)
+            {
+                elapsedTime = 0;
             }
 
             tr.position += Utils.Rotate(vertical, tr.rotation);

@@ -31,7 +31,7 @@ namespace Client
             stuff.Add(gameObject);
 
             // Add PowerUp spawners
-            stuff.Add(new PowerUpSpawner(levelWidth / 2, levelHeight / 2, blockWidth, blockHeight));
+            stuff.Add(new PowerUpSpawner(levelWidth / 2, levelHeight / 2, blockWidth, blockHeight, new FixedSpawn()));
 
             // Add Player spawners
             stuff.Add(new PlayerSpawner(blockWidth * 4, blockHeight * 4, 135));

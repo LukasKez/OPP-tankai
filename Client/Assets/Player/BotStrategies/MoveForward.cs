@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    class Move : StrategyInterface
+    class MoveForward : StrategyInterface
     {
-        public void DoAction(ref Vector2 vertical, float speed, float deltaTime)
+        public void DoAction(Transform tr, ref Vector2 vertical, float speed, float deltaTime)
         {
-            // Move backwards
-            vertical.Y = speed * deltaTime;
+            vertical.Y = -speed * deltaTime;
         }
     }
 }

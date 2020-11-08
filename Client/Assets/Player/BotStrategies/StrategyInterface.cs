@@ -9,6 +9,6 @@ namespace Client
 {
     interface StrategyInterface
     {
-        void DoAction(ref Vector2 vertical, float speed, float deltaTime);
+        void DoAction(Transform tr, ref Vector2 vertical, float speed, float deltaTime);
     }
 }
