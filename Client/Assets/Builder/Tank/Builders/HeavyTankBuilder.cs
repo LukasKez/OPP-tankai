@@ -55,7 +55,7 @@ namespace Client
         {
             Projectile projectile = new Projectile()
             {
-                damage = 120,
+                damage = 20,
                 speed = 600,
                 bounceAngle = 45,
                 bounceCount = 1,

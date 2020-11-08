@@ -14,7 +14,7 @@ namespace PowerUp
 
 		public override void Use(Tank tank)
 		{
-			tank.defense += 10f;
+			tank.defense += 2f;
 		}
 	}
 	

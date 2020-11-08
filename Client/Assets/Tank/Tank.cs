@@ -9,7 +9,7 @@ namespace Client
     public class Tank : GameObject, IControllable
     {
         [Obsolete()] public float attack = 1;     // TODO: Delete
-        [Obsolete()] public float defense = 100;  // TODO: Delete
+        [Obsolete()] public float defense = 5;  // TODO: Delete
         [Obsolete()] public float health = 100;   // TODO: Delete
         [Obsolete()] public float speed = 50;    // TODO: Delete
 
