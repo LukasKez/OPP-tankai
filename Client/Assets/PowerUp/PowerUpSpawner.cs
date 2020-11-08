@@ -23,7 +23,8 @@ namespace PowerUp
             {
                 if (waitTime <= 0)
                 {
-                    Spawn(spawnedObj);
+                    // Use SpawnImplementor Spawn() method
+                    spawnedObj = imp.Spawn(this);
                     waitTime = waitDuration;
                 }
                 else
@@ -35,12 +36,6 @@ namespace PowerUp
             {
                 spawnedObj.Update(deltaTime);
             }
-        }
-
-        public override void Spawn(GameObject gameObject)
-        {
-            Console.WriteLine("Extended abstract spawner Spawn() method");
-            base.Spawn(gameObject);
         }
 
         public PowerUpBase GiveAway()

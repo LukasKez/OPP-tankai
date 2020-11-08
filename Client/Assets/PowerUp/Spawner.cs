@@ -16,10 +16,5 @@ namespace Client
         }
 
         public abstract override void Update(float deltaTime);
-
-        public virtual void Spawn(GameObject gameObject)
-        {
-            spawnedObj = imp.Spawn(this);
-        }
     }
 }
