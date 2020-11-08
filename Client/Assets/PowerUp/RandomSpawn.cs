@@ -8,15 +8,10 @@ namespace Client
     class RandomSpawn : SpawnImplementor
     {
         private PowerUpBase powerUp;
-        //private float waitDuration = 5f;
-        //private float waitTime;
         private readonly Random rnd = new Random();
-        
 
         public GameObject Spawn(GameObject spawner)
         {
-            //rnd = new Random(GameState.Instance.RandomSeed ^ (int)x ^ (int)y << 8);
-            //Console.WriteLine(GameState.Instance.RandomSeed ^ (int)x ^ (int)y << 8);
             AbstractPowerUpFactory powerUpFactory;
 
             int type = rnd.Next(4);

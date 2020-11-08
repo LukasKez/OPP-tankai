@@ -34,7 +34,7 @@ namespace Server
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    await context.Response.WriteAsync("<h1>Tank game server launched...</h1>");
                 });
                 endpoints.MapHub<GameHub>("/gamehub");
             });
