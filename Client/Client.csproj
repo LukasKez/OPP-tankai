@@ -140,7 +140,7 @@
     <Compile Include="Assets\Adapter\AdapterContainer.cs" />
     <Compile Include="Assets\Adapter\IAdapter.cs" />
     <Compile Include="Assets\Adapter\ObstacleAdapter.cs" />
-    <Compile Include="Assets\Builder\Tank\Builders\LightTankBuilder.cs" />
+    <Compile Include="Assets\Tank\Builder\Builders\LightTankBuilder.cs" />
     <Compile Include="Assets\Player\BotStrategies\MoveBackwards.cs" />
     <Compile Include="Assets\Player\BotStrategies\TurnLeft.cs" />
     <Compile Include="Assets\Player\PlayerSpawner.cs" />
@@ -150,10 +150,10 @@
     <Compile Include="Assets\Player\BotStrategies\TurnRight.cs" />
     <Compile Include="Assets\Player\BotStrategies\MoveForward.cs" />
     <Compile Include="Assets\Builder\IObstacleBuilder.cs" />
-    <Compile Include="Assets\Builder\Tank\TankDirector.cs" />
-    <Compile Include="Assets\Builder\Tank\Builders\ITankBuilder.cs" />
+    <Compile Include="Assets\Tank\Builder\TankDirector.cs" />
+    <Compile Include="Assets\Tank\Builder\Builders\ITankBuilder.cs" />
     <Compile Include="Assets\Builder\ObstacleBuilder.cs" />
-    <Compile Include="Assets\Builder\Tank\Builders\HeavyTankBuilder.cs" />
+    <Compile Include="Assets\Tank\Builder\Builders\HeavyTankBuilder.cs" />
     <Compile Include="Assets\Controller\Commands\ActionCommand.cs" />
     <Compile Include="Assets\Controller\Commands\LookLeftCommand.cs" />
     <Compile Include="Assets\Controller\Commands\LookRightCommand.cs" />

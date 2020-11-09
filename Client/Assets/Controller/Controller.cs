@@ -77,7 +77,7 @@ namespace Client
 
         public void Undo()
         {
-            lastCommand?.Execute();
+            lastCommand?.Undo();
             lastCommand = null;
         }
     }
