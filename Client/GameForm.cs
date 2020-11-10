@@ -69,8 +69,15 @@ namespace Client
 
         private void OptionsButton_Click(object sender, EventArgs e)
         {
-            OptionsForm popup = new OptionsForm();
-            popup.Show(this);
+            OptionsForm optionsForm = Application.OpenForms["OptionsForm"] as OptionsForm;
+            if (optionsForm != null)
+            {
+                optionsForm.Focus();
+                return;
+            }
+
+            optionsForm = new OptionsForm();
+            optionsForm.Show(this);
         }
 
         private void IpBox_TextChanged(object sender, EventArgs e)

@@ -82,7 +82,6 @@ namespace Client
                 if (remotePlayers.TryAdd(connectionId, player))
                 {
                     RemotePlayerChange(remotePlayers.Count - 1, player);
-                    GameObject.Instantiate(player);
                 }
             });
 

@@ -39,6 +39,7 @@ namespace Server.Hubs
             {
                 await Clients.Caller.SendAsync("DisconnectClient");
                 await base.OnConnectedAsync();
+                return;
             }
 
             foreach (var player in GameHandler.players)
