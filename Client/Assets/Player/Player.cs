@@ -7,6 +7,7 @@ namespace Client
     {
         protected PlayerSpawner spawnPoint;
         protected Tank controllable;
+        public TankType tankType;
         private ITankBuilder builder;
 
         public Player() : this(null)
@@ -15,21 +16,30 @@ namespace Client
 
         public Player(PlayerSpawner spawnPoint)
         {
-            this.spawnPoint = spawnPoint ?? new PlayerSpawner(50, 50);
-
+            this.spawnPoint = spawnPoint ?? new PlayerSpawner(GameState.Instance.mapSize.X / 2, GameState.Instance.mapSize.Y / 2);
             isShadowCaster = true;
-            builder = new HeavyTankBuilder();
-            TankDirector director = new TankDirector(builder);
-
-            Transform tr = this.spawnPoint.transform;
-            director.Construct(tr.position.X, tr.position.Y);
-            Spawn();
         }
 
         public void Spawn()
         {
+            switch (tankType)
+            {
+                case TankType.HeavyTank:
+                    builder = new HeavyTankBuilder();
+                    break;
+                case TankType.LightTank:
+                    builder = new LightTankBuilder();
+                    break;
+                default:
+                    builder = new HeavyTankBuilder();
+                    break;
+            }
+            TankDirector director = new TankDirector(builder);
+
+            Transform tr = spawnPoint.transform;
+            director.Construct(tr.position.X, tr.position.Y);
+
             controllable = builder.GetResult();
-            controllable.transform.position = spawnPoint.transform.position;
             controllable.transform.rotation = spawnPoint.transform.rotation;
         }
 

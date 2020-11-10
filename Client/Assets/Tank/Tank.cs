@@ -6,6 +6,12 @@ using PowerUp;
 
 namespace Client
 {
+    public enum TankType
+    {
+        HeavyTank,
+        LightTank,
+    }
+
     public class Tank : GameObject, IControllable
     {
         [Obsolete()] public float attack = 1;     // TODO: Delete

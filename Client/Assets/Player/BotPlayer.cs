@@ -17,6 +17,8 @@ namespace Client
 
         public BotPlayer()
         {
+            Spawn();
+
             controllable.transform.position = new Vector2(180, 200);
             controllable.brush = Brushes.Blue;
         }

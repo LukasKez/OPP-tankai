@@ -11,6 +11,7 @@ namespace Client
     {
         public string name { get; set; }
         public bool isReady { get; set; }
+        public TankType tankType { get; set; }
     }
 
     public struct ProjectileStats
@@ -75,6 +76,7 @@ namespace Client
                 {
                     name = stats.name,
                     isReady = stats.isReady,
+                    tankType = stats.tankType,
                 };
 
                 if (remotePlayers.TryAdd(connectionId, player))
@@ -121,6 +123,14 @@ namespace Client
                 }
             });
 
+            connection.On<string, TankType>("OnSetTankType", (connectionId, type) =>
+            {
+                if (remotePlayers.TryGetValue(connectionId, out RemotePlayer player))
+                {
+                    player.tankType = type;
+                }
+            });
+
             connection.On<LevelType>("OnSetLevelType", (levelType) =>
             {
                 LevellTypeChange(levelType);
@@ -163,6 +173,7 @@ namespace Client
             {
                 await connection.StartAsync();
                 SetNameAsync(Options.name);
+                SetTankTypeAsync(GameState.Instance.tankType);
 
                 GameState.Instance.State = ClientState.Connected;
                 Debug.WriteLine("Connection started");
@@ -237,7 +248,22 @@ namespace Client
             }
         }
 
-        public static async void SetLevelType(LevelType levelType)
+        public static async void SetTankTypeAsync(TankType type)
+        {
+            if (!IsConnected())
+                return;
+
+            try
+            {
+                await connection.InvokeAsync("SetTankType", type);
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("Error setting tank type: " + e.Message);
+            }
+        }
+
+        public static async void SetLevelTypeAsync(LevelType levelType)
         {
             if (!IsConnected())
                 return;
@@ -252,7 +278,7 @@ namespace Client
             }
         }
 
-        public static async void CreateProjectile(Projectile projectile)
+        public static async void CreateProjectileAsync(Projectile projectile)
         {
             if (!IsConnected())
                 return;

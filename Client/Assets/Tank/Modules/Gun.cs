@@ -54,7 +54,7 @@ namespace Client
                 tr.rotation += Utils.Clamp((float)rnd.NextGaussian(0, spreadAngle / 1.6f), -spreadAngle, spreadAngle);
                 projectile.SetPosition(tr);
 
-                Networking.CreateProjectile(projectile);
+                Networking.CreateProjectileAsync(projectile);
                 Instantiate(projectile);
 
                 spreadAngle = maxSpreadAngle;

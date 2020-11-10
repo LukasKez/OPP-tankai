@@ -20,6 +20,7 @@ namespace Client
         public Vector2 mapSize;
         public Vector2 mouseLocation;
         public GameLevel gameLevel;
+        public TankType tankType;
         public int RandomSeed;
 
         private ClientState state;

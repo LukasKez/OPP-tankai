@@ -13,6 +13,7 @@ namespace Server.Hubs
         {
             public string name { get; set; }
             public bool isReady { get; set; }
+            public int tankType { get; set; }
         }
 
         public struct ProjectileStats
@@ -98,6 +99,15 @@ namespace Server.Hubs
             {
                 await Clients.Client(player.Key).SendAsync("StartGame", startAt, GameHandler.levelType, i++);
             }
+        }
+
+        public async Task SetTankType(int type)
+        {
+            var stats = GameHandler.players[Context.ConnectionId];
+            stats.tankType = type;
+            GameHandler.players[Context.ConnectionId] = stats;
+
+            await Clients.Others.SendAsync("OnSetTankType", Context.ConnectionId, type);
         }
 
         public async Task SetLevelType(int levelType)

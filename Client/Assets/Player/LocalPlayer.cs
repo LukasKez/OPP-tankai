@@ -17,6 +17,9 @@ namespace Client
 
         public LocalPlayer(PlayerSpawner spawnPoint) : base(spawnPoint)
         {
+            tankType = GameState.Instance.tankType;
+            Spawn();
+
             crosshair = new Pen(Color.FromArgb(128, Color.Red), 2);
             tankController = new Controller(controllable);
 
@@ -34,9 +37,10 @@ namespace Client
         {
             base.Update(deltaTime);
 
-            if (GameState.Instance.focused && GameState.Instance.State != ClientState.Died)
+            if (GameState.Instance.State != ClientState.Died)
             {
-                UpdatePosition();
+                if (GameState.Instance.focused)
+                    UpdatePosition();
                 UpdateLooking();
             }
 

@@ -21,8 +21,8 @@ namespace Client
 
         public RemotePlayer()
         {
-            oldPos = new Transform();
-            newPos = new Transform();
+            oldPos = new Transform(spawnPoint.transform);
+            newPos = new Transform(spawnPoint.transform);
 
             nameFormat = new StringFormat()
             {

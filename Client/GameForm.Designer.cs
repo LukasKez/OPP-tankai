@@ -42,6 +42,8 @@ namespace Client
             this.IpLabel = new System.Windows.Forms.Label();
             this.OptionsButton = new System.Windows.Forms.Button();
             this.IpBox = new System.Windows.Forms.TextBox();
+            this.tankLabel = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.MenuPanel.SuspendLayout();
             this.PlayerListPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -62,6 +64,8 @@ namespace Client
             this.MenuPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MenuPanel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.MenuPanel.Controls.Add(this.tankLabel);
+            this.MenuPanel.Controls.Add(this.comboBox2);
             this.MenuPanel.Controls.Add(this.levelLabel);
             this.MenuPanel.Controls.Add(this.comboBox1);
             this.MenuPanel.Controls.Add(this.PlayerListPanel);
@@ -164,6 +168,26 @@ namespace Client
             this.IpBox.TabIndex = 1;
             this.IpBox.TextChanged += new System.EventHandler(this.IpBox_TextChanged);
             // 
+            // tankLabel
+            // 
+            this.tankLabel.AutoSize = true;
+            this.tankLabel.Location = new System.Drawing.Point(5, 119);
+            this.tankLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.tankLabel.Name = "tankLabel";
+            this.tankLabel.Size = new System.Drawing.Size(59, 13);
+            this.tankLabel.TabIndex = 8;
+            this.tankLabel.Text = "Tank Type";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(71, 116);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(124, 21);
+            this.comboBox2.TabIndex = 7;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -206,6 +230,8 @@ namespace Client
         private Label label1;
         private ComboBox comboBox1;
         private Label levelLabel;
+        private Label tankLabel;
+        private ComboBox comboBox2;
     }
 }
 

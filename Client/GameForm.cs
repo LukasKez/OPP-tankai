@@ -15,6 +15,8 @@ namespace Client
 
             IpBox.Text = Networking.host;
             comboBox1.DataSource = Enum.GetValues(typeof(LevelType));
+            comboBox2.DataSource = Enum.GetValues(typeof(TankType));
+
             SetMenuButtons(true, true, "Join Game", false);
             UpdatePlayerUI();
 
@@ -51,11 +53,17 @@ namespace Client
 
         private void GameForm_MouseMove(object sender, MouseEventArgs e)
         {
+            if (!GameState.Instance.focused)
+                return;
+
             GameState.Instance.mouseLocation = new Vector2(e.Location.X, e.Location.Y);
         }
 
         private void GameForm_MouseUp(object sender, MouseEventArgs e)
         {
+            if (!GameState.Instance.focused)
+                return;
+
             GameState.Instance.MouseClicked(e.Button);
         }
 
@@ -96,7 +104,14 @@ namespace Client
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Networking.SetLevelType((LevelType)comboBox1.SelectedItem);
+            Networking.SetLevelTypeAsync((LevelType)comboBox1.SelectedItem);
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TankType type = (TankType)comboBox2.SelectedItem;
+            GameState.Instance.tankType = type;
+            Networking.SetTankTypeAsync(type);
         }
 
         private void UpdateUIState(ClientState newState)
@@ -127,13 +142,16 @@ namespace Client
             UpdatePlayerUI();
         }
 
-        private void SetMenuButtons(bool enableIpBox, bool enableStartBtn, string startBtnText, bool enableLevelBox)
+        private void SetMenuButtons(bool enableIpBox, bool enableStartBtn, string startBtnText, bool enablePreGameOptions)
         {
             IpBox.Enabled = enableIpBox;
             StartButton.Enabled = enableStartBtn;
             StartButton.Text = startBtnText;
-            levelLabel.Visible = enableLevelBox;
-            comboBox1.Visible = enableLevelBox;
+
+            levelLabel.Visible = enablePreGameOptions;
+            comboBox1.Visible = enablePreGameOptions;
+            tankLabel.Visible = enablePreGameOptions;
+            comboBox2.Visible = enablePreGameOptions;
         }
 
         private delegate void StateDelegate(ClientState state);
