@@ -18,8 +18,10 @@ namespace Client
         {
             InitializeComponent();
 
-            checkBox1.Checked = Options.shadows;
             textBox1.Text = Options.name;
+            checkBox1.Checked = Options.shadows;
+            checkBox2.Checked = Options.smoothing;
+            checkBox3.Checked = Options.pixelOffset;
         }
 
         private void OptionsForm_Load(object sender, EventArgs e)
@@ -43,14 +45,24 @@ namespace Client
             Close();
         }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            Options.name = (sender as TextBox).Text;
+        }
+
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             Options.shadows = (sender as CheckBox).Checked;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            Options.name = (sender as TextBox).Text;
+            Options.smoothing = (sender as CheckBox).Checked;
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            Options.pixelOffset = (sender as CheckBox).Checked;
         }
     }
 }

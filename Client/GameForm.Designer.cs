@@ -33,6 +33,8 @@ namespace Client
         {
             this.StartButton = new System.Windows.Forms.Button();
             this.MenuPanel = new System.Windows.Forms.Panel();
+            this.tankLabel = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.levelLabel = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.PlayerListPanel = new System.Windows.Forms.FlowLayoutPanel();
@@ -42,8 +44,6 @@ namespace Client
             this.IpLabel = new System.Windows.Forms.Label();
             this.OptionsButton = new System.Windows.Forms.Button();
             this.IpBox = new System.Windows.Forms.TextBox();
-            this.tankLabel = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.MenuPanel.SuspendLayout();
             this.PlayerListPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -78,6 +78,26 @@ namespace Client
             this.MenuPanel.Padding = new System.Windows.Forms.Padding(2);
             this.MenuPanel.Size = new System.Drawing.Size(200, 600);
             this.MenuPanel.TabIndex = 0;
+            // 
+            // tankLabel
+            // 
+            this.tankLabel.AutoSize = true;
+            this.tankLabel.Location = new System.Drawing.Point(5, 119);
+            this.tankLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.tankLabel.Name = "tankLabel";
+            this.tankLabel.Size = new System.Drawing.Size(59, 13);
+            this.tankLabel.TabIndex = 8;
+            this.tankLabel.Text = "Tank Type";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(71, 116);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(124, 21);
+            this.comboBox2.TabIndex = 7;
+            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // levelLabel
             // 
@@ -167,26 +187,6 @@ namespace Client
             this.IpBox.Size = new System.Drawing.Size(126, 20);
             this.IpBox.TabIndex = 1;
             this.IpBox.TextChanged += new System.EventHandler(this.IpBox_TextChanged);
-            // 
-            // tankLabel
-            // 
-            this.tankLabel.AutoSize = true;
-            this.tankLabel.Location = new System.Drawing.Point(5, 119);
-            this.tankLabel.Margin = new System.Windows.Forms.Padding(3);
-            this.tankLabel.Name = "tankLabel";
-            this.tankLabel.Size = new System.Drawing.Size(59, 13);
-            this.tankLabel.TabIndex = 8;
-            this.tankLabel.Text = "Tank Type";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(71, 116);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(124, 21);
-            this.comboBox2.TabIndex = 7;
-            this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // GameForm
             // 

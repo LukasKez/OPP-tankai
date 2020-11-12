@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Numerics;
 using System.Windows.Forms;
 
@@ -35,6 +36,12 @@ namespace Client
 
         private void GameForm_Paint(object sender, PaintEventArgs e)
         {
+            if (Options.smoothing)
+                e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+
+            if (Options.pixelOffset)
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
             GameLoop.Manage(e);
             Text = originalText + GameLoop.fps + " FPS";
             Application.DoEvents();

@@ -8,7 +8,9 @@ namespace Client
 {
     static class Options
     {
-        public static bool shadows = true;
         public static string name = "Player";
+        public static bool shadows = true;
+        public static bool smoothing = false;
+        public static bool pixelOffset = true;
     }
 }
