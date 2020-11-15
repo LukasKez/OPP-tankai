@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    class Subject
+    public class Subject
     {
         private List<IObserver> observers = new List<IObserver>();
 

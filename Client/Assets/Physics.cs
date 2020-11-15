@@ -22,7 +22,7 @@ namespace Client
         public Vector2 normal;
     }
 
-    static class Physics
+    public static class Physics
     {
         public static void HandleCollisions(IEnumerable<GameObject> stuff)
         {

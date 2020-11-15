@@ -50,7 +50,11 @@
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameObjectTest.cs" />
+    <Compile Include="PhysicsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stubs\GameLevelStub.cs" />
+    <Compile Include="Stubs\GameObjectStub.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

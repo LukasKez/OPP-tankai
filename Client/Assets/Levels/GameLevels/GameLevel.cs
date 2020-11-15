@@ -16,7 +16,7 @@ namespace Client
         Field,
     }
 
-    abstract class GameLevel
+    public abstract class GameLevel
     {
         public float levelWidth { get; private set; }
         public float levelHeight { get; private set; }

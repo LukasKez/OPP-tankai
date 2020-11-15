@@ -2,7 +2,7 @@
 
 namespace Client
 {
-    interface IObserver
+    public interface IObserver
     {
         void OnSubjectUpdate();
     }

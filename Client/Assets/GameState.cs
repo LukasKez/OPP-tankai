@@ -14,7 +14,7 @@ namespace Client
         Died,
     }
 
-    class GameState : Subject
+    public class GameState : Subject
     {
         public bool focused;
         public Vector2 mapSize;
