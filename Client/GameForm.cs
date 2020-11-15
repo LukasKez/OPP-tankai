@@ -105,7 +105,6 @@ namespace Client
                     Networking.SetIsReadyAsync(true);
                     break;
                 case ClientState.Ready:
-                    //gameLoop.StartGame();
                     break;
                 case ClientState.Playing:
                 case ClientState.Died:
@@ -168,43 +167,60 @@ namespace Client
             comboBox2.Visible = enablePreGameOptions;
         }
 
-        private delegate void StateDelegate(ClientState state);
         public void OnSubjectUpdate()
         {
-            ClientState state = GameState.Instance.State;
             if (InvokeRequired)
             {
-                StateDelegate d = UpdateUIState;
-                Invoke(d, new object[] { state });
+                Invoke(new Action(() =>
+                {
+                    OnSubjectUpdate();
+                }));
+                return;
             }
-            else
-            {
-                UpdateUIState(state);
-            }
+
+            UpdateUIState(GameState.Instance.State);
         }
 
-        private delegate void LevelDelegate(LevelType levelType);
         private void UpdateLevelTypeBox(LevelType levelType)
         {
             if (InvokeRequired)
             {
-                LevelDelegate d = UpdateLevelTypeBox;
-                Invoke(d, new object[] { levelType });
+                Invoke(new Action(() =>
+                {
+                    UpdateLevelTypeBox(levelType);
+                }));
+                return;
             }
-            else
-            {
-                comboBox1.SelectedItem = levelType;
-            }
+
+            comboBox1.SelectedItem = levelType;
         }
 
         public void UpdatePlayerUI()
         {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    UpdatePlayerUI();
+                }));
+                return;
+            }
+
             label2.Text = GameState.Instance.State >= ClientState.Ready ? "✔" : "";
             label1.Text = Options.name;
         }
 
         private void UpdatePlayerListUI(int index, RemotePlayer player)
         {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    UpdatePlayerListUI(index, player);
+                }));
+                return;
+            }
+
             index -= -1;
             var controls = PlayerListPanel.Controls;
 
