@@ -22,13 +22,11 @@ namespace Client
 
     public abstract class GameObject
     {
-        private Renderer renderer = new Renderer();
-
-        public Transform transform;
         public Shape shape;
         public ColliderType collider;
         public bool isStatic;
         public bool isShadowCaster;
+        public float damage;
 
         private BoxAABB _AABB;
         public BoxAABB AABB
@@ -37,10 +35,24 @@ namespace Client
             private set => _AABB = value;
         }
 
+        private Transform _transform;
+        public Transform transform
+        {
+            get
+            {
+                return _transform;
+            }
+            set
+            {
+                _transform = value;
+                _transform.gameObject = this;
+            }
+        }
+
         public Brush brush;
         public Pen outlinePen;
 
-        public float damage;
+        private Renderer renderer;
 
         protected GameObject() : this(new Transform())
         {
@@ -49,12 +61,8 @@ namespace Client
         protected GameObject(Transform transform)
         {
             this.transform = transform;
+            renderer = new Renderer();
             GenerateAABB();
-        }
-
-        [Obsolete()]
-        protected GameObject(float x, float y, float w = 1, float h = 1, float r = 0) : this(new Transform(x, y, w, h, r))
-        {
         }
 
         public void GenerateAABB()
@@ -102,13 +110,18 @@ namespace Client
 
         public static void Instantiate(GameObject gameObject, GameObject parent)
         {
-            gameObject.transform.parent = parent.transform;
+            if (gameObject != parent)
+            {
+                parent.transform.AddChild(gameObject.transform);
+                gameObject.transform.parent = parent.transform;
+            }
+
             Instantiate(gameObject);
         }
 
         public void Destroy()
         {
-            GameState.Instance.gameLevel?.Remove(this);
+            transform.Dispose();
         }
 
         public virtual void Decorate() { }

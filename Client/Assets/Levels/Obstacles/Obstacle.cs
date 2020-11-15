@@ -3,7 +3,7 @@
     class Obstacle : GameObject
     {
         public Obstacle(float x, float y, float width, float height)
-            : base(x, y, width, height)
+            : base(new Transform(x, y, width, height))
         {
         }
 

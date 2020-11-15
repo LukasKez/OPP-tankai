@@ -9,7 +9,7 @@ namespace PowerUp
 	{
         protected float speed = 100;
 
-        public PowerUpBase(float x, float y, float w, float h) : base(x, y, w, h)
+        public PowerUpBase(float x, float y, float w, float h) : base(new Transform(x, y, w, h))
         {
             isShadowCaster = true;
             shape = Shape.Ellipse;

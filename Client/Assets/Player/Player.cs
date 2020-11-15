@@ -45,7 +45,7 @@ namespace Client
 
         public void Despawn()
         {
-            controllable.Destroy();
+            controllable?.Destroy();
         }
 
         ~Player()

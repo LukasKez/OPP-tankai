@@ -15,6 +15,7 @@ namespace Client
         public void SetFields(GameObject gameObject)
         {
             Dictionary<string, object> fields = adapterContainer.GetObjectFields(typeof(GameObject));
+            Dictionary<string, object> properties = adapterContainer.GetObjectProperties(typeof(GameObject));
 
             gameObject.collider = fields.ContainsKey("collider") ? (ColliderType)fields["collider"] : throw new ArgumentNullException();
             gameObject.isStatic = (bool)fields["isStatic"];
@@ -23,7 +24,7 @@ namespace Client
             gameObject.shape = (Shape)fields["shape"];
             gameObject.brush = (Brush)fields["brush"];
             gameObject.outlinePen = (Pen)fields["outlinePen"];
-            gameObject.transform = (Transform)fields["transform"];
+            gameObject.transform = (Transform)properties["transform"];
         }
     }
 }
