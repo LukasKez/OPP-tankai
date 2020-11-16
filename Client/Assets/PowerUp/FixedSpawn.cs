@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace Client
 {
-    class FixedSpawn : SpawnImplementor
+    public class FixedSpawn : SpawnImplementor
     {
         int type = -1;
         private PowerUpBase powerUp;
@@ -28,7 +28,7 @@ namespace Client
                     break;
                 case 3:
                     powerUpFactory = new SpeedFactory();
-                    type = 0;
+                    type = -1;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -49,6 +49,11 @@ namespace Client
             }
             GameObject.Instantiate(powerUp, spawner);
             return powerUp;
+        }
+
+        public int getCurrentType()
+        {
+            return this.type;
         }
     }
 }
