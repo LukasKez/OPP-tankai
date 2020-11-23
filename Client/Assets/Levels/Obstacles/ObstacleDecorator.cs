@@ -1,7 +1,7 @@
 ﻿
 namespace Client
 {
-    abstract class ObstacleDecorator : GameObject
+    public abstract class ObstacleDecorator : GameObject
     { 
         protected GameObject obstacle;
         protected IAdapter adapter;

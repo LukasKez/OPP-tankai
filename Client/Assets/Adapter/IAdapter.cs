@@ -2,7 +2,7 @@
 
 namespace Client
 {
-    interface IAdapter
+    public interface IAdapter
     {
         void SetFields(GameObject gameObject);
     }

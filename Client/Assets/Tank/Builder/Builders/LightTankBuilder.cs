@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Client
 {
-    class LightTankBuilder : ITankBuilder
+    public class LightTankBuilder : ITankBuilder
     {
         private Tank tank;
         private Suspension suspension;

@@ -47,9 +47,13 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\AdapterTest.cs" />
+    <Compile Include="Tests\BuilderTest.cs" />
+    <Compile Include="Tests\DecoratorTest.cs" />
     <Compile Include="Tests\FixedSpawnTest.cs" />
     <Compile Include="Tests\GameObjectTest.cs" />
     <Compile Include="Tests\PhysicsTest.cs" />

@@ -2,7 +2,7 @@
 
 namespace Client
 {
-    class DamageObstacle : ObstacleDecorator
+    public class DamageObstacle : ObstacleDecorator
     {
         public DamageObstacle(GameObject decoredObject)
             : base(decoredObject)

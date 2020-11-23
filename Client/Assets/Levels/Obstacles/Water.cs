@@ -2,7 +2,7 @@
 
 namespace Client
 {
-    class Water : ObstacleDecorator
+    public class Water : ObstacleDecorator
     {
         public Water(GameObject decoredObject)
             :base(decoredObject)

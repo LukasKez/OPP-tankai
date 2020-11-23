@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace Client
 {
-    class ObstacleAdapter : IAdapter
+    public class ObstacleAdapter : IAdapter
     {
         AdapterContainer adapterContainer;
 
@@ -14,10 +14,21 @@ namespace Client
         }
         public void SetFields(GameObject gameObject)
         {
-            Dictionary<string, object> fields = adapterContainer.GetObjectFields(typeof(GameObject));
-            Dictionary<string, object> properties = adapterContainer.GetObjectProperties(typeof(GameObject));
+            if(adapterContainer==null)
+            {
+                return;
+            }
 
-            gameObject.collider = fields.ContainsKey("collider") ? (ColliderType)fields["collider"] : throw new ArgumentNullException();
+            Dictionary<string, object> fields = adapterContainer.GetObjectFields();
+            Dictionary<string, object> properties = adapterContainer.GetObjectProperties();
+
+
+            if (!fields.ContainsKey("collider"))
+            {
+                return;
+            }
+
+            gameObject.collider = (ColliderType)fields["collider"];
             gameObject.isStatic = (bool)fields["isStatic"];
             gameObject.isShadowCaster = (bool)fields["isShadowCaster"];
             gameObject.damage = (float)fields["damage"];

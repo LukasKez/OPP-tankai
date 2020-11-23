@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Client
 {
-    class AdapterContainer
+    public class AdapterContainer
     {
         object gameObject;
 
@@ -15,10 +15,14 @@ namespace Client
             this.gameObject = gameObject;
         }
 
-        public Dictionary<string, object> GetObjectFields(Type objectType)
+        public Dictionary<string, object> GetObjectFields()
         {
 
             Dictionary<string, object> fields = new Dictionary<string, object>();
+            if(this.gameObject==null)
+            {
+                return fields;
+            }
 
             foreach (var field in gameObject.GetType().GetFields())
             {
@@ -28,10 +32,14 @@ namespace Client
             return fields;
         }
 
-        public Dictionary<string, object> GetObjectProperties(Type objectType)
+        public Dictionary<string, object> GetObjectProperties()
         {
 
             Dictionary<string, object> fields = new Dictionary<string, object>();
+            if (this.gameObject == null)
+            {
+                return fields;
+            }
 
             foreach (var field in gameObject.GetType().GetProperties())
             {

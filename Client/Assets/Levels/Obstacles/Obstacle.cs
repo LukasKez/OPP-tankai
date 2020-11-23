@@ -1,6 +1,6 @@
 ﻿namespace Client
 {
-    class Obstacle : GameObject
+    public class Obstacle : GameObject
     {
         public Obstacle(float x, float y, float width, float height)
             : base(new Transform(x, y, width, height))

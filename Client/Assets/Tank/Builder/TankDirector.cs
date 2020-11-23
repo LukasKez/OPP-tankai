@@ -2,7 +2,7 @@
 
 namespace Client
 {
-    class TankDirector
+    public class TankDirector
     {
         private ITankBuilder tankBuilder;
 

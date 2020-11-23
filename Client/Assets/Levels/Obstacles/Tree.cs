@@ -2,7 +2,7 @@
 
 namespace Client
 {
-    class Tree : ObstacleDecorator
+    public class Tree : ObstacleDecorator
     {
         public Tree(GameObject decoredObject)
             : base(decoredObject)

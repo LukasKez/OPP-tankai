@@ -2,7 +2,7 @@
 
 namespace Client
 {
-    class OutlineObstacle: ObstacleDecorator
+    public class OutlineObstacle: ObstacleDecorator
     {
 
         public OutlineObstacle(GameObject decoredObject)

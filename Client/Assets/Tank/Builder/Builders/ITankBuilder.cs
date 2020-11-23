@@ -2,7 +2,7 @@
 
 namespace Client
 {
-    interface ITankBuilder
+    public interface ITankBuilder
     {
         ITankBuilder AddHull(float x, float y);
         ITankBuilder AddEngine();

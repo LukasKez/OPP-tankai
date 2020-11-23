@@ -2,7 +2,7 @@
 
 namespace Client
 {
-    class Boulder : ObstacleDecorator
+    public class Boulder : ObstacleDecorator
     {
 
         public Boulder(GameObject decoredObject)
