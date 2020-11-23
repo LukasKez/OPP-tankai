@@ -6,7 +6,8 @@ namespace Client.Test
     [TestClass]
     public class GameObjectTest
     {
-        public GameObjectTest()
+        [TestInitialize]
+        public void TestInitialize()
         {
             GameLevelStub gameLevel = new GameLevelStub();
         }
