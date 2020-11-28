@@ -34,17 +34,15 @@ namespace Client
                     throw new ArgumentOutOfRangeException();
             }
             
-
             int percent = rnd.Next(100);
+            Vector2 size = spawner.transform.size * new Vector2(0.6f, 0.7f);
 
             if (percent < 50)
             {
-                Vector2 size = spawner.transform.size * new Vector2(0.5f, 0.5f);
                 powerUp = powerUpFactory.CreateTemporaryPowerUp(0, 0, size.X, size.Y);
             }
             else
             {
-                Vector2 size = spawner.transform.size * new Vector2(0.7f, 0.8f);
                 powerUp = powerUpFactory.CreatePermanentPowerUp(0, 0, size.X, size.Y);
             }
             GameObject.Instantiate(powerUp, spawner);

@@ -36,13 +36,15 @@ namespace Client
 
         private void GameForm_Paint(object sender, PaintEventArgs e)
         {
+            Graphics g = e.Graphics;
+
             if (Options.smoothing)
-                e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                g.SmoothingMode = SmoothingMode.HighQuality;
 
             if (Options.pixelOffset)
-                e.Graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
+                g.PixelOffsetMode = PixelOffsetMode.HighQuality;
 
-            GameLoop.Manage(e);
+            GameLoop.Manage(g);
             Text = originalText + GameLoop.fps + " FPS";
             Application.DoEvents();
             Invalidate(false);

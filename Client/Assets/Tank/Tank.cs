@@ -19,9 +19,9 @@ namespace Client
         [Obsolete()] public float health = 100;   // TODO: Delete
         [Obsolete()] public float speed = 50;    // TODO: Delete
 
-        public Engine engine { get; set; }
-        public Suspension suspension { get; set; }
-        public Turret turret { get; set; }
+        public Engine Engine { get; set; }
+        public Suspension Suspension { get; set; }
+        public Turret Turret { get; set; }
 
 
         public event Action<Projectile> OnProjectileHit;
@@ -70,21 +70,24 @@ namespace Client
             Vector2 vertical = new Vector2();
             vertical.Y = direction * speed * GameLoop.DeltaTime;
             transform.position += Utils.Rotate(vertical, transform.rotation);
+            Turret.gun.Aim(-3f);
         }
 
         public void Rotate(float direction)
         {
             transform.rotation += direction * speed * GameLoop.DeltaTime;
+            Turret.gun.Aim(-2.5f);
         }
 
         public void LookAt(float direction)
         {
-            turret.Rotate(direction);
+            Turret.Rotate(direction);
+            Turret.gun.Aim(-1f * Math.Abs(direction));
         }
 
         public void Action()
         {
-            turret.gun.Shoot();
+            Turret.gun.Shoot();
         }
 
         void UpdatePowerUps(float deltaTime)

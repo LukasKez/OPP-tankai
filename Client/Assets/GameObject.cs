@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Numerics;
-using System.Windows.Forms;
 
 namespace Client
 {
@@ -52,8 +51,6 @@ namespace Client
         public Brush brush;
         public Pen outlinePen;
 
-        private Renderer renderer;
-
         protected GameObject() : this(new Transform())
         {
         }
@@ -61,7 +58,6 @@ namespace Client
         protected GameObject(Transform transform)
         {
             this.transform = transform;
-            renderer = new Renderer();
             GenerateAABB();
         }
 
@@ -83,15 +79,15 @@ namespace Client
         {
         }
 
-        public virtual void Render(PaintEventArgs e)
+        public virtual void Render(Graphics g)
         {
             if (brush != null)
             {
-                renderer.RenderShape(e, brush, transform, shape);
+                Renderer.RenderShape(g, brush, transform, shape);
             }
             if (outlinePen != null)
             {
-                renderer.RenderShape(e, outlinePen, transform, shape);
+                Renderer.RenderShape(g, outlinePen, transform, shape);
             }
         }
 
@@ -121,7 +117,10 @@ namespace Client
 
         public void Destroy()
         {
-            transform.Dispose();
+            foreach (Transform item in transform)
+            {
+                item.Dispose();
+            }
         }
 
         public virtual void Decorate() { }

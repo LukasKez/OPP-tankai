@@ -2,9 +2,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Numerics;
-using System.Windows.Forms;
 
 namespace Client
 {
@@ -30,8 +28,6 @@ namespace Client
 
         private ConcurrentQueue<GameObject> toAdd = new ConcurrentQueue<GameObject>();
         private ConcurrentQueue<GameObject> toRemove = new ConcurrentQueue<GameObject>();
-
-        private Renderer renderer = new Renderer();
 
         readonly Brush shadowBrush = new SolidBrush(Color.FromArgb(64, Color.Black));
         readonly Vector2 sunDirection = new Vector2(2, 2);
@@ -139,37 +135,37 @@ namespace Client
             }
         }
 
-        public void Render(PaintEventArgs e)
+        public void Render(Graphics g)
         {
             foreach (var thing in stuff)
             {
                 if (!thing.isShadowCaster)
                 {
-                    thing.Render(e);
+                    thing.Render(g);
                 }
             }
 
             if (Options.shadows)
             {
-                RenderShadows(e);
+                RenderShadows(g);
             }
 
             foreach (var thing in stuff)
             {
                 if (thing.isShadowCaster)
                 {
-                    thing.Render(e);
+                    thing.Render(g);
                 }
             }
         }
 
-        private void RenderShadows(PaintEventArgs e)
+        private void RenderShadows(Graphics g)
         {
             foreach (var thing in stuff)
             {
                 if (thing.isShadowCaster)
                 {
-                    renderer.RenderShape(e, shadowBrush, thing.transform, thing.shape, sunDirection);
+                    Renderer.RenderShape(g, shadowBrush, thing.transform, thing.shape, sunDirection);
                 }
             }
         }

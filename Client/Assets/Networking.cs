@@ -309,7 +309,7 @@ namespace Client
             try
             {
                 Transform tr = tank.transform;
-                float turetRot = tank.turret.transform.rotation;
+                float turetRot = tank.Turret.transform.rotation;
                 await connection.SendAsync("SendPositionUpdate", tr.position.X, tr.position.Y, tr.rotation, turetRot);
             }
             catch (Exception e)

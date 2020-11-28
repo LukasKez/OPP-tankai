@@ -5,20 +5,9 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    class Renderer
+    static class Renderer
     {
-        private Rectangle rectangle;
-        private Ellipse ellipse;
-        private Rotator rotator;
-
-        public Renderer()
-        {
-            rectangle = new Rectangle();
-            ellipse = new Ellipse();
-            rotator = new Rotator();
-        }
-
-        public void RenderShape(PaintEventArgs e, Brush brush, Transform transform, Shape shape, Vector2 offset = default)
+        public static void RenderShape(Graphics g, Brush brush, Transform transform, Shape shape, Vector2 offset = default)
         {
             if (shape == Shape.None) return;
 
@@ -27,16 +16,16 @@ namespace Client
 
             if (rotation != 0)
             {
-                rotator.Rotate(e, position + offset, rotation);
+                Rotator.Rotate(g, position + offset, rotation);
             }
 
             switch (shape)
             {
                 case Shape.Rectangle:
-                    rectangle.Draw(e, brush, position + offset, transform.size);
+                    Rectangle.Draw(g, brush, position + offset, transform.size);
                     break;
                 case Shape.Ellipse:
-                    ellipse.Draw(e, brush, position + offset, transform.size);
+                    Ellipse.Draw(g, brush, position + offset, transform.size);
                     break;
                 case Shape.Mesh:
                 default:
@@ -45,11 +34,11 @@ namespace Client
 
             if (rotation != 0)
             {
-                e.Graphics.ResetTransform();
+                g.ResetTransform();
             }
         }
 
-        public void RenderShape(PaintEventArgs e, Pen pen, Transform transform, Shape shape, Vector2 offset = default)
+        public static void RenderShape(Graphics g, Pen pen, Transform transform, Shape shape, Vector2 offset = default)
         {
             if (shape == Shape.None) return;
 
@@ -58,16 +47,16 @@ namespace Client
 
             if (rotation != 0)
             {
-                rotator.Rotate(e, position + offset, rotation);
+                Rotator.Rotate(g, position + offset, rotation);
             }
 
             switch (shape)
             {
                 case Shape.Rectangle:
-                    rectangle.Draw(e, pen, position + offset, transform.size.Substract(pen.Width));
+                    Rectangle.Draw(g, pen, position + offset, transform.size.Substract(pen.Width));
                     break;
                 case Shape.Ellipse:
-                    ellipse.Draw(e, pen, position + offset, transform.size.Substract(pen.Width));
+                    Ellipse.Draw(g, pen, position + offset, transform.size.Substract(pen.Width));
                     break;
                 case Shape.Mesh:
                 default:
@@ -76,7 +65,7 @@ namespace Client
 
             if (rotation != 0)
             {
-                e.Graphics.ResetTransform();
+                g.ResetTransform();
             }
         }
     }

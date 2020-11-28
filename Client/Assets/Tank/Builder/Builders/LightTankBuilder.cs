@@ -20,7 +20,7 @@ namespace Client
 
         public ITankBuilder AddEngine()
         {
-            tank.engine = new Engine(500);
+            tank.Engine = new Engine(500);
             return this;
         }
 
@@ -34,7 +34,7 @@ namespace Client
                 loadLimit = 20
             };
 
-            tank.suspension = suspension;
+            tank.Suspension = suspension;
             return this;
         }
 
@@ -47,7 +47,7 @@ namespace Client
                 reactionTime = 0.2f
             };
 
-            tank.turret = turret;
+            tank.Turret = turret;
             return this;
         }
 
@@ -71,7 +71,7 @@ namespace Client
                 maxSpreadAngle = 27
             };
 
-            tank.turret.gun = gun;
+            tank.Turret.gun = gun;
             return this;
         }
 

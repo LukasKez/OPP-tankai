@@ -75,7 +75,7 @@ namespace Client
         private void UpdateLooking()
         {
             Vector2 mousePosition = GameState.Instance.mouseLocation - controllable.transform.position;
-            float turretAngle = controllable.turret.transform.WorldRotation;
+            float turretAngle = controllable.Turret.transform.WorldRotation;
             float dotProduct = Vector2.Dot(mousePosition, Utils.RotatedVector(turretAngle));
 
             if (dotProduct < -1)
@@ -110,30 +110,30 @@ namespace Client
             // TODO: Send update to the server
         }
 
-        public override void Render(PaintEventArgs e)
+        public override void Render(Graphics g)
         {
-            base.Render(e);
+            base.Render(g);
 
-            DrawStats(e);
-            DrawCrosshair(e);
+            DrawStats(g);
+            DrawCrosshair(g);
         }
 
-        private void DrawStats(PaintEventArgs e)
+        private void DrawStats(Graphics g)
         {
             int pos = 110;
-            e.Graphics.DrawString("Attack " + controllable.attack.ToString(), Control.DefaultFont, Brushes.Black, 20, pos);
-            e.Graphics.DrawString("Defense " + controllable.defense.ToString(), Control.DefaultFont, Brushes.Black, 20, pos + 15);
-            e.Graphics.DrawString("Health " + controllable.health.ToString(), Control.DefaultFont, Brushes.Black, 20, pos + 30);
-            e.Graphics.DrawString("Speed " + controllable.speed.ToString(), Control.DefaultFont, Brushes.Black, 20, pos + 45);
+            g.DrawString("Attack " + controllable.attack.ToString(), Control.DefaultFont, Brushes.Black, 20, pos);
+            g.DrawString("Defense " + controllable.defense.ToString(), Control.DefaultFont, Brushes.Black, 20, pos + 15);
+            g.DrawString("Health " + controllable.health.ToString(), Control.DefaultFont, Brushes.Black, 20, pos + 30);
+            g.DrawString("Speed " + controllable.speed.ToString(), Control.DefaultFont, Brushes.Black, 20, pos + 45);
         }
 
-        private void DrawCrosshair(PaintEventArgs e)
+        private void DrawCrosshair(Graphics g)
         {
             Vector2 position = controllable.transform.position;
             Vector2 mousePosition = GameState.Instance.mouseLocation - position;
 
-            float turretAngle = controllable.turret.transform.WorldRotation - 90;
-            float spreadAngle = controllable.turret.gun.spreadAngle;
+            float turretAngle = controllable.Turret.transform.WorldRotation - 90;
+            float spreadAngle = controllable.Turret.gun.spreadAngle;
 
             float mouseLength = mousePosition.Length();
             float lenght1 = Math.Max(mouseLength, crosshairLength + 30);
@@ -141,14 +141,14 @@ namespace Client
 
             Vector2 point1 = Utils.RotatedVector(turretAngle + spreadAngle, lenght1 - crosshairLength) + position;
             Vector2 point2 = Utils.RotatedVector(turretAngle + spreadAngle, lenght2 + crosshairLength) + position;
-            e.Graphics.DrawLine(crosshair, point1.X, point1.Y, point2.X, point2.Y);
+            g.DrawLine(crosshair, point1.X, point1.Y, point2.X, point2.Y);
 
             point1 = Utils.RotatedVector(turretAngle - spreadAngle, lenght1 - crosshairLength) + position;
             point2 = Utils.RotatedVector(turretAngle - spreadAngle, lenght2 + crosshairLength) + position;
-            e.Graphics.DrawLine(crosshair, point1.X, point1.Y, point2.X, point2.Y);
+            g.DrawLine(crosshair, point1.X, point1.Y, point2.X, point2.Y);
 
             point1 = Utils.RotatedVector(turretAngle, lenght2) + position;
-            e.Graphics.DrawArc(crosshair, point1.X - 3, point1.Y - 3, 6, 6, turretAngle - 90, 180);
+            g.DrawArc(crosshair, point1.X - 3, point1.Y - 3, 6, 6, turretAngle - 90, 180);
         }
     }
 }

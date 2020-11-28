@@ -140,6 +140,7 @@
     <Compile Include="Assets\Adapter\AdapterContainer.cs" />
     <Compile Include="Assets\Adapter\IAdapter.cs" />
     <Compile Include="Assets\Adapter\ObstacleAdapter.cs" />
+    <Compile Include="Assets\Particle\ParticleSystem.cs" />
     <Compile Include="Assets\Tank\Builder\Builders\LightTankBuilder.cs" />
     <Compile Include="Assets\Player\BotStrategies\MoveBackwards.cs" />
     <Compile Include="Assets\Player\BotStrategies\TurnLeft.cs" />
@@ -206,11 +207,11 @@
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryHealth.cs" />
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporaryPowerUp.cs" />
     <Compile Include="Assets\PowerUp\TemporaryPowerUp\TemporarySpeed.cs" />
-    <Compile Include="Assets\Renderer\Ellipse.cs" />
-    <Compile Include="Assets\Renderer\Rectangle.cs" />
-    <Compile Include="Assets\Renderer\Renderer.cs" />
+    <Compile Include="Assets\Rendering\Ellipse.cs" />
+    <Compile Include="Assets\Rendering\Rectangle.cs" />
+    <Compile Include="Assets\Rendering\Renderer.cs" />
     <Compile Include="Assets\Controller\IControllable.cs" />
-    <Compile Include="Assets\Renderer\Rotator.cs" />
+    <Compile Include="Assets\Rendering\Rotator.cs" />
     <Compile Include="Assets\Tank\Modules\Engine.cs" />
     <Compile Include="Assets\Tank\Modules\Gun.cs" />
     <Compile Include="Assets\Tank\Modules\Track.cs" />

@@ -31,9 +31,7 @@ namespace Client
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-
-            float newSpreadAngle = spreadAngle - aimingRate * deltaTime;
-            spreadAngle = Math.Max(newSpreadAngle, minSpreadAngle);
+            Aim(1);
 
             if (waitTime > 0)
             {
@@ -41,25 +39,32 @@ namespace Client
             }
         }
 
+        public void Aim(float direction)
+        {
+            float newSpreadAngle = spreadAngle - aimingRate * direction * GameLoop.DeltaTime;
+            spreadAngle = Utils.Clamp(newSpreadAngle, minSpreadAngle, maxSpreadAngle);
+        }
+
         public void Shoot()
         {
-            if (waitTime <= 0)
-            {
-                Projectile projectile = (Projectile)shell.Clone();
-                Transform tr = new Transform();
+            if (waitTime > 0)
+                return;
 
-                tr.position = transform.WorldPosition;
-                tr.rotation = transform.WorldRotation;
-                tr.position += Utils.RotatedVector(tr.rotation + 90, -transform.size.Y);
-                tr.rotation += Utils.Clamp((float)rnd.NextGaussian(0, spreadAngle / 1.6f), -spreadAngle, spreadAngle);
-                projectile.SetPosition(tr);
+            Projectile projectile = (Projectile)shell.Clone();
+            Transform tr = new Transform();
 
-                Networking.CreateProjectileAsync(projectile);
-                Instantiate(projectile);
+            tr.position = transform.WorldPosition;
+            tr.rotation = transform.WorldRotation;
 
-                spreadAngle = maxSpreadAngle;
-                waitTime = reloadTime;
-            }
+            tr.position += Utils.RotatedVector(tr.rotation + 90, -transform.size.Y);
+            tr.rotation += Utils.Clamp((float)rnd.NextGaussian(0, spreadAngle / 1.6f), -spreadAngle, spreadAngle);
+            projectile.SetPosition(tr);
+
+            Networking.CreateProjectileAsync(projectile);
+            Instantiate(projectile);
+
+            spreadAngle = maxSpreadAngle;
+            waitTime = reloadTime;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Numerics;
 
 namespace Client
@@ -122,6 +123,17 @@ namespace Client
             double u2 = 1.0 - r.NextDouble();
             double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
             return mean + stdDev * randStdNormal;
+        }
+
+        public static Color Tint(this Color baseColor, Color tintColor)
+        {
+            float alpha = tintColor.A / 255f;
+
+            int R = (int)(baseColor.R + (tintColor.R - baseColor.R) * alpha);
+            int G = (int)(baseColor.G + (tintColor.G - baseColor.G) * alpha);
+            int B = (int)(baseColor.B + (tintColor.B - baseColor.B) * alpha);
+
+            return Color.FromArgb(R, G, B);
         }
     }
 }

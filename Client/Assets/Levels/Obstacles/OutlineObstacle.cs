@@ -9,6 +9,7 @@ namespace Client
             : base(decoredObject)
         {
         }
+
         public override void Decorate()
         {
             base.Decorate();
@@ -17,12 +18,11 @@ namespace Client
 
             MakeOutline();
         }
+
         private void MakeOutline()
         {
-            outlinePen = new Pen(Color.FromArgb(64, Color.Black), 2);
+            Color color = (brush as SolidBrush).Color;
+            outlinePen = new Pen(color.Tint(Color.FromArgb(64, Color.Black)), 2);
         }
-
-
-
     }
 }

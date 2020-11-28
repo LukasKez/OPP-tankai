@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 
 namespace Client
 {
-    public class Transform : IDisposable
+    public class Transform : IEnumerable<Transform>, IDisposable
     {
         public Transform parent;
         public List<Transform> childs;
@@ -51,6 +52,24 @@ namespace Client
             childs.Add(child);
         }
 
+        public IEnumerator<Transform> GetEnumerator()
+        {
+            yield return this;
+            foreach (Transform child in childs)
+            {
+                foreach (Transform item in child)
+                {
+                    yield return item;
+                }
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+
         public void Dispose()
         {
             Dispose(true);
@@ -63,10 +82,6 @@ namespace Client
                 return;
 
             GameState.Instance.gameLevel?.Remove(gameObject);
-            foreach (Transform child in childs)
-            {
-                child.Dispose();
-            }
         }
     }
 }

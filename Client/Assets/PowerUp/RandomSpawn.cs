@@ -35,7 +35,7 @@ namespace Client
             }
 
             int percent = rnd.Next(100);
-            Vector2 size = spawner.transform.size * new Vector2(0.7f, 0.8f);
+            Vector2 size = spawner.transform.size * new Vector2(0.6f, 0.7f);
 
             if (percent < 80)
             {

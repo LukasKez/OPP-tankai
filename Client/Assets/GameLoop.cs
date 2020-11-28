@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace Client
 {
@@ -30,7 +30,7 @@ namespace Client
             GameState.Instance.State = ClientState.Playing;
         }
 
-        public static void Manage(PaintEventArgs e)
+        public static void Manage(Graphics g)
         {
             if (GameState.Instance.State < ClientState.Playing)
             {
@@ -42,7 +42,7 @@ namespace Client
             startTime = endTime;
 
             Update(DeltaTime);
-            Render(e);
+            Render(g);
         }
 
         static void Update(float deltaTime)
@@ -52,9 +52,9 @@ namespace Client
             GameState.Instance.gameLevel.HandleCollisions();
         }
 
-        static void Render(PaintEventArgs e)
+        static void Render(Graphics g)
         {
-            GameState.Instance.gameLevel.Render(e);
+            GameState.Instance.gameLevel.Render(g);
         }
 
         static void UpdateFPS()
