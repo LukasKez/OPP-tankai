@@ -140,6 +140,9 @@
     <Compile Include="Assets\Adapter\AdapterContainer.cs" />
     <Compile Include="Assets\Adapter\IAdapter.cs" />
     <Compile Include="Assets\Adapter\ObstacleAdapter.cs" />
+    <Compile Include="Assets\Flyweight\FlyweightFactory.cs" />
+    <Compile Include="Assets\Flyweight\GameObjectFlyweight.cs" />
+    <Compile Include="Assets\Flyweight\IFlyweight.cs" />
     <Compile Include="Assets\State\AbstractState.cs" />
     <Compile Include="Assets\State\ConnectedState.cs" />
     <Compile Include="Assets\State\ConnectingState.cs" />

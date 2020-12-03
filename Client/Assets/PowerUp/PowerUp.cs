@@ -5,8 +5,8 @@ using System.Drawing;
 */
 namespace PowerUp
 {
-	public class PowerUpBase : GameObject
-	{
+    public class PowerUpBase : GameObject
+    {
         protected float speed = 100;
 
         public PowerUpBase(float x, float y, float w, float h) : base(new Transform(x, y, w, h))
@@ -28,6 +28,6 @@ namespace PowerUp
                 throw new System.ArgumentNullException(nameof(tank));
             }
         }
-	}
-	
+    }
+    
 }

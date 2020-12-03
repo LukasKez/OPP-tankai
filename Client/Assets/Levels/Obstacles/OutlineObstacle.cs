@@ -22,7 +22,7 @@ namespace Client
         private void MakeOutline()
         {
             Color color = (brush as SolidBrush).Color;
-            outlinePen = new Pen(color.Tint(Color.FromArgb(64, Color.Black)), 2);
+            flyweight = FlyweightFactory.GetFlyweight(color.ToArgb()) as GameObjectFlyweight;
         }
     }
 }

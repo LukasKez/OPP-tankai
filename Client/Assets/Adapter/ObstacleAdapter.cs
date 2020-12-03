@@ -34,7 +34,8 @@ namespace Client
             gameObject.damage = (float)fields["damage"];
             gameObject.shape = (Shape)fields["shape"];
             gameObject.brush = (Brush)fields["brush"];
-            gameObject.outlinePen = (Pen)fields["outlinePen"];
+            gameObject.outlinePen = (Pen)properties["outlinePen"];
+            gameObject.flyweight = (GameObjectFlyweight)properties["flyweight"];
             gameObject.transform = (Transform)properties["transform"];
         }
     }

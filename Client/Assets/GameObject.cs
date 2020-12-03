@@ -49,7 +49,15 @@ namespace Client
         }
 
         public Brush brush;
-        public Pen outlinePen;
+
+        private Pen _outlinePen;
+        public Pen outlinePen
+        {
+            get => flyweight != null ? flyweight.outlinePen : _outlinePen;
+            set => _outlinePen = value;
+        }
+
+        public GameObjectFlyweight flyweight { get; set; }
 
         protected GameObject() : this(new Transform())
         {
