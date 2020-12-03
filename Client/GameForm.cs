@@ -99,18 +99,17 @@ namespace Client
             switch (GameState.Instance.State)
             {
                 case ClientState.Menu:
-                    GameState.Instance.State = ClientState.Connecting;
-                    Networking.ConnectAsync();
+                    GameState.Instance.operate();
                     break;
                 case ClientState.Connected:
-                    GameState.Instance.State = ClientState.Ready;
-                    Networking.SetIsReadyAsync(true);
+                    GameState.Instance.operate();
                     break;
                 case ClientState.Ready:
+                    GameState.Instance.operate();
                     break;
                 case ClientState.Playing:
                 case ClientState.Died:
-                    Networking.DisconnectAsync();
+                    GameState.Instance.operate();
                     break;
                 default:
                     break;

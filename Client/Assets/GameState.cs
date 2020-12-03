@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Client.Assets.State;
+using System;
 using System.Numerics;
 using System.Windows.Forms;
 
@@ -24,6 +25,8 @@ namespace Client
         public int RandomSeed;
 
         private ClientState state;
+
+        public AbstractState currentState;
         public ClientState State
         {
             get { return state; }
@@ -50,6 +53,32 @@ namespace Client
         public GameState()
         {
             mapSize = new Vector2(800, 600);
+
+            AbstractState idleState = new IdleState();
+            AbstractState menuState = new MenuState();
+            AbstractState connectedState = new ConnectedState();
+            AbstractState readyState = new ReadyState();
+            AbstractState diedState = new DiedState();
+
+            idleState.setNextState(menuState);
+            menuState.setNextState(connectedState);
+            connectedState.setNextState(readyState);
+            readyState.setNextState(diedState);
+            diedState.setNextState(menuState);
+
+            currentState = idleState;
+        }
+
+        public AbstractState operate()
+        {
+            currentState.getNextState(this);
+            currentState.stateOperation();
+            return currentState;
+        }
+
+        public void setState(AbstractState nextState)
+        {
+            this.currentState = nextState;
         }
     }
 }

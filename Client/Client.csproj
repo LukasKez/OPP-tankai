@@ -140,7 +140,12 @@
     <Compile Include="Assets\Adapter\AdapterContainer.cs" />
     <Compile Include="Assets\Adapter\IAdapter.cs" />
     <Compile Include="Assets\Adapter\ObstacleAdapter.cs" />
-    <Compile Include="Assets\Particle\ParticleSystem.cs" />
+    <Compile Include="Assets\State\AbstractState.cs" />
+    <Compile Include="Assets\State\ConnectedState.cs" />
+    <Compile Include="Assets\State\DiedState.cs" />
+    <Compile Include="Assets\State\IdleState.cs" />
+    <Compile Include="Assets\State\MenuState.cs" />
+    <Compile Include="Assets\State\ReadyState.cs" />
     <Compile Include="Assets\Tank\Builder\Builders\LightTankBuilder.cs" />
     <Compile Include="Assets\Player\BotStrategies\MoveBackwards.cs" />
     <Compile Include="Assets\Player\BotStrategies\TurnLeft.cs" />
