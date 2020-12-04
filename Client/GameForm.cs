@@ -96,24 +96,7 @@ namespace Client
 
         private void StartButton_Click(object sender, EventArgs e)
         {
-            switch (GameState.Instance.State)
-            {
-                case ClientState.Menu:
-                    GameState.Instance.operate();
-                    break;
-                case ClientState.Connected:
-                    GameState.Instance.operate();
-                    break;
-                case ClientState.Ready:
-                    GameState.Instance.operate();
-                    break;
-                case ClientState.Playing:
-                case ClientState.Died:
-                    GameState.Instance.operate();
-                    break;
-                default:
-                    break;
-            }
+            GameState.Instance.operate();
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

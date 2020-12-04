@@ -56,14 +56,18 @@ namespace Client
 
             AbstractState idleState = new IdleState();
             AbstractState menuState = new MenuState();
+            AbstractState connectingState = new ConnectingState();
             AbstractState connectedState = new ConnectedState();
+            AbstractState playingState = new PlayingState();
             AbstractState readyState = new ReadyState();
             AbstractState diedState = new DiedState();
 
             idleState.setNextState(menuState);
-            menuState.setNextState(connectedState);
+            menuState.setNextState(connectingState);
+            connectingState.setNextState(connectedState);
             connectedState.setNextState(readyState);
-            readyState.setNextState(diedState);
+            readyState.setNextState(playingState);
+            playingState.setNextState(diedState);
             diedState.setNextState(menuState);
 
             currentState = idleState;
