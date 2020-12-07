@@ -22,6 +22,7 @@ namespace Client
             checkBox1.Checked = Options.shadows;
             checkBox2.Checked = Options.smoothing;
             checkBox3.Checked = Options.pixelOffset;
+            checkBox4.Checked = Options.renderingProxy;
         }
 
         private void OptionsForm_Load(object sender, EventArgs e)
@@ -38,6 +39,7 @@ namespace Client
                 (Owner as GameForm).UpdatePlayerUI();
                 Networking.SetNameAsync(Options.name);
             }
+            Renderer.RendererProxyInstance.Invalidate();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -63,6 +65,11 @@ namespace Client
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             Options.pixelOffset = (sender as CheckBox).Checked;
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            Options.renderingProxy = (sender as CheckBox).Checked;
         }
     }
 }

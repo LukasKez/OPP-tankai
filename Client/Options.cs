@@ -12,5 +12,6 @@ namespace Client
         public static bool shadows = true;
         public static bool smoothing = false;
         public static bool pixelOffset = true;
+        public static bool renderingProxy = true;
     }
 }

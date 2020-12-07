@@ -29,11 +29,6 @@ namespace Client
         private ConcurrentQueue<GameObject> toAdd = new ConcurrentQueue<GameObject>();
         private ConcurrentQueue<GameObject> toRemove = new ConcurrentQueue<GameObject>();
 
-        readonly Brush shadowBrush = new SolidBrush(Color.FromArgb(64, Color.Black));
-        readonly Vector2 sunDirection = new Vector2(2, 2);
-
-
-
         public GameLevel(float levelWidth, float levelHeight, float blockWidth, float blockHeight, int seed)
         {
             this.levelWidth = levelWidth;
@@ -137,37 +132,7 @@ namespace Client
 
         public void Render(Graphics g)
         {
-            foreach (var thing in stuff)
-            {
-                if (!thing.isShadowCaster)
-                {
-                    thing.Render(g);
-                }
-            }
-
-            if (Options.shadows)
-            {
-                RenderShadows(g);
-            }
-
-            foreach (var thing in stuff)
-            {
-                if (thing.isShadowCaster)
-                {
-                    thing.Render(g);
-                }
-            }
-        }
-
-        private void RenderShadows(Graphics g)
-        {
-            foreach (var thing in stuff)
-            {
-                if (thing.isShadowCaster)
-                {
-                    Renderer.RenderShape(g, shadowBrush, thing.transform, thing.shape, sunDirection);
-                }
-            }
+            Renderer.Instance.RenderGameobjects(g, stuff, Options.shadows);
         }
 
         public List<T> Find<T>()

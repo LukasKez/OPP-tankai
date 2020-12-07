@@ -89,14 +89,7 @@ namespace Client
 
         public virtual void Render(Graphics g)
         {
-            if (brush != null)
-            {
-                Renderer.RenderShape(g, brush, transform, shape);
-            }
-            if (outlinePen != null)
-            {
-                Renderer.RenderShape(g, outlinePen, transform, shape);
-            }
+            Renderer.Instance.RenderGameobject(g, this);
         }
 
         public virtual void OnCollision(Collision collision)

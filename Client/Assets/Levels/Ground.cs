@@ -9,6 +9,7 @@ namespace Client
         public Ground(Transform transform, Brush brush) : base(transform)
         {
             shape = Shape.Rectangle;
+            isStatic = true;
             this.brush = brush;
         }
     }

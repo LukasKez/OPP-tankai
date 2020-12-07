@@ -17,6 +17,8 @@ namespace Client
 
     public class GameState : Subject
     {
+        public static GameState Instance { get; } = new GameState();
+
         public bool focused;
         public Vector2 mapSize;
         public Vector2 mouseLocation;
@@ -42,12 +44,6 @@ namespace Client
         public void MouseClicked(MouseButtons button)
         {
             OnMouseClicked?.Invoke(button);
-        }
-
-        private static readonly GameState instance = new GameState();
-        public static GameState Instance
-        {
-            get { return instance; }
         }
 
         public GameState()
