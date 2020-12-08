@@ -33,6 +33,7 @@ namespace Client
 
         public static event Action<int, RemotePlayer> OnRemotePlayersChange;
         public static event Action<LevelType> OnLevelTypeChange;
+        public static event Action<string, string> OnMessageReceive;
 
         static Networking()
         {
@@ -99,9 +100,9 @@ namespace Client
                 }
             });
 
-            connection.On<string, string>("ReceiveMessage", (user, message) =>
+            connection.On<string, string>("ReceiveMessage", (name, message) =>
             {
-                Debug.WriteLine($"{user}: {message}");
+                MessageReceive(name, message);
             });
 
             connection.On<string, string>("OnSetName", (connectionId, name) =>
@@ -331,6 +332,11 @@ namespace Client
         private static void LevellTypeChange(LevelType levelType)
         {
             OnLevelTypeChange?.Invoke(levelType);
+        }
+
+        private static void MessageReceive(string name, string message)
+        {
+            OnMessageReceive?.Invoke(name, message);
         }
 
         private static int FindIndex(string id)

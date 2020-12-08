@@ -14,7 +14,7 @@ namespace Client
         {
             InitializeComponent();
 
-            IpBox.Text = Networking.host;
+            IpTextBox.Text = Networking.host;
             comboBox1.DataSource = Enum.GetValues(typeof(LevelType));
             comboBox2.DataSource = Enum.GetValues(typeof(TankType));
 
@@ -32,6 +32,7 @@ namespace Client
             GameState.Instance.Attach(this);
             Networking.OnLevelTypeChange += UpdateLevelTypeBox;
             Networking.OnRemotePlayersChange += UpdatePlayerListUI;
+            Networking.OnMessageReceive += ReceiveMessage; ;
         }
 
         private void GameForm_Paint(object sender, PaintEventArgs e)
@@ -111,6 +112,24 @@ namespace Client
             Networking.SetTankTypeAsync(type);
         }
 
+        private void ChatTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                ChatSendButton.PerformClick();
+            }
+        }
+
+        private void ChatSendButton_Click(object sender, EventArgs e)
+        {
+            if (ChatTextBox.Text != "")
+            {
+                Networking.SendMessageAsync(Options.name, ChatTextBox.Text);
+                ChatTextBox.Text = "";
+            }
+        }
+
         private void UpdateUIState(ClientState newState)
         {
             switch (newState)
@@ -141,7 +160,7 @@ namespace Client
 
         private void SetMenuButtons(bool enableIpBox, bool enableStartBtn, string startBtnText, bool enablePreGameOptions)
         {
-            IpBox.Enabled = enableIpBox;
+            IpTextBox.Enabled = enableIpBox;
             StartButton.Enabled = enableStartBtn;
             StartButton.Text = startBtnText;
 
@@ -264,6 +283,36 @@ namespace Client
             nLabel1.TextAlign = ContentAlignment.MiddleCenter;
 
             return nPanel;
+        }
+
+        private void ReceiveMessage(string name, string message)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() =>
+                {
+                    ReceiveMessage(name, message);
+                }));
+                return;
+            }
+
+            Control control = CreateMessageEntry();
+            control.Text = $"{name} : {message}";
+
+            ChatEntriesPanel.Controls.Add(control);
+            ChatEntriesPanel.Controls.SetChildIndex(control, 0);
+            ChatEntriesPanel.ScrollControlIntoView(control);
+        }
+
+        private Control CreateMessageEntry()
+        {
+            Label nLabel = new Label
+            {
+                AutoSize = true,
+                Padding = new Padding(0, 2, 0, 2)
+            };
+
+            return nLabel;
         }
     }
 }
