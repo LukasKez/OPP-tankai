@@ -12,12 +12,14 @@ namespace Client
         LightTank,
     }
 
-    public class Tank : GameObject, IControllable
+    public class Tank : GameObject, IControllable, ICloneable
     {
         [Obsolete()] public float attack = 1;     // TODO: Delete
         [Obsolete()] public float defense = 5;  // TODO: Delete
         [Obsolete()] public float health = 100;   // TODO: Delete
         [Obsolete()] public float speed = 50;    // TODO: Delete
+
+        private int id;
 
         public Engine Engine { get; set; }
         public Suspension Suspension { get; set; }
@@ -132,6 +134,31 @@ namespace Client
         public void ProjectileHit(Projectile projectile)
         {
             OnProjectileHit?.Invoke(projectile);
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
+
+        public void SetId()
+        {
+            this.id = 1;            
+        }
+        public int GetId()
+        {
+            return this.id;
+        }
+        public Memento GetMemento()
+        {
+            var copy = (Tank)this.Clone();
+            copy.transform.position = new Vector2(this.transform.position.X, this.transform.position.Y);
+            copy.brush = (Brush)this.brush.Clone();
+            return new Memento(copy, this.id);
+        }
+        public void SetMemento(Memento previousState)
+        {
+            previousState.Restore(this);
         }
     }
 }

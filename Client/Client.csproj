@@ -143,6 +143,8 @@
     <Compile Include="Assets\Flyweight\FlyweightFactory.cs" />
     <Compile Include="Assets\Flyweight\GameObjectFlyweight.cs" />
     <Compile Include="Assets\Flyweight\IFlyweight.cs" />
+    <Compile Include="Assets\Memento\Caretaker.cs" />
+    <Compile Include="Assets\Memento\Memento.cs" />
     <Compile Include="Assets\Rendering\IRenderer.cs" />
     <Compile Include="Assets\Rendering\RendererProxy.cs" />
     <Compile Include="Assets\State\AbstractState.cs" />
@@ -233,6 +235,11 @@
     <Compile Include="Assets\Tank\Tank.cs" />
     <Compile Include="Assets\Transform.cs" />
     <Compile Include="Assets\Utils.cs" />
+    <Compile Include="Assets\Visitor\BorderVisitor.cs" />
+    <Compile Include="Assets\Visitor\GroundVisitor.cs" />
+    <Compile Include="Assets\Visitor\IVisitor.cs" />
+    <Compile Include="Assets\Visitor\ObstacleVisitor.cs" />
+    <Compile Include="Assets\Visitor\SpawnerVisitor.cs" />
     <Compile Include="GameForm.cs">
       <SubType>Form</SubType>
     </Compile>

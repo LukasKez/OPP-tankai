@@ -2,33 +2,33 @@
 
 namespace Client
 {
-    class Desert : GameLevel
+    public class Desert : GameLevel
     {
         public Desert(float levelWidth, float levelHeight, float blockWidth, float blockHeight, int seed)
             : base(levelWidth, levelHeight, blockWidth, blockHeight, seed)
         {
-            stuff.Add(new Ground(new Transform(levelWidth / 2, levelHeight / 2, levelWidth, levelHeight), Brushes.LightYellow));
-
-            // Horizontal borders
-
-            GameObject gameObject = new OutlineObstacle(new Water(new Obstacle(levelWidth / 2, blockHeight / 2, levelWidth, blockHeight)));
-            gameObject.Decorate();
-            stuff.Add(gameObject);
-
-            gameObject = new OutlineObstacle(new Water(new Obstacle(levelWidth / 2, levelHeight - blockHeight + blockHeight / 2, levelWidth, blockHeight)));
-            gameObject.Decorate();
-            stuff.Add(gameObject);
-
-            // Vertical borders
-
-            gameObject = new OutlineObstacle(new Water(new Obstacle(blockWidth / 2, levelHeight / 2, blockWidth, levelHeight)));
-            gameObject.Decorate();
-            stuff.Add(gameObject);
-
-            gameObject = new OutlineObstacle(new Water(new Obstacle(levelWidth - blockWidth + blockWidth / 2, levelHeight / 2, blockWidth, levelHeight)));
-            gameObject.Decorate();
-            stuff.Add(gameObject);
         }
 
+        public override void SetUpGround(IVisitor v)
+        {
+            Accept(v);
+            visitor.Visit(this);
+        }
+        public override void SetUpBorders(IVisitor v)
+        {
+            Accept(v);
+            visitor.Visit(this);
+        }
+        public override void SetUpObstacles(IVisitor v)
+        {
+            Accept(v);
+            visitor.Visit(this);
+        }
+
+        public override void SetUpSpawners(IVisitor v)
+        {
+            Accept(v);
+            visitor.Visit(this);
+        }
     }
 }

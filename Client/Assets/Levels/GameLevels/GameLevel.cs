@@ -14,7 +14,7 @@ namespace Client
         Field,
     }
 
-    public abstract class GameLevel
+    public abstract class GameLevel : GameObject
     {
         public float levelWidth { get; private set; }
         public float levelHeight { get; private set; }
@@ -29,6 +29,8 @@ namespace Client
         private ConcurrentQueue<GameObject> toAdd = new ConcurrentQueue<GameObject>();
         private ConcurrentQueue<GameObject> toRemove = new ConcurrentQueue<GameObject>();
 
+        protected IVisitor visitor;
+
         public GameLevel(float levelWidth, float levelHeight, float blockWidth, float blockHeight, int seed)
         {
             this.levelWidth = levelWidth;
@@ -38,57 +40,8 @@ namespace Client
             this.blockHeight = blockHeight;
 
             this.seed = seed;
+            
 
-        }
-
-        public virtual void SetupObstacles(LevelType levelType)
-        {
-            int vertEnd = (int)(levelWidth / blockWidth);
-            int hozEnd = (int)(levelHeight / blockHeight);
-
-            seed %= 4;
-
-            for (int k = 4; k <= hozEnd - 2; k += 3)
-            {
-                for (int z = 6; z < vertEnd; z += seed + 6)
-                {
-                    if (seed == 0)
-                    {
-                        GameObject gameObject = new OutlineObstacle(new DamageObstacle(new Boulder
-                            (new Obstacle((z + seed) * blockWidth, k * blockHeight, blockWidth, blockHeight))));
-                        gameObject.Decorate();
-                        stuff.Add(gameObject);
-                        seed++;
-                    }
-                    else if (seed == 1)
-                    {
-
-                        GameObject gameObject = new OutlineObstacle(new DamageObstacle(new Water(
-                            new Obstacle(z * blockWidth, k * blockHeight, blockWidth, blockHeight))));
-                        gameObject.Decorate();
-                        stuff.Add(gameObject);
-                        seed++;
-                    }
-                    else if (seed == 2)
-                    {
-
-                        GameObject gameObject = new OutlineObstacle(new DamageObstacle(new Tree(
-                            new Obstacle((z - seed) * blockWidth, k * blockHeight, blockWidth, blockHeight))));
-                        gameObject.Decorate();
-                        stuff.Add(gameObject);
-                        seed++;
-                    }
-                    else if (seed == 3)
-                    {
-                        GameObject gameObject = new OutlineObstacle(new DamageObstacle(new Wall(
-                            new Obstacle(z * blockWidth, k * blockHeight, blockWidth, blockHeight))));
-                        gameObject.Decorate();
-                        stuff.Add(gameObject);
-                        seed++;
-                    }
-                    seed %= 4;
-                }
-            }
         }
 
         public void Add(GameObject gameObject)
@@ -149,5 +102,40 @@ namespace Client
 
             return list;
         }
+
+        public void AddStuff(GameObject gameObject)
+        {
+            stuff.Add(gameObject);
+        }
+
+        public virtual void Accept(IVisitor v)
+        {
+            this.visitor = v;
+        }
+
+        public sealed override void SetUpLevel()
+        {
+            IVisitor v;
+
+            v = new GroundVisitor();
+            SetUpGround(v);
+
+            v = new BorderVisitor();
+            SetUpBorders(v);
+
+            v = new ObstacleVisitor();
+            SetUpObstacles(v);
+
+            v = new SpawnerVisitor();
+            SetUpSpawners(v);
+
+        }
+        public abstract void SetUpGround(IVisitor v);
+
+        public abstract void SetUpBorders(IVisitor v);
+
+        public abstract void SetUpObstacles(IVisitor v);
+
+        public abstract void SetUpSpawners(IVisitor v);
     }
 }

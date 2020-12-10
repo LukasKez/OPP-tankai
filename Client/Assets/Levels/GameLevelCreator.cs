@@ -28,7 +28,7 @@ namespace Client
                     gameLevel = new Field(levelWidth, levelHight, blockWidth, blockHeight, seed);
                     break;
             }
-            gameLevel.SetupObstacles(levelType);
+            gameLevel.SetUpLevel();
             return gameLevel;
         }
     }
