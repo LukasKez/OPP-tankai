@@ -6,7 +6,7 @@ namespace Client
 {
     class Track : GameObject
     {
-        public Track(float x, float y, Vector2 size) : base(new Transform(x, y, size.X / 2, size.Y + 6))
+        public Track(float x, float y, Vector2 size) : base(new TransformLeaf(x, y, size.X / 2, size.Y + 6))
         {
             shape = Shape.Rectangle;
             isShadowCaster = true;

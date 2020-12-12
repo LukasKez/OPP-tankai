@@ -34,8 +34,8 @@ namespace Client
             private set => _AABB = value;
         }
 
-        private Transform _transform;
-        public Transform transform
+        private TransformBase _transform;
+        public TransformBase transform
         {
             get
             {
@@ -63,7 +63,7 @@ namespace Client
         {
         }
 
-        protected GameObject(Transform transform)
+        protected GameObject(TransformBase transform)
         {
             this.transform = transform;
             GenerateAABB();
@@ -118,7 +118,7 @@ namespace Client
 
         public void Destroy()
         {
-            foreach (Transform item in transform)
+            foreach (TransformBase item in transform)
             {
                 item.Dispose();
             }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Numerics;
 
 namespace Client
 {
@@ -17,8 +18,9 @@ namespace Client
 
         private float waitTime;
         private Random rnd;
+        private ParticleSystem shotParticles;
 
-        public Gun(float length) : base(new Transform(0, -length / 2, 6, length))
+        public Gun(float length) : base(new TransformLeaf(0, -length / 2, 6, length))
         {
             shape = Shape.Rectangle;
             isShadowCaster = true;
@@ -26,6 +28,12 @@ namespace Client
             outlinePen = new Pen(Color.FromArgb(64, Color.Black), 1);
 
             rnd = new Random();
+            shotParticles = new ParticleSystem(new Vector2(0, -length), 0, 20)
+            {
+                particleBrush = Brushes.Red,
+                lifeTime = 0.1f,
+            };
+            Instantiate(shotParticles, this);
         }
 
         public override void Update(float deltaTime)
@@ -65,6 +73,8 @@ namespace Client
 
             spreadAngle = maxSpreadAngle;
             waitTime = reloadTime;
+
+            shotParticles.Emit(10);
         }
     }
 }

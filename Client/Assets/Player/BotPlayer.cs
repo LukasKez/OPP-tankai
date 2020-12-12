@@ -66,7 +66,7 @@ namespace Client
         {
             Vector2 vertical = new Vector2();
             float speed = controllable.speed;
-            Transform tr = controllable.transform;
+            TransformBase tr = controllable.transform;
             
             // Test strategy pattern
             if (elapsedTime < 3f) {

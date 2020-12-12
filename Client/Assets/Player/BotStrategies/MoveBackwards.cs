@@ -9,7 +9,7 @@ namespace Client
 {
     class MoveBackwards : StrategyInterface
     {
-        public void DoAction(Transform tr, ref Vector2 vertical, float speed, float deltaTime)
+        public void DoAction(TransformBase tr, ref Vector2 vertical, float speed, float deltaTime)
         {
             vertical.Y = speed * deltaTime;
         }

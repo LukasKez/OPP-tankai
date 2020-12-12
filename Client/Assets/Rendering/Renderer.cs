@@ -78,7 +78,7 @@ namespace Client
             }
         }
 
-        public void RenderShape(Graphics g, Brush brush, Transform transform, Shape shape, Vector2 offset = default)
+        public void RenderShape(Graphics g, Brush brush, TransformBase transform, Shape shape, Vector2 offset = default)
         {
             if (shape == Shape.None) return;
 
@@ -109,7 +109,7 @@ namespace Client
             }
         }
 
-        public void RenderShape(Graphics g, Pen pen, Transform transform, Shape shape, Vector2 offset = default)
+        public void RenderShape(Graphics g, Pen pen, TransformBase transform, Shape shape, Vector2 offset = default)
         {
             if (shape == Shape.None) return;
 

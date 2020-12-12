@@ -44,7 +44,7 @@ namespace Client
         {
             base.Render(g);
 
-            Transform tr = controllable.transform;
+            TransformBase tr = controllable.transform;
             float x = tr.position.X;
             float y = tr.position.Y - Control.DefaultFont.Height - 18;
             g.DrawString(name, Control.DefaultFont, Brushes.Black, x, y, nameFormat);

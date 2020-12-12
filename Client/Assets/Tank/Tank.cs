@@ -84,7 +84,7 @@ namespace Client
         public void LookAt(float direction)
         {
             Turret.Rotate(direction);
-            Turret.gun.Aim(-1f * Math.Abs(direction));
+            Turret.gun.Aim(-0.1f * Math.Abs(direction));
         }
 
         public void Action()

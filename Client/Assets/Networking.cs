@@ -285,7 +285,7 @@ namespace Client
 
             try
             {
-                Transform tr = projectile.transform;
+                TransformBase tr = projectile.transform;
                 var stats = new ProjectileStats()
                 {
                     damage = projectile.damage,
@@ -309,7 +309,7 @@ namespace Client
 
             try
             {
-                Transform tr = tank.transform;
+                TransformBase tr = tank.transform;
                 float turetRot = tank.Turret.transform.rotation;
                 await connection.SendAsync("SendPositionUpdate", tr.position.X, tr.position.Y, tr.rotation, turetRot);
             }

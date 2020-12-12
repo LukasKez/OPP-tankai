@@ -139,8 +139,8 @@ namespace Client
 
         private static bool CirclevsCircleOverlap(GameObject item1, GameObject item2, ref Collision collision)
         {
-            Transform circle1 = item1.transform;
-            Transform circle2 = item2.transform;
+            TransformBase circle1 = item1.transform;
+            TransformBase circle2 = item2.transform;
 
             float radius = (Math.Max(circle1.size.X, circle1.size.Y) + Math.Max(circle2.size.X, circle2.size.Y)) / 2;
             Vector2 normal = circle2.position - circle1.position;
@@ -162,8 +162,8 @@ namespace Client
             float eps = 1e-3f;
 
             BoxAABB rect = item1.AABB;
-            Transform rectTr = item1.transform;
-            Transform circle = item2.transform;
+            TransformBase rectTr = item1.transform;
+            TransformBase circle = item2.transform;
 
             if (rectTr.position == circle.position)
                 return false;
@@ -190,8 +190,8 @@ namespace Client
 
         private static void ResolveCollision(GameObject item1, GameObject item2, Collision collision, bool equaly = false)
         {
-            Transform tr1 = item1.transform;
-            Transform tr2 = item2.transform;
+            TransformBase tr1 = item1.transform;
+            TransformBase tr2 = item2.transform;
 
             Vector2 correction = collision.normal * collision.penetration;
 

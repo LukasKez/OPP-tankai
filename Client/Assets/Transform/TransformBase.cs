@@ -5,10 +5,9 @@ using System.Numerics;
 
 namespace Client
 {
-    public class Transform : IEnumerable<Transform>, IDisposable
+    public abstract class TransformBase : IEnumerable<TransformBase>, IDisposable
     {
-        public Transform parent;
-        public List<Transform> childs;
+        public TransformBase parent;
         public GameObject gameObject;
 
         public float rotation;
@@ -27,19 +26,15 @@ namespace Client
 
         public Vector2 size;
 
-        public Transform()
-        {
-            childs = new List<Transform>();
-        }
 
-        public Transform(float x = 0, float y = 0, float w = 1, float h = 1, float r = 0) : this()
+        protected TransformBase(float x = 0, float y = 0, float w = 1, float h = 1, float r = 0)
         {
             position = new Vector2(x, y);
             size = new Vector2(w, h);
             rotation = r;
         }
 
-        public Transform(Transform transform) : this()
+        protected TransformBase(TransformBase transform)
         {
             position = new Vector2(transform.position.X, transform.position.Y);
             size = new Vector2(transform.size.X, transform.size.Y);
@@ -47,28 +42,16 @@ namespace Client
             parent = transform.parent;
         }
 
-        public void AddChild(Transform child)
+        public virtual void AddChild(TransformBase child)
         {
-            childs.Add(child);
         }
 
-        public IEnumerator<Transform> GetEnumerator()
-        {
-            yield return this;
-            foreach (Transform child in childs)
-            {
-                foreach (Transform item in child)
-                {
-                    yield return item;
-                }
-            }
-        }
+        public abstract IEnumerator<TransformBase> GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
-
 
         public void Dispose()
         {
@@ -76,12 +59,6 @@ namespace Client
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposing)
-                return;
-
-            GameState.Instance.gameLevel?.Remove(gameObject);
-        }
+        protected abstract void Dispose(bool disposing);
     }
 }

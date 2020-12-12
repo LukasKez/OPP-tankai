@@ -36,7 +36,7 @@ namespace Client
             }
             TankDirector director = new TankDirector(builder);
 
-            Transform tr = spawnPoint.transform;
+            TransformBase tr = spawnPoint.transform;
             director.Construct(tr.position.X, tr.position.Y);
 
             controllable = builder.GetResult();

@@ -69,12 +69,12 @@ namespace Client
             Renderer.RendererInstance.RenderGameobject(g, obj);
         }
 
-        public void RenderShape(Graphics g, Brush brush, Transform transform, Shape shape, Vector2 offset = default)
+        public void RenderShape(Graphics g, Brush brush, TransformBase transform, Shape shape, Vector2 offset = default)
         {
             Renderer.RendererInstance.RenderShape(g, brush, transform, shape, offset);
         }
 
-        public void RenderShape(Graphics g, Pen pen, Transform transform, Shape shape, Vector2 offset = default)
+        public void RenderShape(Graphics g, Pen pen, TransformBase transform, Shape shape, Vector2 offset = default)
         {
             Renderer.RendererInstance.RenderShape(g, pen, transform, shape, offset);
         }
