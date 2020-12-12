@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -33,9 +32,16 @@ namespace Server.Hubs
 
     public class GameHub : Hub
     {
+        Validator validator;
+
+        public GameHub()
+        {
+            validator = new GameStartedValidator().SetNext(new FullLobbyValidator().SetNext(new SameNameValidator()));
+        }
+
         public override async Task OnConnectedAsync()
         {
-            if (GameHandler.isGameStarted || GameHandler.players.Count > GameHandler.maxPlayerCount)
+            if (!validator.Validate(this))
             {
                 await Clients.Caller.SendAsync("DisconnectClient");
                 await base.OnConnectedAsync();
@@ -79,6 +85,11 @@ namespace Server.Hubs
             GameHandler.players[Context.ConnectionId] = stats;
 
             await Clients.Others.SendAsync("OnSetName", Context.ConnectionId, name);
+        }
+
+        public async Task OverrideName(string name)
+        {
+            await Clients.Caller.SendAsync("OnOverrideName", name);
         }
 
         public async Task SetIsReady(bool isReady)

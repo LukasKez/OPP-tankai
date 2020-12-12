@@ -48,7 +48,7 @@ namespace Client
             remotePlayers.Clear();
 
             connection = new HubConnectionBuilder()
-                .WithUrl(scheme + host + path)
+                .WithUrl(scheme + host + path + "/?name=" + Options.name)
                 .WithAutomaticReconnect()
                 .Build();
 
@@ -112,6 +112,11 @@ namespace Client
                     player.name = name;
                     RemotePlayerChange(FindIndex(connectionId), player);
                 }
+            });
+
+            connection.On<string>("OnOverrideName", (name) =>
+            {
+                Options.name = name;
             });
 
             connection.On<string, bool>("OnSetIsReady", (connectionId, isReady) =>

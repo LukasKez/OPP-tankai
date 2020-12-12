@@ -28,12 +28,12 @@ namespace Client
             outlinePen = new Pen(Color.FromArgb(64, Color.Black), 1);
 
             rnd = new Random();
-            shotParticles = new ParticleSystem(new Vector2(0, -length), 0, 20)
-            {
-                particleBrush = Brushes.Red,
-                lifeTime = 0.1f,
-            };
-            Instantiate(shotParticles, this);
+            //shotParticles = new ParticleSystem(new Vector2(0, -length), 0, 20)
+            //{
+            //    particleBrush = Brushes.Red,
+            //    lifeTime = 0.1f,
+            //};
+            //Instantiate(shotParticles, this);
         }
 
         public override void Update(float deltaTime)
@@ -74,7 +74,7 @@ namespace Client
             spreadAngle = maxSpreadAngle;
             waitTime = reloadTime;
 
-            shotParticles.Emit(10);
+            //shotParticles.Emit(10);
         }
     }
 }
