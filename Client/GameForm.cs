@@ -9,6 +9,8 @@ namespace Client
     public partial class GameForm : Form, IObserver
     {
         string originalText;
+        User user;
+        Mediator mediator;
 
         public GameForm()
         {
@@ -23,6 +25,10 @@ namespace Client
 
             Select();
             Focus();
+
+            mediator = new Mediator();
+            user = new User(mediator, Options.name);
+            mediator.AddUser(user);
         }
 
         private void GameForm_Load(object sender, EventArgs e)
@@ -125,7 +131,7 @@ namespace Client
         {
             if (ChatTextBox.Text != "")
             {
-                Networking.SendMessageAsync(Options.name, ChatTextBox.Text);
+                user.SendMessage(ChatTextBox.Text);
                 ChatTextBox.Text = "";
             }
         }
@@ -313,6 +319,11 @@ namespace Client
             };
 
             return nLabel;
+        }
+
+        private void ChatEntriesPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

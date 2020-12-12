@@ -60,9 +60,10 @@ namespace Client
             // 
             // StartButton
             // 
-            this.StartButton.Location = new System.Drawing.Point(5, 31);
+            this.StartButton.Location = new System.Drawing.Point(7, 38);
+            this.StartButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.StartButton.Name = "StartButton";
-            this.StartButton.Size = new System.Drawing.Size(190, 23);
+            this.StartButton.Size = new System.Drawing.Size(253, 28);
             this.StartButton.TabIndex = 1;
             this.StartButton.Text = "Join Game";
             this.StartButton.UseVisualStyleBackColor = true;
@@ -75,9 +76,10 @@ namespace Client
             this.MenuPanel.Controls.Add(this.PlayerListPanel);
             this.MenuPanel.Controls.Add(this.ButtonsPanel);
             this.MenuPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.MenuPanel.Location = new System.Drawing.Point(800, 0);
+            this.MenuPanel.Location = new System.Drawing.Point(1064, 0);
+            this.MenuPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MenuPanel.Name = "MenuPanel";
-            this.MenuPanel.Size = new System.Drawing.Size(200, 600);
+            this.MenuPanel.Size = new System.Drawing.Size(267, 729);
             this.MenuPanel.TabIndex = 0;
             // 
             // ChatPanel
@@ -85,10 +87,11 @@ namespace Client
             this.ChatPanel.Controls.Add(this.ChatEntriesPanel);
             this.ChatPanel.Controls.Add(this.panel2);
             this.ChatPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ChatPanel.Location = new System.Drawing.Point(0, 142);
+            this.ChatPanel.Location = new System.Drawing.Point(0, 173);
+            this.ChatPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ChatPanel.Name = "ChatPanel";
-            this.ChatPanel.Padding = new System.Windows.Forms.Padding(5);
-            this.ChatPanel.Size = new System.Drawing.Size(200, 388);
+            this.ChatPanel.Padding = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.ChatPanel.Size = new System.Drawing.Size(267, 471);
             this.ChatPanel.TabIndex = 1;
             // 
             // ChatEntriesPanel
@@ -97,12 +100,14 @@ namespace Client
             this.ChatEntriesPanel.AutoScrollMargin = new System.Drawing.Size(0, 4);
             this.ChatEntriesPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChatEntriesPanel.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.ChatEntriesPanel.Location = new System.Drawing.Point(5, 5);
+            this.ChatEntriesPanel.Location = new System.Drawing.Point(7, 6);
+            this.ChatEntriesPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ChatEntriesPanel.Name = "ChatEntriesPanel";
             this.ChatEntriesPanel.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.ChatEntriesPanel.Size = new System.Drawing.Size(190, 348);
+            this.ChatEntriesPanel.Size = new System.Drawing.Size(253, 423);
             this.ChatEntriesPanel.TabIndex = 1;
             this.ChatEntriesPanel.WrapContents = false;
+            this.ChatEntriesPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ChatEntriesPanel_Paint);
             // 
             // panel2
             // 
@@ -110,16 +115,18 @@ namespace Client
             this.panel2.Controls.Add(this.ChatSendButton);
             this.panel2.Controls.Add(this.ChatTextBox);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(5, 353);
+            this.panel2.Location = new System.Drawing.Point(7, 429);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(190, 30);
+            this.panel2.Size = new System.Drawing.Size(253, 36);
             this.panel2.TabIndex = 0;
             // 
             // ChatSendButton
             // 
-            this.ChatSendButton.Location = new System.Drawing.Point(145, 3);
+            this.ChatSendButton.Location = new System.Drawing.Point(193, 4);
+            this.ChatSendButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ChatSendButton.Name = "ChatSendButton";
-            this.ChatSendButton.Size = new System.Drawing.Size(40, 22);
+            this.ChatSendButton.Size = new System.Drawing.Size(53, 27);
             this.ChatSendButton.TabIndex = 1;
             this.ChatSendButton.Text = "Send";
             this.ChatSendButton.UseVisualStyleBackColor = true;
@@ -127,9 +134,10 @@ namespace Client
             // 
             // ChatTextBox
             // 
-            this.ChatTextBox.Location = new System.Drawing.Point(3, 4);
+            this.ChatTextBox.Location = new System.Drawing.Point(4, 5);
+            this.ChatTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ChatTextBox.Name = "ChatTextBox";
-            this.ChatTextBox.Size = new System.Drawing.Size(136, 20);
+            this.ChatTextBox.Size = new System.Drawing.Size(180, 22);
             this.ChatTextBox.TabIndex = 0;
             this.ChatTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChatTextBox_KeyDown);
             // 
@@ -139,11 +147,12 @@ namespace Client
             this.PlayerListPanel.Controls.Add(this.panel1);
             this.PlayerListPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.PlayerListPanel.FlowDirection = System.Windows.Forms.FlowDirection.BottomUp;
-            this.PlayerListPanel.Location = new System.Drawing.Point(0, 530);
-            this.PlayerListPanel.MaximumSize = new System.Drawing.Size(200, 214);
+            this.PlayerListPanel.Location = new System.Drawing.Point(0, 644);
+            this.PlayerListPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.PlayerListPanel.MaximumSize = new System.Drawing.Size(267, 263);
             this.PlayerListPanel.Name = "PlayerListPanel";
-            this.PlayerListPanel.Padding = new System.Windows.Forms.Padding(2);
-            this.PlayerListPanel.Size = new System.Drawing.Size(200, 70);
+            this.PlayerListPanel.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.PlayerListPanel.Size = new System.Drawing.Size(267, 85);
             this.PlayerListPanel.TabIndex = 2;
             this.PlayerListPanel.WrapContents = false;
             // 
@@ -152,26 +161,29 @@ namespace Client
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(5, 3);
+            this.panel1.Location = new System.Drawing.Point(7, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(2);
-            this.panel1.Size = new System.Drawing.Size(190, 60);
+            this.panel1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Size = new System.Drawing.Size(253, 73);
             this.panel1.TabIndex = 0;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(159, 2);
+            this.label2.Location = new System.Drawing.Point(212, 2);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 24);
+            this.label2.Size = new System.Drawing.Size(32, 30);
             this.label2.TabIndex = 1;
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label1
             // 
             this.label1.AutoEllipsis = true;
-            this.label1.Location = new System.Drawing.Point(5, 2);
+            this.label1.Location = new System.Drawing.Point(7, 2);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(148, 24);
+            this.label1.Size = new System.Drawing.Size(197, 30);
             this.label1.TabIndex = 0;
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -188,46 +200,49 @@ namespace Client
             this.ButtonsPanel.Controls.Add(this.OptionsButton);
             this.ButtonsPanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ButtonsPanel.Location = new System.Drawing.Point(0, 0);
+            this.ButtonsPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ButtonsPanel.Name = "ButtonsPanel";
-            this.ButtonsPanel.Padding = new System.Windows.Forms.Padding(2);
-            this.ButtonsPanel.Size = new System.Drawing.Size(200, 142);
+            this.ButtonsPanel.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.ButtonsPanel.Size = new System.Drawing.Size(267, 173);
             this.ButtonsPanel.TabIndex = 0;
             // 
             // comboBox2
             // 
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(71, 116);
+            this.comboBox2.Location = new System.Drawing.Point(95, 143);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(124, 21);
+            this.comboBox2.Size = new System.Drawing.Size(164, 24);
             this.comboBox2.TabIndex = 4;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
             // 
             // tankLabel
             // 
             this.tankLabel.AutoSize = true;
-            this.tankLabel.Location = new System.Drawing.Point(5, 119);
-            this.tankLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.tankLabel.Location = new System.Drawing.Point(7, 146);
+            this.tankLabel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tankLabel.Name = "tankLabel";
-            this.tankLabel.Size = new System.Drawing.Size(59, 13);
+            this.tankLabel.Size = new System.Drawing.Size(76, 17);
             this.tankLabel.TabIndex = 0;
             this.tankLabel.Text = "Tank Type";
             // 
             // IpLabel
             // 
             this.IpLabel.AutoSize = true;
-            this.IpLabel.Location = new System.Drawing.Point(5, 8);
-            this.IpLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.IpLabel.Location = new System.Drawing.Point(7, 10);
+            this.IpLabel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.IpLabel.Name = "IpLabel";
-            this.IpLabel.Size = new System.Drawing.Size(58, 13);
+            this.IpLabel.Size = new System.Drawing.Size(76, 17);
             this.IpLabel.TabIndex = 0;
             this.IpLabel.Text = "IP Address";
             // 
             // IpTextBox
             // 
-            this.IpTextBox.Location = new System.Drawing.Point(69, 5);
+            this.IpTextBox.Location = new System.Drawing.Point(92, 6);
+            this.IpTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.IpTextBox.Name = "IpTextBox";
-            this.IpTextBox.Size = new System.Drawing.Size(126, 20);
+            this.IpTextBox.Size = new System.Drawing.Size(167, 22);
             this.IpTextBox.TabIndex = 0;
             this.IpTextBox.TextChanged += new System.EventHandler(this.IpBox_TextChanged);
             // 
@@ -235,27 +250,29 @@ namespace Client
             // 
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(71, 89);
+            this.comboBox1.Location = new System.Drawing.Point(95, 110);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(124, 21);
+            this.comboBox1.Size = new System.Drawing.Size(164, 24);
             this.comboBox1.TabIndex = 3;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // levelLabel
             // 
             this.levelLabel.AutoSize = true;
-            this.levelLabel.Location = new System.Drawing.Point(5, 92);
-            this.levelLabel.Margin = new System.Windows.Forms.Padding(3);
+            this.levelLabel.Location = new System.Drawing.Point(7, 113);
+            this.levelLabel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.levelLabel.Name = "levelLabel";
-            this.levelLabel.Size = new System.Drawing.Size(60, 13);
+            this.levelLabel.Size = new System.Drawing.Size(78, 17);
             this.levelLabel.TabIndex = 0;
             this.levelLabel.Text = "Level Type";
             // 
             // OptionsButton
             // 
-            this.OptionsButton.Location = new System.Drawing.Point(5, 60);
+            this.OptionsButton.Location = new System.Drawing.Point(7, 74);
+            this.OptionsButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.OptionsButton.Name = "OptionsButton";
-            this.OptionsButton.Size = new System.Drawing.Size(190, 23);
+            this.OptionsButton.Size = new System.Drawing.Size(253, 28);
             this.OptionsButton.TabIndex = 2;
             this.OptionsButton.Text = "Options";
             this.OptionsButton.UseVisualStyleBackColor = true;
@@ -263,16 +280,17 @@ namespace Client
             // 
             // GameForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CausesValidation = false;
-            this.ClientSize = new System.Drawing.Size(1000, 600);
+            this.ClientSize = new System.Drawing.Size(1331, 729);
             this.Controls.Add(this.MenuPanel);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1016, 639);
-            this.MinimumSize = new System.Drawing.Size(1016, 639);
+            this.MaximumSize = new System.Drawing.Size(1349, 776);
+            this.MinimumSize = new System.Drawing.Size(1349, 776);
             this.Name = "GameForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Client
 {
-    class PlayingState : AbstractState
+    public interface IMediator
     {
-        public override void stateOperation()
-        {
-            
-        }
+        void AddUser(User entity);
+        void BroadcastMessage(string name, string msg);
     }
 }
