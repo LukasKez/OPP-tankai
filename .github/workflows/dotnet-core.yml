@@ -1,0 +1,23 @@
+name: .NET Framework
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.5
+    - name: Restore NuGet packages
+      run: nuget restore OPP-tankai.sln
+    - name: Build solution
+      run: msbuild OPP-tankai.sln /p:Configuration=Release

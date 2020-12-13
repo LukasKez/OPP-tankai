@@ -48,7 +48,8 @@ namespace Client.Test
             obstacle = new OutlineObstacle(obstacle);
             obstacle.Decorate();
 
-            Assert.IsTrue(obstacle.outlinePen.Color.Equals(Color.FromArgb(64, Color.Black)));
+            Color color = (obstacle.brush as SolidBrush).Color;
+            Assert.IsTrue(obstacle.outlinePen.Color.Equals(color.Tint(Color.FromArgb(64, Color.Black))));
 
         }
     }
