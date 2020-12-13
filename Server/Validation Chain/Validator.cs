@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using Server.Hubs;
+﻿using Server.Hubs;
 using System;
 
 namespace Server
@@ -13,7 +12,7 @@ namespace Server
 
         }
 
-        public Validator SetNext(Validator nextlogger)
+        public Validator SetNext(Validator nextValidator)
         {
             Validator lastValidator = this;
 
@@ -22,7 +21,7 @@ namespace Server
                 lastValidator = lastValidator.next;
             }
 
-            lastValidator.next = nextlogger;
+            lastValidator.next = nextValidator;
             return this;
         }
 
