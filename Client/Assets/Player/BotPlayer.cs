@@ -39,11 +39,9 @@ namespace Client
 
         public override void Update(float deltaTime)
         {
-            base.Update(deltaTime);
+            base.Update(deltaTime);            
 
             
-
-
             if (alive==true)
             {
                 elapsedTime += deltaTime;
@@ -102,17 +100,7 @@ namespace Client
         
         public void RemoveBotTank()
         {
-
-            GameState.Instance.gameLevel.Remove(controllable.Suspension.rightTrack);
-            GameState.Instance.gameLevel.Remove(controllable.Suspension.leftTrack);
-
-            GameState.Instance.gameLevel.Remove(controllable.Suspension);
-
-            GameState.Instance.gameLevel.Remove(controllable);
-
-            GameState.Instance.gameLevel.Remove(controllable.Turret);
-
-            GameState.Instance.gameLevel.Remove(controllable.Turret.gun);
+            Despawn();
         }
         public void RestoreBotTank()
         {
