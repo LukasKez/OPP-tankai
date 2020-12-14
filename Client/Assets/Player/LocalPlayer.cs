@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Numerics;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Windows.Input;
 
@@ -149,6 +150,11 @@ namespace Client
 
             point1 = Utils.RotatedVector(turretAngle, lenght2) + position;
             g.DrawArc(crosshair, point1.X - 3, point1.Y - 3, 6, 6, turretAngle - 90, 180);
+        }
+
+        public void SetPosition(int x, int y)
+        {
+            controllable.transform.position = new Vector2(x, y);
         }
     }
 }

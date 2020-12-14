@@ -144,6 +144,11 @@
     <Compile Include="Assets\Flyweight\GameObjectFlyweight.cs" />
     <Compile Include="Assets\Flyweight\IFlyweight.cs" />
     <Compile Include="Assets\Levels\GameLevels\BaseGameLevel.cs" />
+    <Compile Include="Assets\Interpreter\AbstractExpression.cs" />
+    <Compile Include="Assets\Interpreter\NumberExpression.cs" />
+    <Compile Include="Assets\Interpreter\Parser.cs" />
+    <Compile Include="Assets\Interpreter\PlaceObstacleExpression.cs" />
+    <Compile Include="Assets\Interpreter\SetPositionExpression.cs" />
     <Compile Include="Assets\Mediator\IMediator.cs" />
     <Compile Include="Assets\Mediator\Mediator.cs" />
     <Compile Include="Assets\Mediator\MessageBroadcaster.cs" />

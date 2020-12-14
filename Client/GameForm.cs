@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Numerics;
 using System.Windows.Forms;
+using Client.Interpreter;
 
 namespace Client
 {
@@ -38,7 +39,7 @@ namespace Client
             GameState.Instance.Attach(this);
             Networking.OnLevelTypeChange += UpdateLevelTypeBox;
             Networking.OnRemotePlayersChange += UpdatePlayerListUI;
-            Networking.OnMessageReceive += ReceiveMessage; ;
+            Networking.OnMessageReceive += ReceiveMessage;
         }
 
         private void GameForm_Paint(object sender, PaintEventArgs e)
@@ -120,20 +121,25 @@ namespace Client
 
         private void ChatTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                ChatSendButton.PerformClick();
-            }
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+            e.SuppressKeyPress = true;
+            ChatSendButton.PerformClick();
         }
 
         private void ChatSendButton_Click(object sender, EventArgs e)
         {
-            if (ChatTextBox.Text != "")
-            {
-                user.SendMessage(ChatTextBox.Text);
-                ChatTextBox.Text = "";
-            }
+            if (ChatTextBox.Text == "")
+                return;
+
+            string message = ChatTextBox.Text;
+            ChatTextBox.Text = "";
+
+            if (Parser.ParseAndExecute(message))
+                return;
+
+            user.SendMessage(message);
         }
 
         private void UpdateUIState(ClientState newState)
@@ -156,8 +162,6 @@ namespace Client
                 case ClientState.Playing:
                 case ClientState.Died:
                     SetMenuButtons(false, true, "Leave Game", false);
-                    break;
-                default:
                     break;
             }
 
@@ -319,11 +323,6 @@ namespace Client
             };
 
             return nLabel;
-        }
-
-        private void ChatEntriesPanel_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
