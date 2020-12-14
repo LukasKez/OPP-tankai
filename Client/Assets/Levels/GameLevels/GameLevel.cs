@@ -14,7 +14,7 @@ namespace Client
         Field,
     }
 
-    public abstract class GameLevel : GameObject
+    public abstract class GameLevel : BaseGameLevel
     {
         public float levelWidth { get; private set; }
         public float levelHeight { get; private set; }
@@ -107,7 +107,7 @@ namespace Client
         {
             stuff.Add(gameObject);
         }
-
+        
         public virtual void Accept(IVisitor v)
         {
             this.visitor = v;

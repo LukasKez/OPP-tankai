@@ -143,6 +143,7 @@
     <Compile Include="Assets\Flyweight\FlyweightFactory.cs" />
     <Compile Include="Assets\Flyweight\GameObjectFlyweight.cs" />
     <Compile Include="Assets\Flyweight\IFlyweight.cs" />
+    <Compile Include="Assets\Levels\GameLevels\BaseGameLevel.cs" />
     <Compile Include="Assets\Mediator\IMediator.cs" />
     <Compile Include="Assets\Mediator\Mediator.cs" />
     <Compile Include="Assets\Mediator\MessageBroadcaster.cs" />

@@ -9,8 +9,8 @@ namespace Client
         public float rotationSpeedModifier;
         public float loadLimit;
 
-        private Track leftTrack;
-        private Track rightTrack;
+        public Track leftTrack { get; private set; }
+        public Track rightTrack { get; private set; }
 
         public Suspension(Vector2 size)
         {

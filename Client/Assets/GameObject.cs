@@ -127,8 +127,5 @@ namespace Client
         public virtual void Decorate()
         {
         }
-        public virtual void SetUpLevel()
-        {
-        }
     }
 }

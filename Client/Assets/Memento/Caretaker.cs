@@ -1,6 +1,4 @@
-﻿
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Client
 {
@@ -20,7 +18,5 @@ namespace Client
         {
             return mementos[index];
         }
-
-
     }
 }

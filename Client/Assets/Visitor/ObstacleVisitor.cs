@@ -124,7 +124,28 @@ namespace Client
 
         public void Visit(Cave cave)
         {
-            
+            GameObject obj;
+            obj = new OutlineObstacle(new Wall(new Obstacle(cave.levelWidth *0.35f, cave.blockHeight*4.5f, cave.blockWidth, cave.blockHeight * 7)));
+            obj.Decorate();
+            cave.AddStuff(obj);
+            obj = new OutlineObstacle(new Wall(new Obstacle(cave.levelWidth * 0.57f, cave.blockHeight * 4 * 1.87f, cave.blockWidth*10, cave.blockHeight)));
+            obj.Decorate();
+            cave.AddStuff(obj);
+            obj = new OutlineObstacle(new Wall(new Obstacle(cave.levelWidth * 0.80f, cave.blockHeight * 7* 1.8f, cave.blockWidth, cave.blockHeight * 11)));
+            obj.Decorate();
+            cave.AddStuff(obj);
+
+
+
+            obj = new OutlineObstacle(new Wall(new Obstacle(cave.levelWidth * 0.65f, cave.levelHeight-cave.blockHeight * 4.5f, cave.blockWidth, cave.blockHeight * 7)));
+            obj.Decorate();
+            cave.AddStuff(obj);
+            obj = new OutlineObstacle(new Wall(new Obstacle(cave.levelWidth-cave.levelWidth * 0.57f, cave.levelHeight-cave.blockHeight * 4 * 1.87f, cave.blockWidth * 10, cave.blockHeight)));
+            obj.Decorate();
+            cave.AddStuff(obj);
+            obj = new OutlineObstacle(new Wall(new Obstacle(cave.levelWidth-cave.levelWidth * 0.80f, cave.levelHeight-cave.blockHeight * 7 * 1.8f, cave.blockWidth, cave.blockHeight * 11)));
+            obj.Decorate();
+            cave.AddStuff(obj);
         }
 
         public void Visit(Desert desert)

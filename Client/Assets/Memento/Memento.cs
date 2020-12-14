@@ -21,8 +21,9 @@ namespace Client
                 tank.attack = state.attack;
                 tank.defense = state.defense;
 
+                tank.transform = state.transform;
                 tank.transform.position = new Vector2(state.transform.position.X, state.transform.position.Y);
-                tank.brush = (Brush)state.brush.Clone();
+                tank.transform.size = new Vector2(state.transform.size.X, state.transform.size.Y);
             }
         }
     }

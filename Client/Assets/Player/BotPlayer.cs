@@ -9,17 +9,12 @@ using System.Windows.Input;
 
 namespace Client
 {
-    public enum BotState
-    {
-        Alive,
-        Dead,
-    }
-
     class BotPlayer : Player
     {
         protected StrategyInterface action;
 
         private float elapsedTime;
+        private float deadTime;
 
         private bool alive = true;
 
@@ -32,33 +27,44 @@ namespace Client
             controllable.transform.position = new Vector2(180, 200);
             controllable.brush = Brushes.Blue;
 
+            controllable.OnProjectileHit += OnProjectileHit;
+
             controllable.SetId();
             caretaker = new Caretaker();
+
+            controllable.health = 1;
+            controllable.defense = 0;
             caretaker.AddMemento(controllable.GetMemento());
-
-
         }
 
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
 
-            elapsedTime += deltaTime;
+            
 
-            if(alive==true)
+
+            if (alive==true)
             {
+                elapsedTime += deltaTime;
                 UpdatePosition(deltaTime);
+                if (controllable.health <= 0)
+                {
+                    RemoveBotTank();
+                    alive = false;
+                    elapsedTime = 0;
+                }
             }
             else
             {
-                controllable.health += 50;
-                if(controllable.health>=100)
+                deadTime += deltaTime;
+                if (deadTime >= 4.8f)
                 {
                     RestoreBotTank();
                     alive = true;
+                    deadTime = 0;
                 }
             }
-
 
         }
 
@@ -86,37 +92,42 @@ namespace Client
                 action.DoAction(tr, ref vertical, speed, deltaTime);
             } else if (elapsedTime >= 9.6f)
             {
+
                 elapsedTime = 0;
-                //Memento
-                controllable.health -= 50;
-                alive = false;
             }
 
             tr.position += Utils.Rotate(vertical, tr.rotation);
             controllable.transform = tr;
         }
-        private void TestMemento()
-        {
-            controllable.health -= 50;
-            if (controllable.health<=0)
-            {
-                GameState.Instance.gameLevel.Remove(controllable);
-                alive = false;
-            }
-        }
         
         public void RemoveBotTank()
         {
+
+            GameState.Instance.gameLevel.Remove(controllable.Suspension.rightTrack);
+            GameState.Instance.gameLevel.Remove(controllable.Suspension.leftTrack);
+
+            GameState.Instance.gameLevel.Remove(controllable.Suspension);
+
             GameState.Instance.gameLevel.Remove(controllable);
+
+            GameState.Instance.gameLevel.Remove(controllable.Turret);
+
+            GameState.Instance.gameLevel.Remove(controllable.Turret.gun);
         }
         public void RestoreBotTank()
         {
             controllable.SetMemento(caretaker.GetMemento(0));
-            GameState.Instance.gameLevel.Add(controllable);
+
+            controllable.transform.position = new Vector2(180, 200);
+            controllable.Suspension.InstantiateTracks();
+            GameObject.Instantiate(controllable.Suspension, controllable);
+            GameObject.Instantiate(controllable);
+            GameObject.Instantiate(controllable.Turret.gun, controllable.Turret);
+            GameObject.Instantiate(controllable.Turret, controllable);
         }
         private void OnProjectileHit(Projectile projectile)
         {
-            controllable.TakeDamage(projectile.damage);
+            controllable.health -= projectile.damage;
             
             // TODO: Send update to the server
         }

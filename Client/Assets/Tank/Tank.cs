@@ -138,12 +138,17 @@ namespace Client
 
         public object Clone()
         {
-            return MemberwiseClone();
+
+            Tank state = (Tank)this.MemberwiseClone();
+            state.transform = new Transform(transform.position.X, transform.position.Y, transform.size.X, transform.position.Y);
+            state.transform.size = new Vector2(transform.size.X, transform.size.Y);
+            state.transform.position = new Vector2(transform.position.X, transform.position.Y);
+            return state;
         }
 
         public void SetId()
         {
-            this.id = 1;            
+            this.id = this.GetHashCode();          
         }
         public int GetId()
         {
@@ -152,8 +157,6 @@ namespace Client
         public Memento GetMemento()
         {
             var copy = (Tank)this.Clone();
-            copy.transform.position = new Vector2(this.transform.position.X, this.transform.position.Y);
-            copy.brush = (Brush)this.brush.Clone();
             return new Memento(copy, this.id);
         }
         public void SetMemento(Memento previousState)

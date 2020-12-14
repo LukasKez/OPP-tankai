@@ -4,7 +4,7 @@ using System.Numerics;
 
 namespace Client
 {
-    class Track : GameObject
+    public class Track : GameObject
     {
         public Track(float x, float y, Vector2 size) : base(new TransformLeaf(x, y, size.X / 2, size.Y + 6))
         {
