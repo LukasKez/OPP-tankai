@@ -24,7 +24,7 @@ namespace Client
 
         public int seed { get; protected set; }
 
-        protected HashSet<GameObject> stuff = new HashSet<GameObject>();
+        protected List<GameObject> stuff = new List<GameObject>();
 
         private ConcurrentQueue<GameObject> toAdd = new ConcurrentQueue<GameObject>();
         private ConcurrentQueue<GameObject> toRemove = new ConcurrentQueue<GameObject>();
